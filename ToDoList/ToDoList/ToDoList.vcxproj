@@ -146,6 +146,7 @@
     <ClCompile Include="AddItem.cpp" />
     <ClCompile Include="Form1.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddItem.h">
@@ -155,6 +156,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddItem.resx">

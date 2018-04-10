@@ -114,9 +114,10 @@ namespace ToDoList {
 			this->button2->Location = System::Drawing::Point(235, 400);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(85, 32);
-			this->button2->TabIndex = 1;
+			this->button2->TabIndex = 99;
 			this->button2->Text = L"Ok";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &AddItem::button2_Click);
 			// 
 			// label1
 			// 
@@ -156,10 +157,13 @@ namespace ToDoList {
 			// 
 			// dateTimePicker1
 			// 
+			this->dateTimePicker1->Cursor = System::Windows::Forms::Cursors::Default;
+			this->dateTimePicker1->CustomFormat = L"dd/MM/yyyy";
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
 			this->dateTimePicker1->Location = System::Drawing::Point(92, 9);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(327, 22);
-			this->dateTimePicker1->TabIndex = 6;
+			this->dateTimePicker1->TabIndex = 1;
 			// 
 			// label5
 			// 
@@ -202,7 +206,7 @@ namespace ToDoList {
 			this->textBox4->Location = System::Drawing::Point(92, 72);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(327, 22);
-			this->textBox4->TabIndex = 14;
+			this->textBox4->TabIndex = 5;
 			// 
 			// richTextBox1
 			// 
@@ -210,7 +214,7 @@ namespace ToDoList {
 			this->richTextBox1->Location = System::Drawing::Point(92, 142);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(327, 209);
-			this->richTextBox1->TabIndex = 15;
+			this->richTextBox1->TabIndex = 8;
 			this->richTextBox1->Text = L"";
 			// 
 			// comboBox1
@@ -220,7 +224,7 @@ namespace ToDoList {
 			this->comboBox1->Location = System::Drawing::Point(92, 107);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(246, 24);
-			this->comboBox1->TabIndex = 16;
+			this->comboBox1->TabIndex = 6;
 			// 
 			// numericUpDown1
 			// 
@@ -228,7 +232,7 @@ namespace ToDoList {
 			this->numericUpDown1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 23, 0, 0, 0 });
 			this->numericUpDown1->Name = L"numericUpDown1";
 			this->numericUpDown1->Size = System::Drawing::Size(47, 22);
-			this->numericUpDown1->TabIndex = 17;
+			this->numericUpDown1->TabIndex = 2;
 			// 
 			// numericUpDown2
 			// 
@@ -236,7 +240,7 @@ namespace ToDoList {
 			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown2->Name = L"numericUpDown2";
 			this->numericUpDown2->Size = System::Drawing::Size(47, 22);
-			this->numericUpDown2->TabIndex = 18;
+			this->numericUpDown2->TabIndex = 3;
 			// 
 			// numericUpDown3
 			// 
@@ -244,14 +248,14 @@ namespace ToDoList {
 			this->numericUpDown3->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown3->Name = L"numericUpDown3";
 			this->numericUpDown3->Size = System::Drawing::Size(47, 22);
-			this->numericUpDown3->TabIndex = 19;
+			this->numericUpDown3->TabIndex = 4;
 			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(344, 107);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 20;
+			this->button3->TabIndex = 7;
 			this->button3->Text = L"Add new";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &AddItem::button3_Click);
@@ -303,5 +307,8 @@ namespace ToDoList {
 		//TODO: Pievienot iespēju lietotājam pievienot savas prioritātes, kas balstītos uz ciparu svarīguma
 		//1 ir svarīgāks par 2 , kas ir svarīgāks par 3 utt.
 	}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	MessageBox::Show(this->dateTimePicker1->Text);
+}
 };
 }

@@ -152,6 +152,9 @@ namespace ToDoList {
 		//Pēc form aizstaisīšanas galvenais form atkal tiek ieslēgts
 		this->Enabled = true;
 
+		//Pārnes saņemto informāciju (ja tāda ir) uz listview.
+
+
 	}
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	button2->Enabled = true;
