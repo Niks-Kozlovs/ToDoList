@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"AddItem.h"
+#include<vector>
 
 namespace ToDoList {
 
@@ -129,8 +130,9 @@ namespace ToDoList {
 			// Form1
 			// 
 			this->AcceptButton = this->button1;
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(972, 636);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -153,8 +155,26 @@ namespace ToDoList {
 		this->Enabled = true;
 
 		//Pārnes saņemto informāciju (ja tāda ir) uz listview.
-
-
+		std::vector<std::string> list;
+		std::string buffer;
+		ifstream file("list.txt");
+		int i = 0;
+		while (!file.eof()) {
+			std::string date;
+			std::string name;
+			std::string priority;
+			std::string description;
+			//TODO:Dabūt labu veidu kā nolasīt no teksta faila un sadalīt to uz visiem mainīgiajiem viss cits strādā kā vajag
+			getline(file, buffer);
+			//if (buffer == "") { break; }
+			//std::sscanf(buffer.c_str(), "%s|%s|%s|%s", &date, &name, &priority, &description);
+			this->listView1->Items->Add(convertToSystemString(date));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(name));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(priority));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(description));
+			i++;
+		}
+		file.close();
 	}
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	button2->Enabled = true;

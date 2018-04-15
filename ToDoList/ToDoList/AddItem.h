@@ -1,5 +1,8 @@
 ﻿#pragma once
-
+#include "TimeManager.h"
+#include <string>
+#include "Functions.h"
+#include <fstream>
 namespace ToDoList {
 
 	using namespace System;
@@ -219,6 +222,8 @@ namespace ToDoList {
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::SuggestAppend;
+			this->comboBox1->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Low", L"Medium", L"High" });
 			this->comboBox1->Location = System::Drawing::Point(92, 107);
@@ -288,7 +293,6 @@ namespace ToDoList {
 			this->Controls->Add(this->button1);
 			this->Name = L"AddItem";
 			this->Text = L"AddItem";
-			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &AddItem::AddItem_FormClosed);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
@@ -297,9 +301,6 @@ namespace ToDoList {
 
 		}
 #pragma endregion
-	private: System::Void AddItem_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
-		
-	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		this->Close();
 	}
@@ -308,7 +309,29 @@ namespace ToDoList {
 		//1 ir svarīgāks par 2 , kas ir svarīgāks par 3 utt.
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	MessageBox::Show(this->dateTimePicker1->Text);
+	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
+	int hour = (int)this->numericUpDown1->Value;
+	int minute = (int)this->numericUpDown2->Value;	
+	int second = (int)this->numericUpDown3->Value;
+	
+	TimeManager time(date,hour,minute,second);
+
+	string name =convertToStdString(this->textBox4->Text);
+	string priority = convertToStdString(this->comboBox1->Text);
+	string description = convertToStdString(this->richTextBox1->Text);
+
+	//TODO: Ielikt datuma pārbaudi lai tā nav pagātnē
+	if (name == "" || priority == "") {
+		MessageBox::Show("Name and/or priority not entered");
+	}
+	else if (name.find('|') != string::npos) {
+		MessageBox::Show("Name contains an illegal character \"|\"");
+	} else {
+		ofstream list("list.txt", ios::app);
+		list << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+		list.close();
+		this->Close();
+	}
 }
 };
 }

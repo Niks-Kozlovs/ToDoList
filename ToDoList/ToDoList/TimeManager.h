@@ -1,10 +1,13 @@
 #pragma once
 #include <string>
-ref class TimeManager
+
+using namespace std;
+
+class TimeManager
 {
 private:
-	int dd, mm, yy, hh, mm, ss;
+	int day, month, year, hour, minute, second;
 public:
 	TimeManager(std::string dateString, int h, int m, int s);
+	std::string getTimeFull();
 };
-
