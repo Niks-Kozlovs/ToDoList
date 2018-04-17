@@ -84,6 +84,7 @@ namespace ToDoList {
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
 			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::listView1_SelectedIndexChanged);
+			this->listView1->Enter += gcnew System::EventHandler(this, &Form1::listView1_Enter);
 			// 
 			// columnHeader1
 			// 
@@ -155,31 +156,54 @@ namespace ToDoList {
 		this->Enabled = true;
 
 		//Pārnes saņemto informāciju (ja tāda ir) uz listview.
+		//Iztīra visu no listview, lai tas neatkārtotos divas reizes
+		this->listView1->Items->Clear();
 		std::vector<std::string> list;
 		std::string buffer;
 		ifstream file("list.txt");
 		int i = 0;
 		while (!file.eof()) {
-			std::string date;
-			std::string name;
-			std::string priority;
-			std::string description;
-			//TODO:Dabūt labu veidu kā nolasīt no teksta faila un sadalīt to uz visiem mainīgiajiem viss cits strādā kā vajag
 			getline(file, buffer);
-			//if (buffer == "") { break; }
-			//std::sscanf(buffer.c_str(), "%s|%s|%s|%s", &date, &name, &priority, &description);
-			this->listView1->Items->Add(convertToSystemString(date));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(name));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(priority));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(description));
+			if (buffer == "") { break; }
+			std::vector<std::string> information;
+			information = seperateItems(buffer, "|");
+			this->listView1->Items->Add(convertToSystemString(information[0]));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[1]));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[2]));
+			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[3]));
 			i++;
 		}
 		file.close();
 	}
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-	button2->Enabled = true;
+	if (this->listView1->SelectedItems->Count == 1) {
+		button2->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
+	}
+	else {
+		button2->Enabled = false;
+	}
 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//TODO: Make a form for more info and display it there from the list
+}
+private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
+	this->listView1->Items->Clear();
+	std::vector<std::string> list;
+	std::string buffer;
+	ifstream file("list.txt");
+	int i = 0;
+	while (!file.eof()) {
+		getline(file, buffer);
+		if (buffer == "") { break; }
+		std::vector<std::string> information;
+		information = seperateItems(buffer, "|");
+		this->listView1->Items->Add(convertToSystemString(information[0]));
+		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[1]));
+		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[2]));
+		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[3]));
+		i++;
+	}
+	file.close();
 }
 };
 }
