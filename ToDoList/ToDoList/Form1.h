@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"AddItem.h"
+#include"Functions.h"
 #include<vector>
 
 namespace ToDoList {
@@ -83,6 +84,7 @@ namespace ToDoList {
 			this->listView1->TabIndex = 0;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
+			this->listView1->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &Form1::listView1_ColumnClick);
 			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::listView1_SelectedIndexChanged);
 			this->listView1->Enter += gcnew System::EventHandler(this, &Form1::listView1_Enter);
 			// 
@@ -157,23 +159,23 @@ namespace ToDoList {
 
 		//Pārnes saņemto informāciju (ja tāda ir) uz listview.
 		//Iztīra visu no listview, lai tas neatkārtotos divas reizes
-		this->listView1->Items->Clear();
 		std::vector<std::string> list;
 		std::string buffer;
 		ifstream file("list.txt");
 		int i = 0;
+		std::vector <std::vector<std::string>> information;
+
 		while (!file.eof()) {
 			getline(file, buffer);
 			if (buffer == "") { break; }
-			std::vector<std::string> information;
-			information = seperateItems(buffer, "|");
-			this->listView1->Items->Add(convertToSystemString(information[0]));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[1]));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[2]));
-			this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[3]));
+			std::vector<std::string> text;
+			text = seperateItems(buffer, "|");
+			information.push_back(text);
 			i++;
 		}
 		file.close();
+
+		updateListView(listView1, information);
 	}
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (this->listView1->SelectedItems->Count == 1) {
@@ -187,23 +189,28 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//TODO: Make a form for more info and display it there from the list
 }
 private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
-	this->listView1->Items->Clear();
 	std::vector<std::string> list;
 	std::string buffer;
 	ifstream file("list.txt");
 	int i = 0;
+	std::vector <std::vector<std::string>> information;
+
 	while (!file.eof()) {
+		//TODO:Hold all the items held in the file to a vector (2d).After that do data work and output to listview
 		getline(file, buffer);
 		if (buffer == "") { break; }
-		std::vector<std::string> information;
-		information = seperateItems(buffer, "|");
-		this->listView1->Items->Add(convertToSystemString(information[0]));
-		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[1]));
-		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[2]));
-		this->listView1->Items[i]->SubItems->Add(convertToSystemString(information[3]));
+		std::vector<std::string> text;
+		text = seperateItems(buffer, "|");
+		information.push_back(text);
 		i++;
 	}
 	file.close();
+
+	updateListView(listView1, information);
+}
+private: System::Void listView1_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e) {
+	MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
+	MessageBox::Show(this->listView1->FocusedItem->Index.ToString());
 }
 };
 }

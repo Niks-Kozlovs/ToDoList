@@ -10,4 +10,5 @@ private:
 public:
 	TimeManager(std::string dateString, int h, int m, int s);
 	std::string getTimeFull();
+	bool isDateInPast();
 };

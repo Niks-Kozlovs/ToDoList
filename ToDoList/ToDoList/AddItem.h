@@ -224,6 +224,7 @@ namespace ToDoList {
 			// 
 			this->comboBox1->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::SuggestAppend;
 			this->comboBox1->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Low", L"Medium", L"High" });
 			this->comboBox1->Location = System::Drawing::Point(92, 107);
@@ -257,9 +258,9 @@ namespace ToDoList {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(344, 107);
+			this->button3->Location = System::Drawing::Point(342, 107);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(77, 24);
 			this->button3->TabIndex = 7;
 			this->button3->Text = L"Add new";
 			this->button3->UseVisualStyleBackColor = true;
@@ -311,7 +312,7 @@ namespace ToDoList {
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
 	int hour = (int)this->numericUpDown1->Value;
-	int minute = (int)this->numericUpDown2->Value;	
+	int minute = (int)this->numericUpDown2->Value;
 	int second = (int)this->numericUpDown3->Value;
 	
 	TimeManager time(date,hour,minute,second);
@@ -321,13 +322,16 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	string description = convertToStdString(this->richTextBox1->Text);
 
 	//TODO: Ielikt datuma pārbaudi lai tā nav pagātnē
-	if (name == "" || priority == "") {
+	if (!time.isDateInPast()) {
+		MessageBox::Show("The date entered has passed");
+	} else if (name == "" || priority == "") {
 		MessageBox::Show("Name and/or priority not entered");
 	}
 	else if (name.find('|') != string::npos) {
 		MessageBox::Show("Name contains an illegal character \"|\"");
 	} else {
 		ofstream list("list.txt", ios::app);
+		MessageBox::Show(convertToSystemString(time.getTimeFull()));
 		list << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 		list.close();
 		this->Close();
