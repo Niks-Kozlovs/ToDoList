@@ -49,6 +49,12 @@ namespace ToDoList {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  saveToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  loadToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
 
 	protected:
 
@@ -74,6 +80,13 @@ namespace ToDoList {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->loadToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// listView1
@@ -83,7 +96,7 @@ namespace ToDoList {
 					this->columnHeader3, this->columnHeader4
 			});
 			this->listView1->FullRowSelect = true;
-			this->listView1->Location = System::Drawing::Point(12, 12);
+			this->listView1->Location = System::Drawing::Point(11, 49);
 			this->listView1->Name = L"listView1";
 			this->listView1->Size = System::Drawing::Size(535, 612);
 			this->listView1->TabIndex = 0;
@@ -116,7 +129,7 @@ namespace ToDoList {
 			// button1
 			// 
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Pixel));
-			this->button1->Location = System::Drawing::Point(553, 12);
+			this->button1->Location = System::Drawing::Point(552, 49);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(200, 200);
 			this->button1->TabIndex = 1;
@@ -127,7 +140,7 @@ namespace ToDoList {
 			// button2
 			// 
 			this->button2->Enabled = false;
-			this->button2->Location = System::Drawing::Point(760, 12);
+			this->button2->Location = System::Drawing::Point(759, 49);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(200, 200);
 			this->button2->TabIndex = 2;
@@ -137,7 +150,7 @@ namespace ToDoList {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(553, 218);
+			this->button3->Location = System::Drawing::Point(552, 255);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(134, 59);
 			this->button3->TabIndex = 3;
@@ -145,21 +158,81 @@ namespace ToDoList {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->fileToolStripMenuItem,
+					this->settingsToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(972, 28);
+			this->menuStrip1->TabIndex = 4;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->saveToolStripMenuItem,
+					this->loadToolStripMenuItem, this->exitToolStripMenuItem
+			});
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(44, 24);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(74, 24);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// saveToolStripMenuItem
+			// 
+			this->saveToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
+			this->saveToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
+			this->saveToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->saveToolStripMenuItem->Text = L"Save";
+			// 
+			// loadToolStripMenuItem
+			// 
+			this->loadToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->loadToolStripMenuItem->Name = L"loadToolStripMenuItem";
+			this->loadToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
+			this->loadToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->loadToolStripMenuItem->Text = L"Load";
+			// 
+			// exitToolStripMenuItem
+			// 
+			this->exitToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->exitToolStripMenuItem->Text = L"Exit";
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this->AcceptButton = this->button1;
 			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(972, 636);
+			this->ClientSize = System::Drawing::Size(972, 677);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->listView1);
+			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"To Do List";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -253,6 +326,9 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		list << information.at(i).at(information.at(i).size()-1) << endl;
 	}
 	information.clear();
+}
+private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	exit(0);
 }
 };
 }
