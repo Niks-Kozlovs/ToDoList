@@ -331,7 +331,6 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		MessageBox::Show("Name contains an illegal character \"|\"");
 	} else {
 		ofstream list("list.txt", ios::app);
-		MessageBox::Show(convertToSystemString(time.getTimeFull()));
 		list << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 		list.close();
 		this->Close();

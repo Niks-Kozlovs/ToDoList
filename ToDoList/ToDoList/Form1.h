@@ -3,6 +3,9 @@
 #include"Functions.h"
 #include<vector>
 
+//Global variable
+std::vector <std::vector<std::string>> information;
+
 namespace ToDoList {
 
 	using namespace System;
@@ -45,6 +48,7 @@ namespace ToDoList {
 	private: System::Windows::Forms::ColumnHeader^  columnHeader4;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Button^  button3;
 
 	protected:
 
@@ -69,6 +73,7 @@ namespace ToDoList {
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// listView1
@@ -91,7 +96,7 @@ namespace ToDoList {
 			// columnHeader1
 			// 
 			this->columnHeader1->Text = L"Date";
-			this->columnHeader1->Width = 84;
+			this->columnHeader1->Width = 123;
 			// 
 			// columnHeader2
 			// 
@@ -130,6 +135,16 @@ namespace ToDoList {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(553, 218);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(134, 59);
+			this->button3->TabIndex = 3;
+			this->button3->Text = L"Delete item";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			// 
 			// Form1
 			// 
 			this->AcceptButton = this->button1;
@@ -137,6 +152,7 @@ namespace ToDoList {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(972, 636);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->listView1);
@@ -163,8 +179,8 @@ namespace ToDoList {
 		std::string buffer;
 		ifstream file("list.txt");
 		int i = 0;
-		std::vector <std::vector<std::string>> information;
 
+		information.clear();
 		while (!file.eof()) {
 			getline(file, buffer);
 			if (buffer == "") { break; }
@@ -189,11 +205,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//TODO: Make a form for more info and display it there from the list
 }
 private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
+	information.clear();
 	std::vector<std::string> list;
 	std::string buffer;
 	ifstream file("list.txt");
 	int i = 0;
-	std::vector <std::vector<std::string>> information;
 
 	while (!file.eof()) {
 		//TODO:Hold all the items held in the file to a vector (2d).After that do data work and output to listview
@@ -211,6 +227,32 @@ private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs
 private: System::Void listView1_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e) {
 	MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
 	MessageBox::Show(this->listView1->FocusedItem->Index.ToString());
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Dzes ara no saraksta
+	listView1->SelectedItems[0]->Remove();
+
+	//Vector update
+	information.clear();
+	for (int i = 0; i < listView1->Items->Count; i++) {
+		std::vector<std::string > items;
+		items.push_back(convertToStdString(listView1->Items[i]->Text));
+		for (int j = 1; listView1->Columns->Count > j; j++) {
+			items.push_back(convertToStdString(listView1->Items[i]->SubItems[j]->Text));
+		}
+		information.push_back(items);
+	}
+	//TODO:Name un description goes back and forth
+	//File update
+	ofstream list ("list.txt");
+
+	for (int i = 0; i < information.size(); i++) {
+		for (int j = 0; j < information.at(i).size() - 1; j++) {
+			list << information.at(i).at(j) << "|";
+		}
+		list << information.at(i).at(information.at(i).size()-1) << endl;
+	}
+	information.clear();
 }
 };
 }

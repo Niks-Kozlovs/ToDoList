@@ -8,7 +8,7 @@ TimeManager::TimeManager(std::string dateString, int hour, int minute,int second
 {	
 	int day, month, year;
 	if (std::sscanf(dateString.c_str(), "%d/%d/%d", &day, &month, &year) != 3) {
-
+		//Error
 	}
 	this->day = day;
 	this->month = month;
