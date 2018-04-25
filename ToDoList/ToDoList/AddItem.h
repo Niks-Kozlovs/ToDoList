@@ -3,6 +3,7 @@
 #include <string>
 #include "Functions.h"
 #include <fstream>
+#include "INIReader.h"
 namespace ToDoList {
 
 	using namespace System;
@@ -330,9 +331,14 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	else if (name.find('|') != string::npos) {
 		MessageBox::Show("Name contains an illegal character \"|\"");
 	} else {
-		ofstream list("list.txt", ios::app);
-		list << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-		list.close();
+		INIReader reader("settings.ini");
+		if (reader.ParseError() < 0) {
+			//Error
+		}
+		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
+		ofstream file(fileLocation, ios::app);
+		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+		file.close();
 		this->Close();
 	}
 }

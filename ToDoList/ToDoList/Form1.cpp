@@ -8,8 +8,6 @@ using namespace System::Windows::Forms;
 [STAThreadAttribute]
 int main()
 {	
-	fstream file("file.txt", ios::app | ios::in | ios::out);
-	file.close();
 	// Enabling Windows XP visual effects before any controls are created
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);

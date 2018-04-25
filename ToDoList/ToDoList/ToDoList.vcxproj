@@ -156,6 +156,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="INIReader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>

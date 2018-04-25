@@ -51,10 +51,12 @@ namespace ToDoList {
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  saveToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  loadToolStripMenuItem;
+
+
 	private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  changeFontToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  changeSaveLocationToolStripMenuItem;
 
 	protected:
 
@@ -82,10 +84,10 @@ namespace ToDoList {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->loadToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->changeFontToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->changeSaveLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -174,44 +176,41 @@ namespace ToDoList {
 			// fileToolStripMenuItem
 			// 
 			this->fileToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->saveToolStripMenuItem,
-					this->loadToolStripMenuItem, this->exitToolStripMenuItem
-			});
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->exitToolStripMenuItem });
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(44, 24);
 			this->fileToolStripMenuItem->Text = L"File";
-			// 
-			// settingsToolStripMenuItem
-			// 
-			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
-			this->settingsToolStripMenuItem->Size = System::Drawing::Size(74, 24);
-			this->settingsToolStripMenuItem->Text = L"Settings";
-			// 
-			// saveToolStripMenuItem
-			// 
-			this->saveToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
-			this->saveToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
-			this->saveToolStripMenuItem->Size = System::Drawing::Size(216, 26);
-			this->saveToolStripMenuItem->Text = L"Save";
-			// 
-			// loadToolStripMenuItem
-			// 
-			this->loadToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->loadToolStripMenuItem->Name = L"loadToolStripMenuItem";
-			this->loadToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->loadToolStripMenuItem->Size = System::Drawing::Size(216, 26);
-			this->loadToolStripMenuItem->Text = L"Load";
 			// 
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(161, 26);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->changeFontToolStripMenuItem,
+					this->changeSaveLocationToolStripMenuItem
+			});
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(74, 24);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// changeFontToolStripMenuItem
+			// 
+			this->changeFontToolStripMenuItem->Name = L"changeFontToolStripMenuItem";
+			this->changeFontToolStripMenuItem->Size = System::Drawing::Size(225, 26);
+			this->changeFontToolStripMenuItem->Text = L"Change font";
+			// 
+			// changeSaveLocationToolStripMenuItem
+			// 
+			this->changeSaveLocationToolStripMenuItem->Name = L"changeSaveLocationToolStripMenuItem";
+			this->changeSaveLocationToolStripMenuItem->Size = System::Drawing::Size(225, 26);
+			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
 			// 
 			// Form1
 			// 
@@ -250,7 +249,13 @@ namespace ToDoList {
 		//Iztīra visu no listview, lai tas neatkārtotos divas reizes
 		std::vector<std::string> list;
 		std::string buffer;
-		ifstream file("list.txt");
+		INIReader reader("settings.ini");
+		if (reader.ParseError() < 0) {
+			MessageBox::Show("Reader parse error");
+		}
+		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
+		MessageBox::Show(convertToSystemString(fileLocation));
+		ifstream file(fileLocation);
 		int i = 0;
 
 		information.clear();
@@ -281,7 +286,12 @@ private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs
 	information.clear();
 	std::vector<std::string> list;
 	std::string buffer;
-	ifstream file("list.txt");
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+	std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
+	ifstream file(fileLocation);
 	int i = 0;
 
 	while (!file.eof()) {
@@ -315,15 +325,19 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		}
 		information.push_back(items);
 	}
-	//TODO:Name un description goes back and forth
 	//File update
-	ofstream list ("list.txt");
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		//Error
+	}
+	std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
+	ofstream file(fileLocation);
 
 	for (int i = 0; i < information.size(); i++) {
 		for (int j = 0; j < information.at(i).size() - 1; j++) {
-			list << information.at(i).at(j) << "|";
+			file << information.at(i).at(j) << "|";
 		}
-		list << information.at(i).at(information.at(i).size()-1) << endl;
+		file << information.at(i).at(information.at(i).size()-1) << endl;
 	}
 	information.clear();
 }

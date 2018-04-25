@@ -9,3 +9,4 @@
 
 #include "Form1.h"
 #include "AddItem.h"
+#include "INIReader.h"
