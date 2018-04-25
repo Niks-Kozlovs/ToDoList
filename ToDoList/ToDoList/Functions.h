@@ -12,3 +12,5 @@ std::string convertToStdString(System::String^ text);
 std::vector<std::string> seperateItems(std::string text, std::string delimiter);
 void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information);
 
+void createIniFile(std::string location);
+

@@ -1,4 +1,5 @@
 ﻿#include "Functions.h"
+#include <fstream>
 #include <msclr/marshal_cppstd.h>
 
 
@@ -40,4 +41,15 @@ void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std:
 			listView->Items[i]->SubItems->Add(convertToSystemString(information[i][j]));
 		}
 	}
+}
+
+void createIniFile(std::string location)
+{
+	std::ofstream settings("settings.ini");
+	settings << "[FIRSTTIMELAUNCH]" << std::endl;
+	settings << "firstTime=false" << std::endl;
+	settings << "[USER]" << std::endl;
+	settings << "saveLocation = " + location + "\\list.txt";
+	settings.close();
+
 }

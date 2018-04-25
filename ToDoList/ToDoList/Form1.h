@@ -57,6 +57,7 @@ namespace ToDoList {
 	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  changeFontToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  changeSaveLocationToolStripMenuItem;
+	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 
 	protected:
 
@@ -88,6 +89,7 @@ namespace ToDoList {
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changeFontToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changeSaveLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -152,6 +154,7 @@ namespace ToDoList {
 			// 
 			// button3
 			// 
+			this->button3->Enabled = false;
 			this->button3->Location = System::Drawing::Point(552, 255);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(134, 59);
@@ -211,6 +214,11 @@ namespace ToDoList {
 			this->changeSaveLocationToolStripMenuItem->Name = L"changeSaveLocationToolStripMenuItem";
 			this->changeSaveLocationToolStripMenuItem->Size = System::Drawing::Size(225, 26);
 			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
+			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeSaveLocationToolStripMenuItem_Click);
+			// 
+			// folderBrowserDialog1
+			// 
+			this->folderBrowserDialog1->SelectedPath = L"C:\\Users\\sloppynick3\\Documents\\To do list";
 			// 
 			// Form1
 			// 
@@ -274,9 +282,15 @@ namespace ToDoList {
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (this->listView1->SelectedItems->Count == 1) {
 		button2->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
+		button3->Enabled = true;
 	}
-	else {
+	else if (this->listView1->SelectedItems->Count > 1) {
+		button3->Enabled = true;
 		button2->Enabled = false;
+
+	} else {
+		button2->Enabled = false;
+		button3->Enabled = false;
 	}
 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -295,7 +309,6 @@ private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs
 	int i = 0;
 
 	while (!file.eof()) {
-		//TODO:Hold all the items held in the file to a vector (2d).After that do data work and output to listview
 		getline(file, buffer);
 		if (buffer == "") { break; }
 		std::vector<std::string> text;
@@ -343,6 +356,11 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	exit(0);
+}
+private: System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
+		createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath));
+	}
 }
 };
 }
