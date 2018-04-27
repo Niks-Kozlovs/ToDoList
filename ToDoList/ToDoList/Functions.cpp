@@ -37,7 +37,7 @@ void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std:
 	for (int i = 0; i < information.size(); i++) {
 		int j = 0;
 			listView->Items->Add(convertToSystemString(information[i][j]));
-		for (j = 1; j < listView->Columns->Count; j++) {
+		for (j = 1; j < listView->Columns->Count - 1; j++) {
 			listView->Items[i]->SubItems->Add(convertToSystemString(information[i][j]));
 		}
 	}

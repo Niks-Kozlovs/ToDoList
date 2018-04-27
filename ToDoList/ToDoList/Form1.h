@@ -58,6 +58,12 @@ namespace ToDoList {
 	private: System::Windows::Forms::ToolStripMenuItem^  changeFontToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  changeSaveLocationToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
+	private: System::Windows::Forms::ToolStripComboBox^  toolStripComboBox1;
+	private: System::Windows::Forms::ColumnHeader^  columnHeader5;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::Windows::Forms::ToolStripMenuItem^  changeUpdateRateToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripTextBox^  toolStripTextBox1;
+	private: System::ComponentModel::IContainer^  components;
 
 	protected:
 
@@ -65,7 +71,7 @@ namespace ToDoList {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -74,12 +80,14 @@ namespace ToDoList {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
+			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
@@ -88,21 +96,25 @@ namespace ToDoList {
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changeFontToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripComboBox1 = (gcnew System::Windows::Forms::ToolStripComboBox());
 			this->changeSaveLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->changeUpdateRateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripTextBox1 = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// listView1
 			// 
-			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
+			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
 				this->columnHeader1, this->columnHeader2,
-					this->columnHeader3, this->columnHeader4
+					this->columnHeader3, this->columnHeader4, this->columnHeader5
 			});
 			this->listView1->FullRowSelect = true;
-			this->listView1->Location = System::Drawing::Point(11, 49);
+			this->listView1->Location = System::Drawing::Point(12, 31);
 			this->listView1->Name = L"listView1";
-			this->listView1->Size = System::Drawing::Size(535, 612);
+			this->listView1->Size = System::Drawing::Size(702, 612);
 			this->listView1->TabIndex = 0;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
@@ -117,23 +129,32 @@ namespace ToDoList {
 			// 
 			// columnHeader2
 			// 
+			this->columnHeader2->DisplayIndex = 2;
 			this->columnHeader2->Text = L"Name";
 			this->columnHeader2->Width = 129;
 			// 
 			// columnHeader3
 			// 
+			this->columnHeader3->DisplayIndex = 3;
 			this->columnHeader3->Text = L"Priority";
 			this->columnHeader3->Width = 98;
 			// 
 			// columnHeader4
 			// 
+			this->columnHeader4->DisplayIndex = 4;
 			this->columnHeader4->Text = L"Description";
-			this->columnHeader4->Width = 123;
+			this->columnHeader4->Width = 170;
+			// 
+			// columnHeader5
+			// 
+			this->columnHeader5->DisplayIndex = 1;
+			this->columnHeader5->Text = L"Time left";
+			this->columnHeader5->Width = 75;
 			// 
 			// button1
 			// 
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Pixel));
-			this->button1->Location = System::Drawing::Point(552, 49);
+			this->button1->Location = System::Drawing::Point(767, 49);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(200, 200);
 			this->button1->TabIndex = 1;
@@ -144,7 +165,7 @@ namespace ToDoList {
 			// button2
 			// 
 			this->button2->Enabled = false;
-			this->button2->Location = System::Drawing::Point(759, 49);
+			this->button2->Location = System::Drawing::Point(974, 49);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(200, 200);
 			this->button2->TabIndex = 2;
@@ -155,7 +176,7 @@ namespace ToDoList {
 			// button3
 			// 
 			this->button3->Enabled = false;
-			this->button3->Location = System::Drawing::Point(552, 255);
+			this->button3->Location = System::Drawing::Point(767, 255);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(134, 59);
 			this->button3->TabIndex = 3;
@@ -172,7 +193,7 @@ namespace ToDoList {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(972, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1226, 28);
 			this->menuStrip1->TabIndex = 4;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -195,9 +216,9 @@ namespace ToDoList {
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->changeFontToolStripMenuItem,
-					this->changeSaveLocationToolStripMenuItem
+					this->changeSaveLocationToolStripMenuItem, this->changeUpdateRateToolStripMenuItem
 			});
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(74, 24);
@@ -205,9 +226,16 @@ namespace ToDoList {
 			// 
 			// changeFontToolStripMenuItem
 			// 
+			this->changeFontToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripComboBox1 });
 			this->changeFontToolStripMenuItem->Name = L"changeFontToolStripMenuItem";
 			this->changeFontToolStripMenuItem->Size = System::Drawing::Size(225, 26);
 			this->changeFontToolStripMenuItem->Text = L"Change font";
+			// 
+			// toolStripComboBox1
+			// 
+			this->toolStripComboBox1->Name = L"toolStripComboBox1";
+			this->toolStripComboBox1->Size = System::Drawing::Size(121, 28);
+			this->toolStripComboBox1->Enter += gcnew System::EventHandler(this, &Form1::toolStripComboBox1_Enter);
 			// 
 			// changeSaveLocationToolStripMenuItem
 			// 
@@ -216,9 +244,26 @@ namespace ToDoList {
 			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
 			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeSaveLocationToolStripMenuItem_Click);
 			// 
+			// changeUpdateRateToolStripMenuItem
+			// 
+			this->changeUpdateRateToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripTextBox1 });
+			this->changeUpdateRateToolStripMenuItem->Name = L"changeUpdateRateToolStripMenuItem";
+			this->changeUpdateRateToolStripMenuItem->Size = System::Drawing::Size(225, 26);
+			this->changeUpdateRateToolStripMenuItem->Text = L"Change update rate";
+			// 
+			// toolStripTextBox1
+			// 
+			this->toolStripTextBox1->Name = L"toolStripTextBox1";
+			this->toolStripTextBox1->Size = System::Drawing::Size(100, 27);
+			// 
 			// folderBrowserDialog1
 			// 
 			this->folderBrowserDialog1->SelectedPath = L"C:\\Users\\sloppynick3\\Documents\\To do list";
+			// 
+			// timer1
+			// 
+			this->timer1->Interval = 1000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
 			// Form1
 			// 
@@ -226,7 +271,7 @@ namespace ToDoList {
 			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(972, 677);
+			this->ClientSize = System::Drawing::Size(1226, 677);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -278,6 +323,10 @@ namespace ToDoList {
 		file.close();
 
 		updateListView(listView1, information);
+		for (int i = 0; i < listView1->Items->Count; i++) {
+			TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
+			listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
+		}
 	}
 private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (this->listView1->SelectedItems->Count == 1) {
@@ -285,8 +334,8 @@ private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, Sy
 		button3->Enabled = true;
 	}
 	else if (this->listView1->SelectedItems->Count > 1) {
-		button3->Enabled = true;
-		button2->Enabled = false;
+		//button3->Enabled = true;
+		//button2->Enabled = false;
 
 	} else {
 		button2->Enabled = false;
@@ -297,6 +346,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//TODO: Make a form for more info and display it there from the list
 }
 private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
+	timer1->Start();
 	information.clear();
 	std::vector<std::string> list;
 	std::string buffer;
@@ -319,6 +369,10 @@ private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs
 	file.close();
 
 	updateListView(listView1, information);
+	for (int i = 0; i < listView1->Items->Count; i++) {
+		TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
+		listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
+	}
 }
 private: System::Void listView1_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e) {
 	MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
@@ -326,18 +380,13 @@ private: System::Void listView1_ColumnClick(System::Object^  sender, System::Win
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	//Dzes ara no saraksta
+	int index = this->listView1->FocusedItem->Index;
 	listView1->SelectedItems[0]->Remove();
 
 	//Vector update
-	information.clear();
-	for (int i = 0; i < listView1->Items->Count; i++) {
-		std::vector<std::string > items;
-		items.push_back(convertToStdString(listView1->Items[i]->Text));
-		for (int j = 1; listView1->Columns->Count > j; j++) {
-			items.push_back(convertToStdString(listView1->Items[i]->SubItems[j]->Text));
-		}
-		information.push_back(items);
-	}
+	information.erase(information.begin() + index);
+
+
 	//File update
 	INIReader reader("settings.ini");
 	if (reader.ParseError() < 0) {
@@ -360,6 +409,20 @@ private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, Syste
 private: System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
 		createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath));
+		MessageBox::Show("The program will now close for the changes to take effect");
+		exit(0);
+	}
+}
+private: System::Void toolStripComboBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
+	//Show list of fonts
+}
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+	for (int i = 0; i < listView1->Items->Count; i++) {
+		TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
+		listView1->Items[i]->SubItems[4]->Text=convertToSystemString(date.getTimeDifference());
+		if (listView1->Items[i]->SubItems[4]->Text == "Time has passed") { //Ja laiks ir pagajis, tad true
+			//Make item red
+		}
 	}
 }
 };

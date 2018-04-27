@@ -309,6 +309,7 @@ namespace ToDoList {
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 		//TODO: Pievienot iespēju lietotājam pievienot savas prioritātes, kas balstītos uz ciparu svarīguma
 		//1 ir svarīgāks par 2 , kas ir svarīgāks par 3 utt.
+
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string

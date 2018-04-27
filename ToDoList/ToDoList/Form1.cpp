@@ -7,7 +7,7 @@ using namespace System::Windows::Forms;
 
 [STAThreadAttribute]
 int main()
-{	
+{
 	// Enabling Windows XP visual effects before any controls are created
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
