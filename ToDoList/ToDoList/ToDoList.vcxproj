@@ -144,16 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddItem.cpp" />
-    <ClCompile Include="AddPriority.cpp" />
     <ClCompile Include="Form1.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddItem.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="AddPriority.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Form1.h">
@@ -167,9 +163,6 @@
   <ItemGroup>
     <EmbeddedResource Include="AddItem.resx">
       <DependentUpon>AddItem.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddPriority.resx">
-      <DependentUpon>AddPriority.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.aa.resx">
       <DependentUpon>Form1.h</DependentUpon>
