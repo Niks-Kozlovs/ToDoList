@@ -27,6 +27,9 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Priority.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form1.h">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="INIReader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Priority.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

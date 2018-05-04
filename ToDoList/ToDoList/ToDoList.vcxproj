@@ -146,6 +146,7 @@
     <ClCompile Include="AddItem.cpp" />
     <ClCompile Include="Form1.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Priority.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Functions.h" />
     <ClInclude Include="INIReader.h" />
+    <ClInclude Include="Priority.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>
@@ -172,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Priority.resx">
+      <DependentUpon>Priority.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,9 +2,8 @@
 #include"AddItem.h"
 #include"Functions.h"
 #include<vector>
+std::vector <std::vector <std::string>> information;
 
-//Global variable
-std::vector <std::vector<std::string>> information;
 
 namespace ToDoList {
 
@@ -14,6 +13,7 @@ namespace ToDoList {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
 
 	/// <summary>
 	/// Summary for Form1
@@ -288,6 +288,7 @@ namespace ToDoList {
 
 		}
 #pragma endregion
+
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//Atslēdz, lai lietotājs nevar neko darīt kamēr pievieno jaunu informāciju
 		this->Enabled = false;
@@ -395,8 +396,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
 	ofstream file(fileLocation);
 
-	for (int i = 0; i < information.size(); i++) {
-		for (int j = 0; j < information.at(i).size() - 1; j++) {
+	for (size_t i = 0; i < information.size(); i++) {
+		for (size_t j = 0; j < information.at(i).size() - 1; j++) {
 			file << information.at(i).at(j) << "|";
 		}
 		file << information.at(i).at(information.at(i).size()-1) << endl;
