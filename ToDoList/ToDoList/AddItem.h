@@ -342,7 +342,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		if (reader.ParseError() < 0) {
 			//Error
 		}
-		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt");
+		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
 		ofstream file(fileLocation, ios::app);
 		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 		file.close();
