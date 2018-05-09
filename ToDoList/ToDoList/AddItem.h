@@ -1,5 +1,6 @@
 ﻿#pragma once
 #define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + "Other\\priority.txt";
 
 #include "TimeManager.h"
 #include <string>
@@ -299,6 +300,7 @@ namespace ToDoList {
 			this->Controls->Add(this->button1);
 			this->Name = L"AddItem";
 			this->Text = L"AddItem";
+			this->Load += gcnew System::EventHandler(this, &AddItem::AddItem_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
@@ -319,6 +321,25 @@ namespace ToDoList {
 		priority.ShowDialog();
 
 		this->Enabled = true;
+
+		//Update comboBox
+		comboBox1->Items->Clear();
+
+		INIReader reader("settings.ini");
+		if (reader.ParseError() < 0) {
+			MessageBox::Show("Reader parse error");
+		}
+		
+		std::string location = defPriorityLocation;
+		std::ifstream priorityFile(location);
+		while (!priorityFile.eof()) {
+			std::string buffer;
+			std::vector<std::string> items;
+			getline(priorityFile, buffer);
+			if (buffer == "") { break; }
+			items = seperateItems(buffer, "|");
+			comboBox1->Items->Add(convertToSystemString(items.at(0)));
+		}
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
@@ -350,6 +371,26 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 		file.close();
 		this->Close();
+	}
+}
+private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  e) {
+	//Update comboBox
+	comboBox1->Items->Clear();
+
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+
+	std::string location = defPriorityLocation;
+	std::ifstream priorityFile(location);
+	while (!priorityFile.eof()) {
+		std::string buffer;
+		std::vector<std::string> items;
+		getline(priorityFile, buffer);
+		if (buffer == "") { break; }
+		items = seperateItems(buffer, "|");
+		comboBox1->Items->Add(convertToSystemString(items.at(0)));
 	}
 }
 };

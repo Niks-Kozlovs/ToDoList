@@ -3,7 +3,7 @@
 #include"AddItem.h"
 #include"Functions.h"
 #include<vector>
-std::vector <std::vector <std::string>> information;
+std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
 
 
 namespace ToDoList {
