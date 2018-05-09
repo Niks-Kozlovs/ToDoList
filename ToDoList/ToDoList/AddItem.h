@@ -1,10 +1,13 @@
 ﻿#pragma once
+#define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+
 #include "TimeManager.h"
 #include <string>
 #include "Functions.h"
 #include <fstream>
 #include "INIReader.h"
 #include "Priority.h"
+
 namespace ToDoList {
 
 	using namespace System;
@@ -312,8 +315,8 @@ namespace ToDoList {
 		//1 ir svarīgāks par 2 , kas ir svarīgāks par 3 utt.
 		this->Enabled = false;
 
-		ToDoList::Priority addPriority;
-		addPriority.ShowDialog();
+		ToDoList::Priority priority;
+		priority.ShowDialog();
 
 		this->Enabled = true;
 	}
@@ -342,7 +345,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		if (reader.ParseError() < 0) {
 			//Error
 		}
-		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+		std::string fileLocation = defLocation
 		ofstream file(fileLocation, ios::app);
 		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 		file.close();

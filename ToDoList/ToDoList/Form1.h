@@ -1,4 +1,5 @@
 ﻿#pragma once
+#define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
 #include"AddItem.h"
 #include"Functions.h"
 #include<vector>
@@ -307,7 +308,7 @@ namespace ToDoList {
 		if (reader.ParseError() < 0) {
 			MessageBox::Show("Reader parse error");
 		}
-		std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+		std::string fileLocation = defLocation
 		MessageBox::Show(convertToSystemString(fileLocation));
 		ifstream file(fileLocation);
 		int i = 0;
@@ -355,7 +356,7 @@ private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs
 	if (reader.ParseError() < 0) {
 		MessageBox::Show("Reader parse error");
 	}
-	std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+	std::string fileLocation = defLocation
 	ifstream file(fileLocation);
 	int i = 0;
 
@@ -393,7 +394,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	if (reader.ParseError() < 0) {
 		//Error
 	}
-	std::string fileLocation = reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+	std::string fileLocation = defLocation
 	ofstream file(fileLocation);
 
 	for (size_t i = 0; i < information.size(); i++) {
