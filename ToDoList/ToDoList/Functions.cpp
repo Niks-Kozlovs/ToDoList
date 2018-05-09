@@ -53,3 +53,19 @@ void createIniFile(std::string location)
 	settings.close();
 
 }
+
+bool checkIfDuplicate(std::string fileLocation, int column, std::string value) {
+	std::ifstream file(fileLocation);
+	std::vector<std::string> info;
+	while (!file.eof()) {
+		std::string buffer;
+
+		getline(file, buffer);
+		if (buffer == "") { return false; } //Faila beigas vai ir tuks
+		info = seperateItems(buffer, "|");
+		if (value == info.at(column)) {
+			return true;
+		}
+	}
+	return false;
+}

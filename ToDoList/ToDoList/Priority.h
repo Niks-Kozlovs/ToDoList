@@ -1,7 +1,10 @@
 #pragma once
+#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + "Other\\priority.txt";
 //#include "stdafx.h"
 #include <string>
+#include <fstream>
 #include "Functions.h"
+#include "INIReader.h"
 
 namespace ToDoList {
 
@@ -86,6 +89,7 @@ namespace ToDoList {
 			this->button2->TabIndex = 4;
 			this->button2->Text = L"Cancel";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Priority::button2_Click);
 			// 
 			// label1
 			// 
@@ -147,6 +151,27 @@ namespace ToDoList {
 		int value = (int)numericUpDown1->Value;
 		std::string strValue = std::to_string(value);
 
+		INIReader reader("settings.ini");
+		if (reader.ParseError() < 0) {
+			MessageBox::Show("Reader parse error");
+		}
+		std::string priorityLocation = defPriorityLocation;
+
+		if (checkIfDuplicate(priorityLocation, 0, name)) {
+			MessageBox::Show("This name is taken");
+		}
+		else {
+			std::ofstream priority(priorityLocation, std::ios::app);
+
+			priority << name << "|" << value << std::endl;
+
+			priority.close();
+			this->Close();
+		}
+
 	}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	this->Close();
+}
 };
 }

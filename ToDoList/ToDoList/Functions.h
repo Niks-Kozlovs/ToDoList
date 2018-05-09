@@ -14,3 +14,4 @@ void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std:
 
 void createIniFile(std::string location);
 
+bool checkIfDuplicate(std::string fileLocation, int column, std::string value);
