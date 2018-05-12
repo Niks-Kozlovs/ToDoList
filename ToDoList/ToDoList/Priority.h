@@ -155,7 +155,7 @@ namespace ToDoList {
 		if (reader.ParseError() < 0) {
 			MessageBox::Show("Reader parse error");
 		}
-		std::string priorityLocation = defPriorityLocation;
+		std::string priorityLocation = defPriorityLocation
 
 		if (checkIfDuplicate(priorityLocation, 0, name)) {
 			MessageBox::Show("This name is taken");

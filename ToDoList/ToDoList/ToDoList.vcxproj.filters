@@ -30,6 +30,9 @@
     <ClCompile Include="Priority.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoreInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form1.h">
@@ -53,6 +56,9 @@
     <ClInclude Include="Priority.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MoreInfo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -65,6 +71,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.en.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Priority.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

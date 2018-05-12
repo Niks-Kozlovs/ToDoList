@@ -1,6 +1,7 @@
 ﻿#pragma once
 #define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
 #include"AddItem.h"
+#include"MoreInfo.h"
 #include"Functions.h"
 #include<vector>
 std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
@@ -346,6 +347,13 @@ private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, Sy
 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	//TODO: Make a form for more info and display it there from the list
+	this->Enabled = false;
+
+	ToDoList::MoreInfo moreInfo;
+	moreInfo.ShowDialog();
+
+	this->Enabled = true;
+
 }
 private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
 	timer1->Start();
