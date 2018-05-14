@@ -349,9 +349,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//TODO: Make a form for more info and display it there from the list
 	this->Enabled = false;
 
-	ToDoList::MoreInfo moreInfo;
-	moreInfo.ShowDialog();
-
+	MoreInfo^ moreInfo = gcnew MoreInfo(information.at(listView1->FocusedItem->Index));
+	moreInfo->ShowDialog();
+	//Pogas vajag atslēgt, jo kad aiztaisas logs, tad nekas no saraksta nav izvēlēts, bet uz pogām vēl var uzpiest
+	button2->Enabled = false;
+	button3->Enabled = false;
 	this->Enabled = true;
 
 }
