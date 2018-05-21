@@ -387,22 +387,23 @@ namespace ToDoList {
 		this->Enabled = true;
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
+	int hour = (int)this->numericUpDown1->Value;
+	int minute = (int)this->numericUpDown2->Value;
+	int second = (int)this->numericUpDown3->Value;
+
+	TimeManager time(date, hour, minute, second);
+
+	string name = convertToStdString(this->textBox4->Text);
+	string priority = convertToStdString(this->comboBox1->Text);
+	string description = convertToStdString(this->richTextBox1->Text);
 	/*
 	
 		Pievienot jaunu itemu	
 	
 	*/
 	if (!edit) {
-		string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
-		int hour = (int)this->numericUpDown1->Value;
-		int minute = (int)this->numericUpDown2->Value;
-		int second = (int)this->numericUpDown3->Value;
 
-		TimeManager time(date, hour, minute, second);
-
-		string name = convertToStdString(this->textBox4->Text);
-		string priority = convertToStdString(this->comboBox1->Text);
-		string description = convertToStdString(this->richTextBox1->Text);
 
 		if (name == "" || priority == "") {
 			MessageBox::Show("Name and/or priority not entered");
@@ -428,16 +429,6 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			Rediģēt esošo itemu
 
 		*/
-		string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
-		int hour = (int)this->numericUpDown1->Value;
-		int minute = (int)this->numericUpDown2->Value;
-		int second = (int)this->numericUpDown3->Value;
-
-		TimeManager time(date, hour, minute, second);
-
-		string name = convertToStdString(this->textBox4->Text);
-		string priority = convertToStdString(this->comboBox1->Text);
-		string description = convertToStdString(this->richTextBox1->Text);
 
 		if (name == "" || priority == "") {
 			MessageBox::Show("Name and/or priority not entered");
