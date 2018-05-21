@@ -1,5 +1,5 @@
 ﻿#pragma once
-#define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
+#define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt)";
 #include"AddItem.h"
 #include"MoreInfo.h"
 #include"Functions.h"
@@ -65,6 +65,7 @@ namespace ToDoList {
 	private: System::Windows::Forms::Timer^  timer1;
 	private: System::Windows::Forms::ToolStripMenuItem^  changeUpdateRateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripTextBox^  toolStripTextBox1;
+	private: System::Windows::Forms::Button^  button4;
 	private: System::ComponentModel::IContainer^  components;
 
 	protected:
@@ -104,6 +105,7 @@ namespace ToDoList {
 			this->toolStripTextBox1 = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -267,6 +269,17 @@ namespace ToDoList {
 			this->timer1->Interval = 1000;
 			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
+			// button4
+			// 
+			this->button4->Enabled = false;
+			this->button4->Location = System::Drawing::Point(974, 258);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(138, 56);
+			this->button4->TabIndex = 5;
+			this->button4->Text = L"Edit";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
 			// Form1
 			// 
 			this->AcceptButton = this->button1;
@@ -274,6 +287,7 @@ namespace ToDoList {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(1226, 677);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -335,6 +349,7 @@ private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, Sy
 	if (this->listView1->SelectedItems->Count == 1) {
 		button2->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
 		button3->Enabled = true;
+		button4->Enabled = true;
 	}
 	else if (this->listView1->SelectedItems->Count > 1) {
 		//button3->Enabled = true;
@@ -343,6 +358,7 @@ private: System::Void listView1_SelectedIndexChanged(System::Object^  sender, Sy
 	} else {
 		button2->Enabled = false;
 		button3->Enabled = false;
+		button4->Enabled = false;
 	}
 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -354,6 +370,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//Pogas vajag atslēgt, jo kad aiztaisas logs, tad nekas no saraksta nav izvēlēts, bet uz pogām vēl var uzpiest
 	button2->Enabled = false;
 	button3->Enabled = false;
+	button4->Enabled = false;
 	this->Enabled = true;
 
 }
@@ -436,6 +453,15 @@ private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e
 			//Make item red
 		}
 	}
+}
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+	AddItem^ edit = gcnew AddItem(information.at(listView1->FocusedItem->Index), (int)listView1->FocusedItem->Index);
+	edit->ShowDialog();
+
+	button2->Enabled = false;
+	button3->Enabled = false;
+	button4->Enabled = false;
+
 }
 };
 }

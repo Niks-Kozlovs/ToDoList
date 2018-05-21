@@ -1,6 +1,6 @@
 ﻿#pragma once
-#define defLocation reader.Get("USER", "saveLocation", "list.txt") + "Lists\\list.txt";
-#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + "Other\\priority.txt";
+#define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt\)";
+#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + R"(Other\priority.txt)";
 
 #include "TimeManager.h"
 #include <string>
@@ -23,13 +23,50 @@ namespace ToDoList {
 	/// </summary>
 	public ref class AddItem : public System::Windows::Forms::Form
 	{
+	public: bool edit;
+	public: String ^ prioritySystem;
+	public: int index;
 	public:
-		AddItem(void)
+		AddItem(void) //Make new
 		{
 			InitializeComponent();
+			edit = false;
 			//
 			//TODO: Add the constructor code here
 			//
+		}
+		AddItem(std::vector<std::string> listItem, int index) //Edit
+		{
+			InitializeComponent();
+			edit = true;
+			this->index = index;
+			std::vector<std::string> dateTime;
+			std::vector<std::string> values;
+			dateTime = seperateItems(listItem.at(0), " ");
+
+			values = seperateItems(dateTime.at(0), "/");
+			int day = atoi(values.at(0).c_str());
+			int month = atoi(values.at(1).c_str());
+			int year = atoi(values.at(2).c_str());
+			
+			values = seperateItems(dateTime.at(1), ":");
+			int hour = std::atoi(values.at(0).c_str());
+			int minute = std::atoi(values.at(1).c_str());
+			int second = atoi(values.at(2).c_str());
+
+			dateTimePicker1->Value = DateTime(year, month, day);
+			numericUpDown1->Value = hour;
+			numericUpDown2->Value = minute;
+			numericUpDown3->Value = second;
+
+			std::string name = listItem.at(1);
+			std::string priority = listItem.at(2);
+			std::string description = listItem.at(3);
+
+			textBox4->Text = convertToSystemString(name);
+			prioritySystem = convertToSystemString(priority); //Neskapēc combobox nepievieno sarakstam lietas ar inicializēšanu, tapēc tas tiek pārvietots uz load metodi
+			richTextBox1->Text = convertToSystemString(description);
+
 		}
 
 	protected:
@@ -319,7 +356,7 @@ namespace ToDoList {
 		ToDoList::Priority priority;
 		priority.ShowDialog();
 
-		this->Enabled = true;
+
 
 		//Update comboBox
 		comboBox1->Items->Clear();
@@ -331,6 +368,10 @@ namespace ToDoList {
 		
 		std::string location = defPriorityLocation;
 		std::ifstream priorityFile(location);
+
+		int* i = new int;
+		i = 0;
+
 		while (!priorityFile.eof()) {
 			std::string buffer;
 			std::vector<std::string> items;
@@ -339,6 +380,8 @@ namespace ToDoList {
 			items = seperateItems(buffer, "|");
 			comboBox1->Items->Add(convertToSystemString(items.at(0)));
 		}
+
+		this->Enabled = true;
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
@@ -373,6 +416,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	}
 }
 private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  e) {
+	bool duplicatePriority = false;
+
 	//Update comboBox
 	comboBox1->Items->Clear();
 
@@ -383,6 +428,9 @@ private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  
 
 	std::string location = defPriorityLocation;
 	std::ifstream priorityFile(location);
+
+	priorityFile.clear();
+	priorityFile.seekg(0, ios::beg);
 	while (!priorityFile.eof()) {
 		std::string buffer;
 		std::vector<std::string> items;
@@ -390,6 +438,19 @@ private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  
 		if (buffer == "") { break; }
 		items = seperateItems(buffer, "|");
 		comboBox1->Items->Add(convertToSystemString(items.at(0)));
+
+		//Pārbauda lai nebūtu divas vienādas prioritātes
+		if (edit && !duplicatePriority) {
+			if (convertToSystemString(items.at(0)) == prioritySystem) { duplicatePriority = true; }
+		}
+	}
+	//Pievieno izvēlētas lietas priority
+	if (edit && !duplicatePriority) {
+		comboBox1->Items->Add(prioritySystem);
+		comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
+	}
+	else {
+		comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
 	}
 }
 };

@@ -49,7 +49,7 @@ void createIniFile(std::string location)
 	settings << "[FIRSTTIMELAUNCH]" << std::endl;
 	settings << "firstTime=false" << std::endl;
 	settings << "[USER]" << std::endl;
-	settings << "saveLocation = " + location + "\\list.txt";
+	settings << "saveLocation = " + location + '\\';
 	settings.close();
 
 }
