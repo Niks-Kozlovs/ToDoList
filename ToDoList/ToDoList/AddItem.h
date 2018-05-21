@@ -1,7 +1,10 @@
 ﻿#pragma once
 #define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt\)";
+#define defTempFileLocation reader.Get("USER", "saveLocation", "list.txt") + R"(TempFile.txt)";
 #define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + R"(Other\priority.txt)";
 
+//#include <iostream>
+#include <stdio.h>
 #include "TimeManager.h"
 #include <string>
 #include "Functions.h"
@@ -384,35 +387,98 @@ namespace ToDoList {
 		this->Enabled = true;
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
-	int hour = (int)this->numericUpDown1->Value;
-	int minute = (int)this->numericUpDown2->Value;
-	int second = (int)this->numericUpDown3->Value;
+	/*
 	
-	TimeManager time(date,hour,minute,second);
+		Pievienot jaunu itemu	
+	
+	*/
+	if (!edit) {
+		string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
+		int hour = (int)this->numericUpDown1->Value;
+		int minute = (int)this->numericUpDown2->Value;
+		int second = (int)this->numericUpDown3->Value;
 
-	string name =convertToStdString(this->textBox4->Text);
-	string priority = convertToStdString(this->comboBox1->Text);
-	string description = convertToStdString(this->richTextBox1->Text);
+		TimeManager time(date, hour, minute, second);
 
-	//TODO: Ielikt datuma pārbaudi lai tā nav pagātnē
-	if (!time.isDateInPast()) {
-		MessageBox::Show("The date entered has passed");
-	} else if (name == "" || priority == "") {
-		MessageBox::Show("Name and/or priority not entered");
-	}
-	else if (name.find('|') != string::npos) {
-		MessageBox::Show("Name contains an illegal character \"|\"");
-	} else {
-		INIReader reader("settings.ini");
-		if (reader.ParseError() < 0) {
-			//Error
+		string name = convertToStdString(this->textBox4->Text);
+		string priority = convertToStdString(this->comboBox1->Text);
+		string description = convertToStdString(this->richTextBox1->Text);
+
+		if (name == "" || priority == "") {
+			MessageBox::Show("Name and/or priority not entered");
 		}
-		std::string fileLocation = defLocation
-		ofstream file(fileLocation, ios::app);
-		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-		file.close();
-		this->Close();
+		else if (name.find('|') != string::npos) {
+			MessageBox::Show("Name contains an illegal character \"|\"");
+		}
+		else {
+			INIReader reader("settings.ini");
+			if (reader.ParseError() < 0) {
+				//Error
+			}
+			std::string fileLocation = defLocation
+				ofstream file(fileLocation, ios::app);
+			file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+			file.close();
+			this->Close();
+		}
+	}
+	else {
+		/*
+
+			Rediģēt esošo itemu
+
+		*/
+		string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
+		int hour = (int)this->numericUpDown1->Value;
+		int minute = (int)this->numericUpDown2->Value;
+		int second = (int)this->numericUpDown3->Value;
+
+		TimeManager time(date, hour, minute, second);
+
+		string name = convertToStdString(this->textBox4->Text);
+		string priority = convertToStdString(this->comboBox1->Text);
+		string description = convertToStdString(this->richTextBox1->Text);
+
+		if (name == "" || priority == "") {
+			MessageBox::Show("Name and/or priority not entered");
+		}
+		else if (name.find('|') != string::npos) {
+			MessageBox::Show("Name contains an illegal character \"|\"");
+		}
+		else {
+
+			INIReader reader("settings.ini");
+			if (reader.ParseError() < 0) {
+				MessageBox::Show("Reader parse error");
+			}
+			std::string tempFileLocation = defTempFileLocation;
+			std::string fileLocation = defLocation;
+
+			ifstream file(fileLocation);
+			ofstream tempFile(tempFileLocation);
+
+			int countIndex = 0;
+
+			while (!file.eof()) {
+
+				std::string buffer;
+
+				getline(file, buffer);
+				if (countIndex == index) {
+					tempFile << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+				}
+				else {
+					tempFile << buffer << endl;
+				}
+					countIndex++;
+			}
+			
+			tempFile.close();
+			file.close();
+			remove(fileLocation.c_str());
+			rename(tempFileLocation.c_str(), fileLocation.c_str());
+			this->Close();
+		}
 	}
 }
 private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  e) {
