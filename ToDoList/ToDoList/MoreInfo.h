@@ -83,78 +83,88 @@ namespace ToDoList {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 13);
+			this->label1->Location = System::Drawing::Point(9, 11);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(49, 17);
+			this->label1->Size = System::Drawing::Size(38, 13);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Name:";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(12, 51);
+			this->label2->Location = System::Drawing::Point(9, 41);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(42, 17);
+			this->label2->Size = System::Drawing::Size(33, 13);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Date:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 89);
+			this->label3->Location = System::Drawing::Point(9, 72);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(56, 17);
+			this->label3->Size = System::Drawing::Size(41, 13);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Priority:";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(12, 127);
+			this->label4->Location = System::Drawing::Point(9, 103);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(83, 17);
+			this->label4->Size = System::Drawing::Size(63, 13);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Description:";
 			// 
 			// richTextBox1
 			// 
+			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->richTextBox1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->richTextBox1->EnableAutoDragDrop = true;
-			this->richTextBox1->Location = System::Drawing::Point(101, 124);
+			this->richTextBox1->Location = System::Drawing::Point(76, 101);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(327, 209);
+			this->richTextBox1->Size = System::Drawing::Size(246, 171);
 			this->richTextBox1->TabIndex = 9;
 			this->richTextBox1->Text = L"";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(98, 13);
+			this->label5->Location = System::Drawing::Point(74, 11);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(0, 17);
+			this->label5->Size = System::Drawing::Size(0, 13);
 			this->label5->TabIndex = 10;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(98, 51);
+			this->label6->Location = System::Drawing::Point(74, 41);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(0, 17);
+			this->label6->Size = System::Drawing::Size(0, 13);
 			this->label6->TabIndex = 11;
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(98, 89);
+			this->label7->Location = System::Drawing::Point(74, 72);
+			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(0, 17);
+			this->label7->Size = System::Drawing::Size(0, 13);
 			this->label7->TabIndex = 12;
 			// 
 			// MoreInfo
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(921, 625);
+			this->ClientSize = System::Drawing::Size(691, 508);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -163,6 +173,7 @@ namespace ToDoList {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MoreInfo";
 			this->Text = L"MoreInfo";
 			this->Load += gcnew System::EventHandler(this, &MoreInfo::MoreInfo_Load);

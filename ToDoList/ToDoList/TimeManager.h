@@ -13,4 +13,5 @@ public:
 	std::string getTimeFull();
 	bool isDateInPast();
 	string getTimeDifference();
+	void getTimeInValues(int &year, int &month, int &day, int &hour, int &minute, int &second);
 };

@@ -1,7 +1,7 @@
 #include"stdafx.h"
 #include<fstream>
 
-using namespace ToDoList;
+; using namespace ToDoList;
 using namespace System;
 using namespace System::Windows::Forms;
 [STAThreadAttribute]

@@ -8,7 +8,7 @@
 #include "TimeManager.h"
 #include <string>
 #include "Functions.h"
-#include <fstream>
+//#include <fstream>
 #include "INIReader.h"
 #include "Priority.h"
 
@@ -26,9 +26,9 @@ namespace ToDoList {
 	/// </summary>
 	public ref class AddItem : public System::Windows::Forms::Form
 	{
-	public: bool edit;
-	public: String ^ prioritySystem;
-	public: int index;
+	private: bool edit;
+	private: String ^ prioritySystem;
+	private: int index;
 	public:
 		AddItem(void) //Make new
 		{
@@ -47,6 +47,8 @@ namespace ToDoList {
 			std::vector<std::string> values;
 			dateTime = seperateItems(listItem.at(0), " ");
 
+
+			//Pārvēŗš datumu un laiku no string uz int
 			values = seperateItems(dateTime.at(0), "/");
 			int day = atoi(values.at(0).c_str());
 			int month = atoi(values.at(1).c_str());
@@ -501,7 +503,7 @@ private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  
 			if (convertToSystemString(items.at(0)) == prioritySystem) { duplicatePriority = true; }
 		}
 	}
-	//Pievieno izvēlētas lietas priority
+	//Pievieno izvēlētas lietas priority ja nav un izvēlas to
 	if (edit && !duplicatePriority) {
 		comboBox1->Items->Add(prioritySystem);
 		comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
