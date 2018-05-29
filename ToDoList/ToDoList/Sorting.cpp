@@ -4,7 +4,7 @@ Sorting::Sorting()
 {
 }
 
-void Sorting::sortItems(vector<vector<string>> information, string sortType, int columns, int *& itemOrder)
+void Sorting::sortItems(vector<vector<string>> information, string sortType, int columns, vector<int> itemOrder)
 {
 	switch (columns)
 	{
@@ -18,7 +18,7 @@ void Sorting::sortItems(vector<vector<string>> information, string sortType, int
 	}
 }
 
-void Sorting::sortDate(vector<vector<string>> information, string sortType, int *& itemOrder)
+void Sorting::sortDate(vector<vector<string>> information, string sortType, vector<int> itemOrder)
 {
 	int i = 0;
 	bool isInOrder = true;
@@ -56,7 +56,7 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, int 
 		}
 
 		if (shouldSwap) {
-			std::swap(itemOrder[i], itemOrder[i + 1]);
+			std::swap(itemOrder.at(i), itemOrder.at(i + 1));
 		}
 
 		i++;
@@ -64,15 +64,15 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, int 
 
 }
 
-void Sorting::sortName(vector<vector<string>> information, string sortType, int *& itemOrder)
+void Sorting::sortName(vector<vector<string>> information, string sortType, vector<int> itemOrder)
 {
 }
 
-void Sorting::sortPriority(vector<vector<string>> information, string sortType, int *& itemOrder)
+void Sorting::sortPriority(vector<vector<string>> information, string sortType, vector<int> itemOrder)
 {
 }
 
-void Sorting::sortTimeLeft(vector<vector<string>> information, string sortType, int *& itemOrder)
+void Sorting::sortTimeLeft(vector<vector<string>> information, string sortType, vector<int> itemOrder)
 {
 }
 

@@ -43,6 +43,12 @@ void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std:
 	}
 }
 
+void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information, std::vector<int> itemOrder) 
+{
+	listView->Items->Clear();
+
+}
+
 void createIniFile(std::string location)
 {
 	std::ofstream settings("settings.ini");

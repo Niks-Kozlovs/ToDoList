@@ -4,7 +4,9 @@
 #include"MoreInfo.h"
 #include"Functions.h"
 #include<vector>
+#include "Sorting.h"
 std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
+std::vector <int> itemOrder;
 
 
 namespace ToDoList {
@@ -23,9 +25,10 @@ namespace ToDoList {
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
 	public: int clickedColumn;
+	private: System::Windows::Forms::Button^  button5;
+	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
 	public:
-	public: int * itemOrder;
 	public:
 		Form1(void)
 		{
@@ -120,6 +123,7 @@ namespace ToDoList {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -345,6 +349,16 @@ namespace ToDoList {
 			this->textBox1->Size = System::Drawing::Size(160, 20);
 			this->textBox1->TabIndex = 10;
 			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(617, 350);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->TabIndex = 11;
+			this->button5->Text = L"Reset";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
+			// 
 			// Form1
 			// 
 			this->AcceptButton = this->button1;
@@ -352,6 +366,7 @@ namespace ToDoList {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(981, 542);
+			this->Controls->Add(this->button5);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->label3);
@@ -469,6 +484,7 @@ namespace ToDoList {
 			std::vector<std::string> text;
 			text = seperateItems(buffer, "|");
 			information.push_back(text);
+			itemOrder.push_back(i);
 			i++;
 		}
 
@@ -590,9 +606,21 @@ namespace ToDoList {
 
 	} //Edit click
 	private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-		itemOrder = new int[listView1->Items->Count];
-
+		Sorting sortItem;
+		std::string sortType = convertToStdString(comboBox1->Text);
+		sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
 
 	};
-	};
+	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+		comboBox1->Enabled = false;
+		clickedColumn = -1;
+		itemOrder.clear();
+
+		for (int i = 0; i < information.size(); i++) {
+			itemOrder.push_back(i);
+		}
+
+		updateListView(listView1, information, itemOrder);
+	}
+};
 };
