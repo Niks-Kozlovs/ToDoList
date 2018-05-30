@@ -24,7 +24,7 @@ namespace ToDoList {
 	/// </summary>
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
-	public: int clickedColumn;
+	public: int clickedColumn = -1;
 	private: System::Windows::Forms::Button^  button5;
 	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
@@ -415,17 +415,19 @@ namespace ToDoList {
 		int i = 0;
 
 		information.clear();
+		itemOrder.clear();
 		while (!file.eof()) {
 			getline(file, buffer);
 			if (buffer == "") { break; }
 			std::vector<std::string> text;
 			text = seperateItems(buffer, "|");
 			information.push_back(text);
+			itemOrder.push_back(i);
 			i++;
 		}
 		file.close();
 
-		updateListView(listView1, information);
+		updateListView(listView1, information, itemOrder);
 		for (i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
 			listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
@@ -468,6 +470,7 @@ namespace ToDoList {
 	private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
 		timer1->Start();
 		information.clear();
+		if (clickedColumn == -1) { itemOrder.clear(); }
 		std::vector<std::string> list;
 		std::string buffer;
 		INIReader reader("settings.ini");
@@ -484,13 +487,14 @@ namespace ToDoList {
 			std::vector<std::string> text;
 			text = seperateItems(buffer, "|");
 			information.push_back(text);
-			itemOrder.push_back(i);
+			if (clickedColumn == -1) { itemOrder.push_back(i); }
 			i++;
 		}
 
+
 		file.close();
 
-		updateListView(listView1, information);
+		updateListView(listView1, information, itemOrder);
 		for (int i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
 			listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
@@ -550,7 +554,8 @@ namespace ToDoList {
 		listView1->SelectedItems[0]->Remove();
 
 		//Vector update
-		information.erase(information.begin() + index);
+		information.erase(information.begin() + itemOrder.at(index));
+		itemOrder.erase(itemOrder.begin() + index);
 
 
 		//File update
@@ -609,16 +614,24 @@ namespace ToDoList {
 		Sorting sortItem;
 		std::string sortType = convertToStdString(comboBox1->Text);
 		sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+		updateListView(listView1, information, itemOrder);
 
 	};
 	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 		comboBox1->Enabled = false;
+		comboBox1->Items->Clear();
+		comboBox1->Text = "";
+		
+		textBox1->Text = "";
+
+		label1->Text = "Selected: None";
 		clickedColumn = -1;
 		itemOrder.clear();
 
 		for (int i = 0; i < information.size(); i++) {
 			itemOrder.push_back(i);
 		}
+
 
 		updateListView(listView1, information, itemOrder);
 	}

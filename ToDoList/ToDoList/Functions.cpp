@@ -29,24 +29,32 @@ std::vector<std::string> seperateItems(std::string text, std::string delimiter)
 	return information;
 }
 
-void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information)
-{
-	//Saraksts tiks atjaunināts
-	//Tas strādās pat ja pievieno vel vienu kolonu
-	listView->Items->Clear();
-	for (int i = 0; i < information.size(); i++) {
-		int j = 0;
-			listView->Items->Add(convertToSystemString(information[i][j]));
-		for (j = 1; j < listView->Columns->Count - 1; j++) {
-			listView->Items[i]->SubItems->Add(convertToSystemString(information[i][j]));
-		}
-	}
-}
+//void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information)
+//{
+//	//Saraksts tiks atjaunināts
+//	//Tas strādās pat ja pievieno vel vienu kolonu
+//	listView->Items->Clear();
+//	for (int i = 0; i < information.size(); i++) {
+//		int j = 0;
+//			listView->Items->Add(convertToSystemString(information[i][j]));
+//		for (j = 1; j < listView->Columns->Count - 1; j++) {
+//			listView->Items[i]->SubItems->Add(convertToSystemString(information[i][j]));
+//		}
+//	}
+//}
 
 void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information, std::vector<int> itemOrder) 
 {
 	listView->Items->Clear();
-
+	for (int i = 0; i < itemOrder.size(); i++) {
+		int j = 0;
+		int itemPlace = itemOrder.at(i);
+		listView->Items->Add(convertToSystemString(information[itemPlace][j]));
+		for (j = 1; j < listView->Columns->Count - 1; j++) {
+			listView->Items[i]->SubItems->Add(convertToSystemString(information[itemPlace][j]));
+		}
+		listView->Items[i]->SubItems->Add("");
+	}
 }
 
 void createIniFile(std::string location)

@@ -4,7 +4,7 @@ Sorting::Sorting()
 {
 }
 
-void Sorting::sortItems(vector<vector<string>> information, string sortType, int columns, vector<int> itemOrder)
+void Sorting::sortItems(vector<vector<string>> information, string sortType, int columns, vector<int> & itemOrder)
 {
 	switch (columns)
 	{
@@ -18,14 +18,16 @@ void Sorting::sortItems(vector<vector<string>> information, string sortType, int
 	}
 }
 
-void Sorting::sortDate(vector<vector<string>> information, string sortType, vector<int> itemOrder)
+void Sorting::sortDate(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
 {
 	int i = 0;
-	bool isInOrder = true;
-	while (i < information.size() - 1 && !isInOrder) {
+	bool isInOrder;
+	while (i < information.size() - 1) {
 		isInOrder = true;
-		TimeManager time(information.at(0).at(i));
-		TimeManager time2(information.at(0).at(i + 1));
+		int currentItemOrderValue = itemOrder.at(i);
+		int currentItemOrderValueNext = itemOrder.at(i + 1);
+		TimeManager time(information.at(currentItemOrderValue).at(0));
+		TimeManager time2(information.at(currentItemOrderValueNext).at(0));
 
 		int year, month, day, hour, minute, second; //time info
 		int year2, month2, day2, hour2, minute2, second2; //time2 info
@@ -38,41 +40,48 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, vect
 
 		bool shouldSwap = false;
 		//Laika salidzinasana
-		if (year < year2) {
+		if (year > year2) {
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month < month2) {
+		else if (year == year2 && month > month2) {
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month == month2 && day < day2) {
+		else if (year == year2 && month == month2 && day > day2) { //If days are swapped then it becomes a problem
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month == month2 && day == day2 && timeInSeconds < timeInSeconds2) {
+		else if (year == year2 && month == month2 && day == day2 && timeInSeconds > timeInSeconds2) {
 			shouldSwap = true;
 			isInOrder = false;
 		}
 
 		if (shouldSwap) {
 			std::swap(itemOrder.at(i), itemOrder.at(i + 1));
+			i = 0;
 		}
-
-		i++;
+		else {
+			i++;
+		}
+		
 	}
 
+	if (sortType == "High to low") { //reverse
+		std::reverse(itemOrder.begin(), itemOrder.end());
+	}
 }
 
-void Sorting::sortName(vector<vector<string>> information, string sortType, vector<int> itemOrder)
+void Sorting::sortName(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
+{
+	itemOrder = { 2,0,1 };
+}
+
+void Sorting::sortPriority(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
 {
 }
 
-void Sorting::sortPriority(vector<vector<string>> information, string sortType, vector<int> itemOrder)
-{
-}
-
-void Sorting::sortTimeLeft(vector<vector<string>> information, string sortType, vector<int> itemOrder)
+void Sorting::sortTimeLeft(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
 {
 }
 
