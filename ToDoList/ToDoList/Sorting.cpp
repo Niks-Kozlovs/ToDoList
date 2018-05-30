@@ -1,4 +1,4 @@
-#include "Sorting.h"
+﻿#include "Sorting.h"
 
 Sorting::Sorting()
 {
@@ -44,15 +44,15 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, vect
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month > month2) {
+		else if (year == year2 && month < month2) {
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month == month2 && day > day2) { //If days are swapped then it becomes a problem
+		else if (year == year2 && month == month2 && day < day2) { //If days are swapped then it becomes a problem
 			shouldSwap = true;
 			isInOrder = false;
 		}
-		else if (year == year2 && month == month2 && day == day2 && timeInSeconds > timeInSeconds2) {
+		else if (year == year2 && month == month2 && day == day2 && timeInSeconds < timeInSeconds2) {
 			shouldSwap = true;
 			isInOrder = false;
 		}
@@ -67,14 +67,37 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, vect
 		
 	}
 
-	if (sortType == "High to low") { //reverse
+	if (sortType == "Low to high") { //reverse
 		std::reverse(itemOrder.begin(), itemOrder.end());
 	}
 }
 
 void Sorting::sortName(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
 {
-	itemOrder = { 2,0,1 };
+	int i = 0;
+	while (i < information.size() - 1) {
+		int currentItemOrderValue = itemOrder.at(i);
+		int currentItemOrderValueNext = itemOrder.at(i + 1);
+
+		std::string name1 = information.at(currentItemOrderValue).at(1);
+		std::string name2 = information.at(currentItemOrderValueNext).at(1);
+
+		std::transform(name1.begin(), name1.end(), name1.begin(), ::toupper); //Pārveido uz lielajiem burtiem
+		std::transform(name2.begin(), name2.end(), name2.begin(), ::toupper);
+
+		if (name1 > name2 ) {
+			std::swap(itemOrder.at(i), itemOrder.at(i + 1));
+			i = 0;
+		}
+		else {
+			i++;
+		}
+	}
+
+	if (sortType == "Z-A") { //reverse
+		std::reverse(itemOrder.begin(), itemOrder.end());
+	}
+
 }
 
 void Sorting::sortPriority(vector<vector<string>> information, string sortType, vector<int> & itemOrder)

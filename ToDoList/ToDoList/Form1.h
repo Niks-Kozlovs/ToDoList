@@ -554,8 +554,8 @@ namespace ToDoList {
 		listView1->SelectedItems[0]->Remove();
 
 		//Vector update
-		information.erase(information.begin() + itemOrder.at(index));
-		itemOrder.erase(itemOrder.begin() + index);
+		information.erase(information.begin() + itemOrder.at(index)); //Paņem vajadzīgo indeksu no itemOrder un izdēš to
+		itemOrder.erase(itemOrder.begin() + index); //Pēc tam izdzēš to indeksu no itemOrder, tas nozīmē, ka var izdēst pat ja ir sortots un filtrēts
 
 
 		//File update
