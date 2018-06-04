@@ -5,7 +5,7 @@ Sorting::Sorting()
 {
 }
 
-void Sorting::sortItems(vector<vector<string>> information, string sortType, int columns, vector<int> & itemOrder)
+void Sorting::sortItems(vector<vector<string>> & information, string sortType, int columns, vector<int> & itemOrder)
 {
 	switch (columns)
 	{
@@ -19,7 +19,7 @@ void Sorting::sortItems(vector<vector<string>> information, string sortType, int
 	}
 }
 
-void Sorting::sortDate(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
+void Sorting::sortDate(vector<vector<string>> & information, string sortType, vector<int> & itemOrder)
 {
 	int i = 0;
 	bool isInOrder;
@@ -73,7 +73,7 @@ void Sorting::sortDate(vector<vector<string>> information, string sortType, vect
 	}
 }
 
-void Sorting::sortText(vector<vector<string>> information, string sortType, vector<int> & itemOrder, int columnClicked)
+void Sorting::sortText(vector<vector<string>> & information, string sortType, vector<int> & itemOrder, int columnClicked)
 {
 	int i = 0;
 	while (i < itemOrder.size() - 1) {
@@ -101,7 +101,7 @@ void Sorting::sortText(vector<vector<string>> information, string sortType, vect
 
 }
 
-void Sorting::sortPriority(vector<vector<string>> information, string sortType, vector<int> & itemOrder)
+void Sorting::sortPriority(vector<vector<string>> & information, string sortType, vector<int> & itemOrder)
 {
 	vector<priorityValues> priorityValuesVec;
 

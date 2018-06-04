@@ -29,17 +29,30 @@ std::vector<std::string> seperateItems(std::string text, std::string delimiter) 
 	return information;
 }
 
-void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> information, std::vector<int> itemOrder) 
+void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> & information, std::vector<int> & itemOrder, std::vector<int> & filteredItemOrder, bool isFiltered) 
 {
 	listView->Items->Clear();
-	for (int i = 0; i < itemOrder.size(); i++) {
-		int j = 0;
-		int itemPlace = itemOrder.at(i);
-		listView->Items->Add(convertToSystemString(information[itemPlace][j]));
-		for (j = 1; j < listView->Columns->Count - 1; j++) {
-			listView->Items[i]->SubItems->Add(convertToSystemString(information[itemPlace][j]));
+	if (!isFiltered) {
+		for (int i = 0; i < itemOrder.size(); i++) {
+			int j = 0;
+			int itemPlace = itemOrder.at(i);
+			listView->Items->Add(convertToSystemString(information[itemPlace][j]));
+			for (j = 1; j < listView->Columns->Count - 1; j++) {
+				listView->Items[i]->SubItems->Add(convertToSystemString(information[itemPlace][j]));
+			}
+			listView->Items[i]->SubItems->Add("");
 		}
-		listView->Items[i]->SubItems->Add("");
+	}
+	else {
+		for (int i = 0; i < filteredItemOrder.size(); i++) {
+			int j = 0;
+			int itemPlace = filteredItemOrder.at(i);
+			listView->Items->Add(convertToSystemString(information[itemPlace][j]));
+			for (j = 1; j < listView->Columns->Count - 1; j++) {
+				listView->Items[i]->SubItems->Add(convertToSystemString(information[itemPlace][j]));
+			}
+			listView->Items[i]->SubItems->Add("");
+		}
 	}
 }
 
@@ -68,4 +81,12 @@ bool checkIfDuplicate(std::string fileLocation, int column, std::string value) {
 		}
 	}
 	return false;
+}
+
+void resetItemOrder(std::vector<std::vector<std::string>>& information, std::vector<int>& itemOrder)
+{
+	itemOrder.clear();
+	for (int i = 0; i < information.size(); i++) {
+		itemOrder.push_back(i);
+	}
 }

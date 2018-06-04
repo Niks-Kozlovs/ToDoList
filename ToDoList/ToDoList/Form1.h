@@ -1,12 +1,15 @@
 ﻿#pragma once
 #define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt)";
-#include"AddItem.h"
-#include"MoreInfo.h"
-#include"Functions.h"
-#include<vector>
+#include "AddItem.h"
+#include "MoreInfo.h"
+#include "Functions.h"
+#include <vector>
 #include "Sorting.h"
+#include <algorithm>
 std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
 std::vector <int> itemOrder;
+std::vector <int> filterItemOrder;
+bool isFiltered = false;
 
 
 namespace ToDoList {
@@ -26,6 +29,9 @@ namespace ToDoList {
 	{
 	public: int clickedColumn = -1;
 	private: System::Windows::Forms::Button^  button5;
+	private: System::Windows::Forms::ToolStripMenuItem^  listsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  addNewListToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  selectListToolStripMenuItem;
 	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
 	public:
@@ -64,14 +70,14 @@ namespace ToDoList {
 
 	private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  changeFontToolStripMenuItem;
+
 	private: System::Windows::Forms::ToolStripMenuItem^  changeSaveLocationToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
-	private: System::Windows::Forms::ToolStripComboBox^  toolStripComboBox1;
+
 	private: System::Windows::Forms::ColumnHeader^  columnHeader5;
 	private: System::Windows::Forms::Timer^  timer1;
-	private: System::Windows::Forms::ToolStripMenuItem^  changeUpdateRateToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripTextBox^  toolStripTextBox1;
+
+
 	private: System::Windows::Forms::Button^  button4;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
@@ -110,11 +116,7 @@ namespace ToDoList {
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->changeFontToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripComboBox1 = (gcnew System::Windows::Forms::ToolStripComboBox());
 			this->changeSaveLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->changeUpdateRateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripTextBox1 = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -124,6 +126,9 @@ namespace ToDoList {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->listsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addNewListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->selectListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -213,9 +218,9 @@ namespace ToDoList {
 			// menuStrip1
 			// 
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->fileToolStripMenuItem,
-					this->settingsToolStripMenuItem
+					this->settingsToolStripMenuItem, this->listsToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -243,26 +248,10 @@ namespace ToDoList {
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->changeFontToolStripMenuItem,
-					this->changeSaveLocationToolStripMenuItem, this->changeUpdateRateToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->changeSaveLocationToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
-			// 
-			// changeFontToolStripMenuItem
-			// 
-			this->changeFontToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripComboBox1 });
-			this->changeFontToolStripMenuItem->Name = L"changeFontToolStripMenuItem";
-			this->changeFontToolStripMenuItem->Size = System::Drawing::Size(187, 22);
-			this->changeFontToolStripMenuItem->Text = L"Change font";
-			// 
-			// toolStripComboBox1
-			// 
-			this->toolStripComboBox1->Name = L"toolStripComboBox1";
-			this->toolStripComboBox1->Size = System::Drawing::Size(121, 23);
-			this->toolStripComboBox1->Enter += gcnew System::EventHandler(this, &Form1::toolStripComboBox1_Enter);
 			// 
 			// changeSaveLocationToolStripMenuItem
 			// 
@@ -270,18 +259,6 @@ namespace ToDoList {
 			this->changeSaveLocationToolStripMenuItem->Size = System::Drawing::Size(187, 22);
 			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
 			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeSaveLocationToolStripMenuItem_Click);
-			// 
-			// changeUpdateRateToolStripMenuItem
-			// 
-			this->changeUpdateRateToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripTextBox1 });
-			this->changeUpdateRateToolStripMenuItem->Name = L"changeUpdateRateToolStripMenuItem";
-			this->changeUpdateRateToolStripMenuItem->Size = System::Drawing::Size(187, 22);
-			this->changeUpdateRateToolStripMenuItem->Text = L"Change update rate";
-			// 
-			// toolStripTextBox1
-			// 
-			this->toolStripTextBox1->Name = L"toolStripTextBox1";
-			this->toolStripTextBox1->Size = System::Drawing::Size(100, 23);
 			// 
 			// folderBrowserDialog1
 			// 
@@ -344,10 +321,13 @@ namespace ToDoList {
 			// 
 			// textBox1
 			// 
+			this->textBox1->AcceptsReturn = true;
+			this->textBox1->Enabled = false;
 			this->textBox1->Location = System::Drawing::Point(779, 322);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(160, 20);
 			this->textBox1->TabIndex = 10;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged_1);
 			// 
 			// button5
 			// 
@@ -358,6 +338,29 @@ namespace ToDoList {
 			this->button5->Text = L"Reset";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
+			// 
+			// listsToolStripMenuItem
+			// 
+			this->listsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->addNewListToolStripMenuItem,
+					this->selectListToolStripMenuItem
+			});
+			this->listsToolStripMenuItem->Name = L"listsToolStripMenuItem";
+			this->listsToolStripMenuItem->Size = System::Drawing::Size(42, 20);
+			this->listsToolStripMenuItem->Text = L"Lists";
+			// 
+			// addNewListToolStripMenuItem
+			// 
+			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
+			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->addNewListToolStripMenuItem->Text = L"Add new list";
+			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
+			// 
+			// selectListToolStripMenuItem
+			// 
+			this->selectListToolStripMenuItem->Name = L"selectListToolStripMenuItem";
+			this->selectListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->selectListToolStripMenuItem->Text = L"Select list";
 			// 
 			// Form1
 			// 
@@ -391,7 +394,7 @@ namespace ToDoList {
 		}
 #pragma endregion
 
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) { //Add new item
 		//Atslēdz, lai lietotājs nevar neko darīt kamēr pievieno jaunu informāciju
 		this->Enabled = false;
 		//Izveido un parāda jaunu form priekš informācijas ievades
@@ -410,24 +413,48 @@ namespace ToDoList {
 			MessageBox::Show("Reader parse error");
 		}
 		std::string fileLocation = defLocation
-			MessageBox::Show(convertToSystemString(fileLocation));
+			//MessageBox::Show(convertToSystemString(fileLocation));
 		ifstream file(fileLocation);
 		int i = 0;
 
 		information.clear();
-		itemOrder.clear();
 		while (!file.eof()) {
 			getline(file, buffer);
 			if (buffer == "") { break; }
 			std::vector<std::string> text;
 			text = seperateItems(buffer, "|");
 			information.push_back(text);
-			itemOrder.push_back(i);
 			i++;
 		}
 		file.close();
 
-		updateListView(listView1, information, itemOrder);
+		resetItemOrder(information, itemOrder);
+
+		if (clickedColumn != -1) { //Ja ir sortots
+			Sorting sortItem;
+			std::string sortType = convertToStdString(comboBox1->Text);
+
+			sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+		}
+
+		if (isFiltered) {
+			std::string textToFilter = convertToStdString(textBox1->Text);
+			filterItemOrder.clear();
+			for (int i = 0; i < itemOrder.size(); i++) {
+				std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
+				std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
+				std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
+				//name.find('|') != string::npos
+				if (textToCheck.find(textToFilter) != string::npos) {
+					filterItemOrder.push_back(itemOrder.at(i));
+				}
+			}
+
+			isFiltered = true;
+		} 
+
+		updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
+
 		for (i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
 			listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
@@ -453,8 +480,7 @@ namespace ToDoList {
 		}
 	}
 
-	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-		//TODO: Make a form for more info and display it there from the list
+	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) { //More info
 		this->Enabled = false;
 
 		MoreInfo^ moreInfo = gcnew MoreInfo(information.at(listView1->FocusedItem->Index));
@@ -470,7 +496,6 @@ namespace ToDoList {
 	private: System::Void listView1_Enter(System::Object^  sender, System::EventArgs^  e) {
 		timer1->Start();
 		information.clear();
-		if (clickedColumn == -1) { itemOrder.clear(); }
 		std::vector<std::string> list;
 		std::string buffer;
 		INIReader reader("settings.ini");
@@ -487,14 +512,22 @@ namespace ToDoList {
 			std::vector<std::string> text;
 			text = seperateItems(buffer, "|");
 			information.push_back(text);
-			if (clickedColumn == -1) { itemOrder.push_back(i); }
 			i++;
 		}
 
+		if (clickedColumn == -1) {
+			resetItemOrder(information, itemOrder);
+		}
+		else {
+			Sorting sortItem;
+			std::string sortType = convertToStdString(comboBox1->Text);
+
+			sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+		}
 
 		file.close();
 
-		updateListView(listView1, information, itemOrder);
+		updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 		for (int i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
 			listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
@@ -521,34 +554,37 @@ namespace ToDoList {
 			//Date
 			comboBox1->Items->Add("High to low");
 			comboBox1->Items->Add("Low to high");
+			textBox1->Enabled = true;
 			break;
 		case 1:
 			//Name
 			comboBox1->Items->Add("A-Z");
 			comboBox1->Items->Add("Z-A");
+			textBox1->Enabled = true;
 			break;
 		case 2:
 			//Priority
 			comboBox1->Items->Add("High to low");
 			comboBox1->Items->Add("Low to high");
+			textBox1->Enabled = true;
 			break;
 		case 3:
 			//Description (Nav ko kartot tapec disable)
 			comboBox1->Enabled = false;
+			textBox1->Enabled = true;
 			break;
 		case 4:
 			//Time left
 			comboBox1->Items->Add("High to low");
 			comboBox1->Items->Add("Low to high");
+			textBox1->Enabled = true;
 			break;
 		default:
 			break;
 		}
-
-
 	}
 
-	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) { //Delete item
 		//Dzes ara no saraksta
 		int index = this->listView1->FocusedItem->Index;
 		listView1->SelectedItems[0]->Remove();
@@ -601,7 +637,7 @@ namespace ToDoList {
 		}
 	}
 
-	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) { //Edit
 		AddItem^ edit = gcnew AddItem(information.at(listView1->FocusedItem->Index), (int)listView1->FocusedItem->Index);
 		edit->ShowDialog();
 
@@ -613,27 +649,52 @@ namespace ToDoList {
 	private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 		Sorting sortItem;
 		std::string sortType = convertToStdString(comboBox1->Text);
-		sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-		updateListView(listView1, information, itemOrder);
+		if (!isFiltered) {
+			sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+		}
+		else {
+			sortItem.sortItems(information, sortType, clickedColumn, filterItemOrder);
+		}
+
+		updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 
 	};
-	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) { //Reset
 		comboBox1->Enabled = false;
 		comboBox1->Items->Clear();
 		comboBox1->Text = "";
 		
 		textBox1->Text = "";
+		textBox1->Enabled = false;
 
 		label1->Text = "Selected: None";
 		clickedColumn = -1;
-		itemOrder.clear();
+		isFiltered = false;
 
-		for (int i = 0; i < information.size(); i++) {
-			itemOrder.push_back(i);
-		}
+		filterItemOrder.clear();
+		resetItemOrder(information, itemOrder);
 
-
-		updateListView(listView1, information, itemOrder);
+		updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 	}
+
+private: System::Void textBox1_TextChanged_1(System::Object^  sender, System::EventArgs^  e) {
+	std::string textToFilter = convertToStdString(textBox1->Text);
+	filterItemOrder.clear();
+	for (int i = 0; i < itemOrder.size(); i++) {
+		std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
+		std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
+		std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
+
+		if (textToCheck.find(textToFilter) != string::npos) {
+			filterItemOrder.push_back(itemOrder.at(i));
+		}
+	}
+
+	isFiltered = true;
+	updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
+}
+private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	
+}
 };
 };
