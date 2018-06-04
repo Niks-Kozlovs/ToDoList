@@ -63,6 +63,7 @@ void createIniFile(std::string location)
 	settings << "firstTime=false" << std::endl;
 	settings << "[USER]" << std::endl;
 	settings << "saveLocation = " + location + '\\';
+	settings << "selectedForm = ";
 	settings.close();
 
 }

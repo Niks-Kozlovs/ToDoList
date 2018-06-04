@@ -1,4 +1,0 @@
-﻿Izveidot struct lai verētu vienkārši krāt mainīgos priekš laika. Maybe make it a class to make methods. Taisu kā klasi. (nav atšķirības īsti)
-Mainot AddItem formā laiku un sasniedzot limitu tiek mainīts nākošais (piem ejot uz aukšu no 59 sekundes ieliks 1 minūti un sekunde atkal būs 0), tā darīt ar visiem.
-Importēt citu cilvēku sarakstus un eksportēt savējos uz dažādiem failiem.
-Izveidot filtrācijas sistēmu (piem. rādīt lietas ar vidēju svarīgumu).

@@ -1,7 +1,9 @@
 ﻿#pragma once
 #define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt)";
+#define defLocationNoEnding reader.Get("USER", "saveLocation", "") + R"(Lists\)";
 #include "AddItem.h"
 #include "MoreInfo.h"
+#include "SimpleInputBox.h"
 #include "Functions.h"
 #include <vector>
 #include "Sorting.h"
@@ -694,7 +696,21 @@ private: System::Void textBox1_TextChanged_1(System::Object^  sender, System::Ev
 	updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 }
 private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+	ofstream listOfLists("listOfLists.txt", ios::app);
+
+	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
+	this->Enabled = false;
+	form->ShowDialog();
+
+	String ^ textFromForm = form->TextBoxValue;
+	this->Enabled = true;
+	std::string listName = convertToStdString(textFromForm) + ".txt";
+
+
+	listOfLists << listName << endl;
+
+	listOfLists.close();
+
 }
 };
 };

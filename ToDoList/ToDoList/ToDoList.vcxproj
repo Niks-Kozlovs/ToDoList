@@ -148,6 +148,7 @@
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="MoreInfo.cpp" />
     <ClCompile Include="Priority.cpp" />
+    <ClCompile Include="SimpleInputBox.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
@@ -164,6 +165,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Priority.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="SimpleInputBox.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Sorting.h" />
@@ -188,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Priority.resx">
       <DependentUpon>Priority.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleInputBox.resx">
+      <DependentUpon>SimpleInputBox.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
