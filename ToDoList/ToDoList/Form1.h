@@ -1,5 +1,5 @@
 ﻿#pragma once
-#define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt)";
+#define defLocation reader.Get("USER", "saveLocation", "") + R"(Lists\)" + currentListFile + ".txt";
 #define defLocationNoEnding reader.Get("USER", "saveLocation", "") + R"(Lists\)";
 #include "AddItem.h"
 #include "MoreInfo.h"
@@ -8,9 +8,11 @@
 #include <vector>
 #include "Sorting.h"
 #include <algorithm>
+
 std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
 std::vector <int> itemOrder;
 std::vector <int> filterItemOrder;
+std::string currentListFile = "";
 bool isFiltered = false;
 
 
@@ -33,7 +35,9 @@ namespace ToDoList {
 	private: System::Windows::Forms::Button^  button5;
 	private: System::Windows::Forms::ToolStripMenuItem^  listsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  addNewListToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  selectListToolStripMenuItem;
+
+	private: System::Windows::Forms::ComboBox^  comboBox2;
+	private: System::Windows::Forms::Label^  label4;
 	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
 	public:
@@ -119,6 +123,8 @@ namespace ToDoList {
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changeSaveLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->listsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addNewListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -128,9 +134,8 @@ namespace ToDoList {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->listsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->addNewListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->selectListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -262,6 +267,20 @@ namespace ToDoList {
 			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
 			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeSaveLocationToolStripMenuItem_Click);
 			// 
+			// listsToolStripMenuItem
+			// 
+			this->listsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->addNewListToolStripMenuItem });
+			this->listsToolStripMenuItem->Name = L"listsToolStripMenuItem";
+			this->listsToolStripMenuItem->Size = System::Drawing::Size(42, 20);
+			this->listsToolStripMenuItem->Text = L"Lists";
+			// 
+			// addNewListToolStripMenuItem
+			// 
+			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
+			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->addNewListToolStripMenuItem->Text = L"Add new list";
+			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
+			// 
 			// folderBrowserDialog1
 			// 
 			this->folderBrowserDialog1->SelectedPath = L"C:\\Users\\sloppynick3\\Documents\\To do list";
@@ -341,28 +360,23 @@ namespace ToDoList {
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
-			// listsToolStripMenuItem
+			// comboBox2
 			// 
-			this->listsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->addNewListToolStripMenuItem,
-					this->selectListToolStripMenuItem
-			});
-			this->listsToolStripMenuItem->Name = L"listsToolStripMenuItem";
-			this->listsToolStripMenuItem->Size = System::Drawing::Size(42, 20);
-			this->listsToolStripMenuItem->Text = L"Lists";
+			this->comboBox2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Location = System::Drawing::Point(614, 411);
+			this->comboBox2->Name = L"comboBox2";
+			this->comboBox2->Size = System::Drawing::Size(121, 21);
+			this->comboBox2->TabIndex = 12;
 			// 
-			// addNewListToolStripMenuItem
+			// label4
 			// 
-			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
-			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->addNewListToolStripMenuItem->Text = L"Add new list";
-			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
-			// 
-			// selectListToolStripMenuItem
-			// 
-			this->selectListToolStripMenuItem->Name = L"selectListToolStripMenuItem";
-			this->selectListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->selectListToolStripMenuItem->Text = L"Select list";
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(614, 395);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(26, 13);
+			this->label4->TabIndex = 13;
+			this->label4->Text = L"List:";
 			// 
 			// Form1
 			// 
@@ -371,6 +385,8 @@ namespace ToDoList {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(981, 542);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->comboBox2);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->comboBox1);
@@ -388,6 +404,8 @@ namespace ToDoList {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Form1";
 			this->Text = L"To Do List";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form1::Form1_FormClosed);
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -401,8 +419,8 @@ namespace ToDoList {
 		this->Enabled = false;
 		//Izveido un parāda jaunu form priekš informācijas ievades
 		//Tā izskatīsies labāk nekā piepildīt galveno form ar dažādiem text boxiem
-		ToDoList::AddItem addItemForm;
-		addItemForm.ShowDialog();
+		AddItem^ addItem = gcnew AddItem(convertToSystemString(currentListFile));
+		addItem->ShowDialog();
 		//Pēc form aizstaisīšanas galvenais form atkal tiek ieslēgts
 		this->Enabled = true;
 
@@ -442,7 +460,7 @@ namespace ToDoList {
 		if (isFiltered) {
 			std::string textToFilter = convertToStdString(textBox1->Text);
 			filterItemOrder.clear();
-			for (int i = 0; i < itemOrder.size(); i++) {
+			for (size_t i = 0; i < itemOrder.size(); i++) {
 				std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
 				std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
 				std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
@@ -505,7 +523,7 @@ namespace ToDoList {
 			MessageBox::Show("Reader parse error");
 		}
 		std::string fileLocation = defLocation
-			ifstream file(fileLocation);
+		ifstream file(fileLocation);
 		int i = 0;
 
 		while (!file.eof()) {
@@ -539,50 +557,51 @@ namespace ToDoList {
 	private: System::Void listView1_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e) {
 		//MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
 		//MessageBox::Show(this->listView1->FocusedItem->Index.ToString());
+		if (listView1->Items->Count > 1) {
+			clickedColumn = e->Column;
+			label1->Text = "Selected: " + listView1->Columns[clickedColumn]->Text;
+			//Set combobox parameters
+			comboBox1->Items->Clear();
 
-		clickedColumn = e->Column;
-		label1->Text = "Selected: " + listView1->Columns[clickedColumn]->Text;
-		//Set combobox parameters
-		comboBox1->Items->Clear();
+			comboBox1->Text = "";
 
-		comboBox1->Text = "";
+			comboBox1->Enabled = true;
+			textBox1->Enabled = true;
 
-		comboBox1->Enabled = true;
-		textBox1->Enabled = true;
-
-		switch (clickedColumn)
-		{
-		case 0:
-			//Date
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		case 1:
-			//Name
-			comboBox1->Items->Add("A-Z");
-			comboBox1->Items->Add("Z-A");
-			textBox1->Enabled = true;
-			break;
-		case 2:
-			//Priority
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		case 3:
-			//Description (Nav ko kartot tapec disable)
-			comboBox1->Enabled = false;
-			textBox1->Enabled = true;
-			break;
-		case 4:
-			//Time left
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		default:
-			break;
+			switch (clickedColumn)
+			{
+			case 0:
+				//Date
+				comboBox1->Items->Add("High to low");
+				comboBox1->Items->Add("Low to high");
+				textBox1->Enabled = true;
+				break;
+			case 1:
+				//Name
+				comboBox1->Items->Add("A-Z");
+				comboBox1->Items->Add("Z-A");
+				textBox1->Enabled = true;
+				break;
+			case 2:
+				//Priority
+				comboBox1->Items->Add("High to low");
+				comboBox1->Items->Add("Low to high");
+				textBox1->Enabled = true;
+				break;
+			case 3:
+				//Description (Nav ko kartot tapec disable)
+				comboBox1->Enabled = false;
+				textBox1->Enabled = true;
+				break;
+			case 4:
+				//Time left
+				comboBox1->Items->Add("High to low");
+				comboBox1->Items->Add("Low to high");
+				textBox1->Enabled = true;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -619,7 +638,7 @@ namespace ToDoList {
 
 	private: System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
-			createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath));
+			createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath), currentListFile, "false");
 			MessageBox::Show("The program will now close for the changes to take effect");
 			exit(0);
 		}
@@ -640,7 +659,7 @@ namespace ToDoList {
 	}
 
 	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) { //Edit
-		AddItem^ edit = gcnew AddItem(information.at(listView1->FocusedItem->Index), (int)listView1->FocusedItem->Index);
+		AddItem^ edit = gcnew AddItem(information.at(listView1->FocusedItem->Index), (int)listView1->FocusedItem->Index, convertToSystemString(currentListFile));
 		edit->ShowDialog();
 
 		button2->Enabled = false;
@@ -682,7 +701,7 @@ namespace ToDoList {
 private: System::Void textBox1_TextChanged_1(System::Object^  sender, System::EventArgs^  e) {
 	std::string textToFilter = convertToStdString(textBox1->Text);
 	filterItemOrder.clear();
-	for (int i = 0; i < itemOrder.size(); i++) {
+	for (size_t i = 0; i < itemOrder.size(); i++) {
 		std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
 		std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
 		std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
@@ -706,10 +725,111 @@ private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender,
 	this->Enabled = true;
 	std::string listName = convertToStdString(textFromForm) + ".txt";
 
-
 	listOfLists << listName << endl;
 
 	listOfLists.close();
+
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+
+	std::string selectedSaveLocation = defLocationNoEnding
+	std::string saveLocation = selectedSaveLocation + (std::string)"\\Lists\\" + listName;
+	fstream fileCreate(saveLocation, ios::in | ios::out | ios::app);
+	fileCreate.close();
+
+}
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+	std::string firstTimeText = reader.Get("FIRSTTIMELAUNCH", "firstTime", "true");
+	std::transform(firstTimeText.begin(), firstTimeText.end(), firstTimeText.begin(), ::toupper);
+	bool firstTimeLaunch = firstTimeText == "TRUE";
+	//Check if firsttimeLaunch
+	if (firstTimeLaunch) {
+		MessageBox::Show("Program has noticed this is the first time you are launching this program. Please enter the name of the first list!");
+		SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
+		this->Enabled = false;
+		form->ShowDialog();
+
+		String ^ textFromForm = form->TextBoxValue;
+
+		currentListFile = convertToStdString(textFromForm);
+		bool pressedCancel = true;
+		if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
+			pressedCancel = false;
+		}
+		while (pressedCancel) { //Kamēr nav uzspiests OK
+			MessageBox::Show("Please choose a save location!");
+			if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
+				pressedCancel = false;
+			}
+
+		}
+
+		std::string selectedSaveLocation = convertToStdString(folderBrowserDialog1->SelectedPath);
+
+		createIniFile(selectedSaveLocation, currentListFile, "false");
+		this->Enabled = true;
+
+		std::string saveLocation = selectedSaveLocation + (std::string)"\\Lists\\" + currentListFile + ".txt";
+
+		createRootFolder(selectedSaveLocation.c_str());
+
+		fstream fileCreate(saveLocation, ios::in | ios::out | ios::app);
+		fileCreate.close();
+
+	}
+	else {
+		currentListFile = reader.Get("USER", "selectedForm", "list");
+	}
+
+	std::string fileLocation = defLocationNoEnding;
+	std::vector<std::string> listOfFiles = get_all_files_names_within_folder(fileLocation);
+
+	bool foundList = false;
+	for (size_t i = 0; i < listOfFiles.size(); i++) {
+		if (listOfFiles.at(i) == currentListFile + ".txt") {
+			foundList = true;
+		}
+			comboBox2->Items->Add(convertToSystemString(listOfFiles.at(i)));
+	}
+
+	if (!foundList & !firstTimeLaunch) {
+		if (listOfFiles.size() <= 0) {
+			std::string selectedSaveLocation = convertToStdString(folderBrowserDialog1->SelectedPath);
+			std::string saveLocation = selectedSaveLocation + (std::string)"\\Lists\\" + "list";
+			//Vajag ielikt pārbaudi vai eksistē root fails. Savādāk nekas nestrādā.
+
+			std::string cLists = selectedSaveLocation + (std::string)"\\Lists";
+			std::string cOther = selectedSaveLocation + (std::string)"\\Other";
+
+			MessageBox::Show(convertToSystemString(selectedSaveLocation));
+
+			createRootFolder(selectedSaveLocation.c_str());
+
+			fstream fileCreate(saveLocation, ios::in | ios::out | ios::app);
+			fileCreate.close();
+
+			MessageBox::Show("Somehow we didn't find any lists using default!");
+			currentListFile = "list";
+		}
+	}
+
+
+
+
+}
+private: System::Void Form1_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+	std::string fileLocation = defLocationNoEnding;
+
 
 }
 };

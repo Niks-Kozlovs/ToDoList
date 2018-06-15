@@ -21,7 +21,7 @@ void Sorting::sortItems(vector<vector<string>> & information, string sortType, i
 
 void Sorting::sortDate(vector<vector<string>> & information, string sortType, vector<int> & itemOrder)
 {
-	int i = 0;
+	size_t i = 0;
 	bool isInOrder;
 	while (i < itemOrder.size() - 1) {
 		isInOrder = true;
@@ -75,7 +75,7 @@ void Sorting::sortDate(vector<vector<string>> & information, string sortType, ve
 
 void Sorting::sortText(vector<vector<string>> & information, string sortType, vector<int> & itemOrder, int columnClicked)
 {
-	int i = 0;
+	size_t i = 0;
 	while (i < itemOrder.size() - 1) {
 		int currentItemOrderValue = itemOrder.at(i);
 		int currentItemOrderValueNext = itemOrder.at(i + 1);
@@ -128,7 +128,7 @@ void Sorting::sortPriority(vector<vector<string>> & information, string sortType
 		priorityValuesVec.push_back(tempValues);
 	}
 	//Sākas sortošana
-	int i = 0;
+	size_t i = 0;
 	while (i < itemOrder.size() - 1) {
 		int currentItemOrderValue = itemOrder.at(i);
 		int currentItemOrderValueNext = itemOrder.at(i + 1);
@@ -142,7 +142,7 @@ void Sorting::sortPriority(vector<vector<string>> & information, string sortType
 		bool foundValue1 = false;
 		bool foundValue2 = false;
 
-		for (int j = 0; j < priorityValuesVec.size(); j++) {
+		for (size_t j = 0; j < priorityValuesVec.size(); j++) {
 			if (priorityValuesVec.at(j).name == priority1 || priorityValuesVec.at(j).name == priority2) {
 				if (priorityValuesVec.at(j).name == priority1) {
 					priority1Value = priorityValuesVec.at(j).value;

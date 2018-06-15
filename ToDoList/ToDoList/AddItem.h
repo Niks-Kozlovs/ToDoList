@@ -1,5 +1,4 @@
 ﻿#pragma once
-#define defLocation reader.Get("USER", "saveLocation", "list.txt") + R"(Lists\list.txt\)";
 #define defTempFileLocation reader.Get("USER", "saveLocation", "list.txt") + R"(TempFile.txt)";
 #define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + R"(Other\priority.txt)";
 
@@ -29,18 +28,21 @@ namespace ToDoList {
 	private: bool edit;
 	private: String ^ prioritySystem;
 	private: int index;
+	private: String ^ currentListFile = "";
 	public:
-		AddItem(void) //Make new
+		AddItem(String ^ currentListFile) //Make new
 		{
 			InitializeComponent();
 			edit = false;
+			this->currentListFile = currentListFile;
 			//
 			//TODO: Add the constructor code here
 			//
 		}
-		AddItem(std::vector<std::string> listItem, int index) //Edit
+		AddItem(std::vector<std::string> listItem, int index, String ^ currentListName) //Edit
 		{
 			InitializeComponent();
+			this->currentListFile = currentListName;
 			edit = true;
 			this->index = index;
 			std::vector<std::string> dateTime;
@@ -418,8 +420,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			if (reader.ParseError() < 0) {
 				//Error
 			}
-			std::string fileLocation = defLocation
-				ofstream file(fileLocation, ios::app);
+			std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
+				ofstream file(fileLocation, ios::app | ios::out);
 			file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 			file.close();
 			this->Close();
@@ -445,7 +447,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				MessageBox::Show("Reader parse error");
 			}
 			std::string tempFileLocation = defTempFileLocation;
-			std::string fileLocation = defLocation;
+			std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
 
 			ifstream file(fileLocation);
 			ofstream tempFile(tempFileLocation);
