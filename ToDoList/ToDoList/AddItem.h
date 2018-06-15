@@ -401,21 +401,24 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	string name = convertToStdString(this->textBox4->Text);
 	string priority = convertToStdString(this->comboBox1->Text);
 	string description = convertToStdString(this->richTextBox1->Text);
-	/*
-	
-		Pievienot jaunu itemu	
-	
-	*/
-	if (!edit) {
 
+	bool goodTime = false;
 
-		if (name == "" || priority == "") {
-			MessageBox::Show("Name and/or priority not entered");
-		}
-		else if (name.find('|') != string::npos) {
-			MessageBox::Show("Name contains an illegal character \"|\"");
-		}
-		else {
+	if (!time.isDateInPast()) {
+		MessageBox::Show("The current date is in the past");
+	} else if (name == "" || priority == "") {
+		MessageBox::Show("Name and/or priority not entered");
+	}
+	else if (name.find('|') != string::npos) {
+		MessageBox::Show("Name contains an illegal character \"|\"");
+	}
+	else if (!edit) {
+		/*
+
+		Pievienot jaunu itemu
+
+		*/
+
 			INIReader reader("settings.ini");
 			if (reader.ParseError() < 0) {
 				//Error
@@ -425,7 +428,6 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
 			file.close();
 			this->Close();
-		}
 	}
 	else {
 		/*
@@ -433,14 +435,6 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			Rediģēt esošo itemu
 
 		*/
-
-		if (name == "" || priority == "") {
-			MessageBox::Show("Name and/or priority not entered");
-		}
-		else if (name.find('|') != string::npos) {
-			MessageBox::Show("Name contains an illegal character \"|\"");
-		}
-		else {
 
 			INIReader reader("settings.ini");
 			if (reader.ParseError() < 0) {
@@ -475,7 +469,6 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			this->Close();
 		}
 	}
-}
 private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  e) {
 	bool duplicatePriority = false;
 

@@ -277,7 +277,7 @@ namespace ToDoList {
 			// addNewListToolStripMenuItem
 			// 
 			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
-			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->addNewListToolStripMenuItem->Text = L"Add new list";
 			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
 			// 
@@ -368,6 +368,7 @@ namespace ToDoList {
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(121, 21);
 			this->comboBox2->TabIndex = 12;
+			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox2_SelectedIndexChanged);
 			// 
 			// label4
 			// 
@@ -715,7 +716,6 @@ private: System::Void textBox1_TextChanged_1(System::Object^  sender, System::Ev
 	updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 }
 private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	ofstream listOfLists("listOfLists.txt", ios::app);
 
 	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
 	this->Enabled = false;
@@ -723,11 +723,8 @@ private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender,
 
 	String ^ textFromForm = form->TextBoxValue;
 	this->Enabled = true;
-	std::string listName = convertToStdString(textFromForm) + ".txt";
+	std::string listName = convertToStdString(textFromForm);
 
-	listOfLists << listName << endl;
-
-	listOfLists.close();
 
 	INIReader reader("settings.ini");
 	if (reader.ParseError() < 0) {
@@ -735,9 +732,13 @@ private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender,
 	}
 
 	std::string selectedSaveLocation = defLocationNoEnding
-	std::string saveLocation = selectedSaveLocation + (std::string)"\\Lists\\" + listName;
+	std::string saveLocation = selectedSaveLocation + listName + ".txt";
 	fstream fileCreate(saveLocation, ios::in | ios::out | ios::app);
 	fileCreate.close();
+
+	comboBox2->Items->Add(convertToSystemString(listName));
+
+
 
 }
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -795,7 +796,9 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		if (listOfFiles.at(i) == currentListFile + ".txt") {
 			foundList = true;
 		}
-			comboBox2->Items->Add(convertToSystemString(listOfFiles.at(i)));
+
+		listOfFiles.at(i).erase(listOfFiles.at(i).end() - 4, listOfFiles.at(i).end());
+		comboBox2->Items->Add(convertToSystemString(listOfFiles.at(i)));
 	}
 
 	if (!foundList & !firstTimeLaunch) {
@@ -831,6 +834,48 @@ private: System::Void Form1_FormClosed(System::Object^  sender, System::Windows:
 	std::string fileLocation = defLocationNoEnding;
 
 
+}
+private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+
+	currentListFile = convertToStdString(comboBox2->Text);
+
+	information.clear();
+	std::vector<std::string> list;
+	std::string buffer;
+	INIReader reader("settings.ini");
+	if (reader.ParseError() < 0) {
+		MessageBox::Show("Reader parse error");
+	}
+	std::string fileLocation = defLocation
+		ifstream file(fileLocation);
+	int i = 0;
+
+	while (!file.eof()) {
+		getline(file, buffer);
+		if (buffer == "") { break; }
+		std::vector<std::string> text;
+		text = seperateItems(buffer, "|");
+		information.push_back(text);
+		i++;
+	}
+
+	if (clickedColumn == -1) {
+		resetItemOrder(information, itemOrder);
+	}
+	else {
+		Sorting sortItem;
+		std::string sortType = convertToStdString(comboBox1->Text);
+
+		sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+	}
+
+	file.close();
+
+	updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
+	for (int i = 0; i < listView1->Items->Count; i++) {
+		TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
+		listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
+	}
 }
 };
 };
