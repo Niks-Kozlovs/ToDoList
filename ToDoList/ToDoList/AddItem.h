@@ -154,9 +154,11 @@ namespace ToDoList {
 			// button1
 			// 
 			this->button1->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->button1->Location = System::Drawing::Point(326, 400);
+			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->button1->Location = System::Drawing::Point(286, 301);
+			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(93, 32);
+			this->button1->Size = System::Drawing::Size(70, 35);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Cancel";
 			this->button1->UseVisualStyleBackColor = true;
@@ -164,9 +166,11 @@ namespace ToDoList {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(235, 400);
+			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->button2->Location = System::Drawing::Point(212, 301);
+			this->button2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(85, 32);
+			this->button2->Size = System::Drawing::Size(70, 35);
 			this->button2->TabIndex = 99;
 			this->button2->Text = L"Ok";
 			this->button2->UseVisualStyleBackColor = true;
@@ -175,36 +179,44 @@ namespace ToDoList {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 9);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label1->Location = System::Drawing::Point(9, 7);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(38, 17);
+			this->label1->Size = System::Drawing::Size(35, 16);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Date";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(12, 75);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label2->Location = System::Drawing::Point(9, 61);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(45, 17);
+			this->label2->Size = System::Drawing::Size(42, 16);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Name";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 110);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label3->Location = System::Drawing::Point(9, 89);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(52, 17);
+			this->label3->Size = System::Drawing::Size(49, 16);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Priority";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(12, 145);
+			this->label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label4->Location = System::Drawing::Point(9, 118);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(79, 17);
+			this->label4->Size = System::Drawing::Size(73, 16);
 			this->label4->TabIndex = 5;
 			this->label4->Text = L"Description";
 			// 
@@ -212,61 +224,75 @@ namespace ToDoList {
 			// 
 			this->dateTimePicker1->Cursor = System::Windows::Forms::Cursors::Default;
 			this->dateTimePicker1->CustomFormat = L"dd/MM/yyyy";
+			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
-			this->dateTimePicker1->Location = System::Drawing::Point(92, 9);
+			this->dateTimePicker1->Location = System::Drawing::Point(86, 7);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(327, 22);
+			this->dateTimePicker1->Size = System::Drawing::Size(270, 22);
 			this->dateTimePicker1->TabIndex = 1;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(12, 40);
+			this->label5->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label5->Location = System::Drawing::Point(9, 32);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(39, 17);
+			this->label5->Size = System::Drawing::Size(36, 16);
 			this->label5->TabIndex = 8;
 			this->label5->Text = L"Time";
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(89, 40);
+			this->label6->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label6->Location = System::Drawing::Point(84, 32);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(46, 17);
+			this->label6->Size = System::Drawing::Size(42, 16);
 			this->label6->TabIndex = 10;
 			this->label6->Text = L"Hours";
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(193, 40);
+			this->label7->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label7->Location = System::Drawing::Point(162, 32);
+			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(57, 17);
+			this->label7->Size = System::Drawing::Size(54, 16);
 			this->label7->TabIndex = 11;
 			this->label7->Text = L"Minutes";
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(303, 40);
+			this->label8->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->label8->Location = System::Drawing::Point(258, 32);
+			this->label8->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(63, 17);
+			this->label8->Size = System::Drawing::Size(59, 16);
 			this->label8->TabIndex = 13;
 			this->label8->Text = L"Seconds";
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(92, 72);
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->textBox4->Location = System::Drawing::Point(86, 58);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(327, 22);
+			this->textBox4->Size = System::Drawing::Size(270, 22);
 			this->textBox4->TabIndex = 5;
 			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->EnableAutoDragDrop = true;
-			this->richTextBox1->Location = System::Drawing::Point(92, 142);
+			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->richTextBox1->Location = System::Drawing::Point(86, 115);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(327, 209);
+			this->richTextBox1->Size = System::Drawing::Size(270, 182);
 			this->richTextBox1->TabIndex = 8;
 			this->richTextBox1->Text = L"";
 			// 
@@ -275,41 +301,51 @@ namespace ToDoList {
 			this->comboBox1->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::SuggestAppend;
 			this->comboBox1->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
 			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(92, 107);
+			this->comboBox1->Location = System::Drawing::Point(86, 87);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(246, 24);
+			this->comboBox1->Size = System::Drawing::Size(201, 24);
 			this->comboBox1->TabIndex = 6;
 			// 
 			// numericUpDown1
 			// 
-			this->numericUpDown1->Location = System::Drawing::Point(141, 38);
+			this->numericUpDown1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->numericUpDown1->Location = System::Drawing::Point(123, 31);
+			this->numericUpDown1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->numericUpDown1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 23, 0, 0, 0 });
 			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(47, 22);
+			this->numericUpDown1->Size = System::Drawing::Size(35, 22);
 			this->numericUpDown1->TabIndex = 2;
 			// 
 			// numericUpDown2
 			// 
-			this->numericUpDown2->Location = System::Drawing::Point(256, 38);
+			this->numericUpDown2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->numericUpDown2->Location = System::Drawing::Point(220, 31);
+			this->numericUpDown2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown2->Name = L"numericUpDown2";
-			this->numericUpDown2->Size = System::Drawing::Size(47, 22);
+			this->numericUpDown2->Size = System::Drawing::Size(35, 22);
 			this->numericUpDown2->TabIndex = 3;
 			// 
 			// numericUpDown3
 			// 
-			this->numericUpDown3->Location = System::Drawing::Point(372, 38);
+			this->numericUpDown3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->numericUpDown3->Location = System::Drawing::Point(321, 31);
+			this->numericUpDown3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->numericUpDown3->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown3->Name = L"numericUpDown3";
-			this->numericUpDown3->Size = System::Drawing::Size(47, 22);
+			this->numericUpDown3->Size = System::Drawing::Size(35, 22);
 			this->numericUpDown3->TabIndex = 4;
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(342, 107);
+			this->button3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->button3->Location = System::Drawing::Point(291, 87);
+			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(77, 24);
+			this->button3->Size = System::Drawing::Size(65, 24);
 			this->button3->TabIndex = 7;
 			this->button3->Text = L"Add new";
 			this->button3->UseVisualStyleBackColor = true;
@@ -318,10 +354,10 @@ namespace ToDoList {
 			// AddItem
 			// 
 			this->AcceptButton = this->button2;
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->button1;
-			this->ClientSize = System::Drawing::Size(433, 444);
+			this->ClientSize = System::Drawing::Size(372, 349);
 			this->ControlBox = false;
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->numericUpDown3);
@@ -341,6 +377,7 @@ namespace ToDoList {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"AddItem";
 			this->Text = L"AddItem";
 			this->Load += gcnew System::EventHandler(this, &AddItem::AddItem_Load);
