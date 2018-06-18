@@ -792,7 +792,7 @@ private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender,
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 	INIReader reader("settings.ini");
 	if (reader.ParseError() < 0) {
-		MessageBox::Show("Reader parse error");
+		//Wont show error because it might be first time launch
 	}
 	std::string firstTimeText = reader.Get("FIRSTTIMELAUNCH", "firstTime", "true");
 	std::transform(firstTimeText.begin(), firstTimeText.end(), firstTimeText.begin(), ::toupper);
