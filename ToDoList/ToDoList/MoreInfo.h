@@ -19,6 +19,10 @@ namespace ToDoList {
 	public: String ^ name;
 	public: String ^ date;
 	public: String ^ priority;
+	private: System::Windows::Forms::Button^  button2;
+	public:
+
+	public:
 	public: String ^ description;
 	public:
 		MoreInfo(void)
@@ -78,6 +82,7 @@ namespace ToDoList {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -135,7 +140,7 @@ namespace ToDoList {
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
 			this->richTextBox1->Size = System::Drawing::Size(246, 171);
-			this->richTextBox1->TabIndex = 9;
+			this->richTextBox1->TabIndex = 4;
 			this->richTextBox1->Text = L"";
 			// 
 			// label5
@@ -146,7 +151,7 @@ namespace ToDoList {
 			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(0, 16);
-			this->label5->TabIndex = 10;
+			this->label5->TabIndex = 1;
 			// 
 			// label6
 			// 
@@ -156,7 +161,7 @@ namespace ToDoList {
 			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(0, 16);
-			this->label6->TabIndex = 11;
+			this->label6->TabIndex = 2;
 			// 
 			// label7
 			// 
@@ -166,13 +171,29 @@ namespace ToDoList {
 			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(0, 16);
-			this->label7->TabIndex = 12;
+			this->label7->TabIndex = 3;
+			// 
+			// button2
+			// 
+			this->button2->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->button2->Location = System::Drawing::Point(281, 287);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(70, 35);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"Ok";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MoreInfo::button2_Click);
 			// 
 			// MoreInfo
 			// 
+			this->AcceptButton = this->button2;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(362, 303);
+			this->CancelButton = this->button2;
+			this->ClientSize = System::Drawing::Size(362, 333);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -196,5 +217,8 @@ namespace ToDoList {
 		label7->Text = priority;
 		richTextBox1->Text = description;
 	}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	this->Close();
+}
 };
 }

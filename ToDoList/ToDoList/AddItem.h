@@ -156,10 +156,10 @@ namespace ToDoList {
 			this->button1->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->button1->Location = System::Drawing::Point(286, 301);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(70, 35);
-			this->button1->TabIndex = 0;
+			this->button1->TabIndex = 10;
 			this->button1->Text = L"Cancel";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &AddItem::button1_Click);
@@ -168,10 +168,10 @@ namespace ToDoList {
 			// 
 			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->button2->Location = System::Drawing::Point(212, 301);
-			this->button2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(70, 35);
-			this->button2->TabIndex = 99;
+			this->button2->TabIndex = 9;
 			this->button2->Text = L"Ok";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &AddItem::button2_Click);
@@ -227,7 +227,7 @@ namespace ToDoList {
 			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
 			this->dateTimePicker1->Location = System::Drawing::Point(86, 7);
-			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(270, 22);
 			this->dateTimePicker1->TabIndex = 1;
@@ -280,7 +280,7 @@ namespace ToDoList {
 			// 
 			this->textBox4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->textBox4->Location = System::Drawing::Point(86, 58);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(270, 22);
 			this->textBox4->TabIndex = 5;
@@ -290,7 +290,7 @@ namespace ToDoList {
 			this->richTextBox1->EnableAutoDragDrop = true;
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->richTextBox1->Location = System::Drawing::Point(86, 115);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(2);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(270, 182);
 			this->richTextBox1->TabIndex = 8;
@@ -304,7 +304,7 @@ namespace ToDoList {
 			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Location = System::Drawing::Point(86, 87);
-			this->comboBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(201, 24);
 			this->comboBox1->TabIndex = 6;
@@ -313,7 +313,7 @@ namespace ToDoList {
 			// 
 			this->numericUpDown1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->numericUpDown1->Location = System::Drawing::Point(123, 31);
-			this->numericUpDown1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->numericUpDown1->Margin = System::Windows::Forms::Padding(2);
 			this->numericUpDown1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 23, 0, 0, 0 });
 			this->numericUpDown1->Name = L"numericUpDown1";
 			this->numericUpDown1->Size = System::Drawing::Size(35, 22);
@@ -323,7 +323,7 @@ namespace ToDoList {
 			// 
 			this->numericUpDown2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->numericUpDown2->Location = System::Drawing::Point(220, 31);
-			this->numericUpDown2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->numericUpDown2->Margin = System::Windows::Forms::Padding(2);
 			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown2->Name = L"numericUpDown2";
 			this->numericUpDown2->Size = System::Drawing::Size(35, 22);
@@ -333,7 +333,7 @@ namespace ToDoList {
 			// 
 			this->numericUpDown3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->numericUpDown3->Location = System::Drawing::Point(321, 31);
-			this->numericUpDown3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->numericUpDown3->Margin = System::Windows::Forms::Padding(2);
 			this->numericUpDown3->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 59, 0, 0, 0 });
 			this->numericUpDown3->Name = L"numericUpDown3";
 			this->numericUpDown3->Size = System::Drawing::Size(35, 22);
@@ -343,7 +343,7 @@ namespace ToDoList {
 			// 
 			this->button3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->button3->Location = System::Drawing::Point(291, 87);
-			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(65, 24);
 			this->button3->TabIndex = 7;
@@ -377,7 +377,7 @@ namespace ToDoList {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"AddItem";
 			this->Text = L"AddItem";
 			this->Load += gcnew System::EventHandler(this, &AddItem::AddItem_Load);

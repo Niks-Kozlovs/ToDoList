@@ -157,7 +157,7 @@ namespace ToDoList {
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->Name = L"listView1";
 			this->listView1->Size = System::Drawing::Size(562, 490);
-			this->listView1->TabIndex = 0;
+			this->listView1->TabIndex = 9;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
 			this->listView1->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &Form1::listView1_ColumnClick);
@@ -227,7 +227,7 @@ namespace ToDoList {
 			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(120, 60);
-			this->button3->TabIndex = 3;
+			this->button3->TabIndex = 4;
 			this->button3->Text = L"Delete item";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
@@ -260,7 +260,7 @@ namespace ToDoList {
 			this->exitToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
 			// 
@@ -310,7 +310,7 @@ namespace ToDoList {
 			this->button4->Margin = System::Windows::Forms::Padding(2);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(120, 60);
-			this->button4->TabIndex = 5;
+			this->button4->TabIndex = 3;
 			this->button4->Text = L"Edit";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
@@ -354,7 +354,7 @@ namespace ToDoList {
 			this->comboBox1->Location = System::Drawing::Point(6, 67);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(121, 24);
-			this->comboBox1->TabIndex = 9;
+			this->comboBox1->TabIndex = 5;
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox1_SelectedIndexChanged);
 			// 
 			// textBox1
@@ -365,7 +365,7 @@ namespace ToDoList {
 			this->textBox1->Location = System::Drawing::Point(150, 67);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(160, 22);
-			this->textBox1->TabIndex = 10;
+			this->textBox1->TabIndex = 6;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged_1);
 			// 
 			// button5
@@ -374,7 +374,7 @@ namespace ToDoList {
 			this->button5->Location = System::Drawing::Point(6, 107);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(79, 27);
-			this->button5->TabIndex = 11;
+			this->button5->TabIndex = 7;
 			this->button5->Text = L"Reset";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
@@ -387,7 +387,7 @@ namespace ToDoList {
 			this->comboBox2->Location = System::Drawing::Point(587, 364);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(121, 24);
-			this->comboBox2->TabIndex = 12;
+			this->comboBox2->TabIndex = 8;
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox2_SelectedIndexChanged);
 			// 
 			// label4

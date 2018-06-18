@@ -86,11 +86,12 @@ namespace ToDoList {
 			// 
 			// button1
 			// 
+			this->button1->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->button1->Location = System::Drawing::Point(128, 59);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(70, 35);
-			this->button1->TabIndex = 0;
+			this->button1->TabIndex = 3;
 			this->button1->Text = L"Cancel";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &SimpleInputBox::button1_Click);
@@ -101,7 +102,7 @@ namespace ToDoList {
 			this->button2->Location = System::Drawing::Point(52, 59);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(70, 35);
-			this->button2->TabIndex = 1;
+			this->button2->TabIndex = 2;
 			this->button2->Text = L"Ok";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &SimpleInputBox::button2_Click);
@@ -122,12 +123,14 @@ namespace ToDoList {
 			this->textBox1->Location = System::Drawing::Point(12, 31);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(186, 22);
-			this->textBox1->TabIndex = 3;
+			this->textBox1->TabIndex = 1;
 			// 
 			// SimpleInputBox
 			// 
+			this->AcceptButton = this->button2;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->CancelButton = this->button1;
 			this->ClientSize = System::Drawing::Size(209, 105);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label1);
