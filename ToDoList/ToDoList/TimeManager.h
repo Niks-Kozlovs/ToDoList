@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <string>
 
 using namespace std;
-
+//Time manager ir klase, lai būtu vieglāk sekot līdzi datumiem.
 class TimeManager
 {
 private:

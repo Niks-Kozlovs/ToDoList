@@ -413,8 +413,6 @@ namespace ToDoList {
 		std::string location = defPriorityLocation;
 		std::ifstream priorityFile(location);
 
-		int* i = new int;
-		i = 0;
 
 		while (!priorityFile.eof()) {
 			std::string buffer;
@@ -439,8 +437,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	string priority = convertToStdString(this->comboBox1->Text);
 	string description = convertToStdString(this->richTextBox1->Text);
 
-	bool goodTime = false;
-
+	//Pābaudes vai viss ir labi
 	if (!time.isDateInPast()) {
 		MessageBox::Show("The current date is in the past");
 	} else if (name == "" || priority == "") {

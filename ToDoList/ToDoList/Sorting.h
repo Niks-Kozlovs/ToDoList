@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <vector>
 #include "TimeManager.h"
@@ -8,7 +8,7 @@
 #include <fstream>
 //#include "Functions.h"
 
-
+//Dažādi sorting algoritmi, kas tiek izmanotti (pēc nosaukuma un pēc vērtības)
 struct priorityValues
 {
 	std::string name;

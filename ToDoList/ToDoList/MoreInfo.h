@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Functions.h"
 #include <vector>
 
@@ -212,6 +212,7 @@ namespace ToDoList {
 		}
 #pragma endregion
 	private: System::Void MoreInfo_Load(System::Object^  sender, System::EventArgs^  e) {
+		//Saņemto informāciju parāda vienkārši. Nekas īpašs
 		label5->Text = name;
 		label6->Text = date;
 		label7->Text = priority;

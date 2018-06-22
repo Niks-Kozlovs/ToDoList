@@ -30,7 +30,7 @@ std::vector<std::string> seperateItems(std::string text, std::string delimiter) 
 }
 
 void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std::vector<std::string>> & information, std::vector<int> & itemOrder, std::vector<int> & filteredItemOrder, bool isFiltered) 
-{
+{ //Atjauno listView, lai nevajadzētu copy paste
 	listView->Items->Clear();
 	if (!isFiltered) {
 		for (size_t i = 0; i < itemOrder.size(); i++) {
@@ -57,7 +57,7 @@ void updateListView(System::Windows::Forms::ListView^ listView, std::vector<std:
 }
 
 void createIniFile(std::string location, std::string currentList, std::string firstTimeLaunch)
-{
+{ //Izveido ini failu, pat ja tas tiek izdēsts
 	std::ofstream settings("settings.ini");
 	settings << "[FIRSTTIMELAUNCH]" << std::endl;
 	settings << "firstTime=" + firstTimeLaunch << std::endl;
@@ -69,6 +69,7 @@ void createIniFile(std::string location, std::string currentList, std::string fi
 }
 
 bool checkIfDuplicate(std::string fileLocation, int column, std::string value) {
+	//Pārbauda vai divi stringi ir vienādi
 	std::ifstream file(fileLocation);
 	std::vector<std::string> info;
 	while (!file.eof()) {
@@ -86,6 +87,7 @@ bool checkIfDuplicate(std::string fileLocation, int column, std::string value) {
 
 void resetItemOrder(std::vector<std::vector<std::string>>& information, std::vector<int>& itemOrder)
 {
+	//itemOrder vektors tiek pārveidots uz default (1,2,3,4,...), itemOrder rūpējas kādā secībā rādīt visu.
 	itemOrder.clear();
 	for (size_t i = 0; i < information.size(); i++) {
 		itemOrder.push_back(i);
@@ -93,7 +95,7 @@ void resetItemOrder(std::vector<std::vector<std::string>>& information, std::vec
 }
 
 std::vector<std::string> get_all_files_names_within_folder(std::string folder)
-{
+{//Saņemt faila nosaukumus kādā vietā
 	std::vector<std::string> names;
 	std::string search_path = folder + "/*.txt";
 	WIN32_FIND_DATA fd;
@@ -112,7 +114,7 @@ std::vector<std::string> get_all_files_names_within_folder(std::string folder)
 }
 
 void createFolder(const char * path)
-{
+{//Izveidot folder, jo fstream to negrib darīt
 	if (!CreateDirectory(path, NULL))
 	{
 		return;

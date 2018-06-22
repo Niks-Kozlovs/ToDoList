@@ -9,7 +9,7 @@
 #include "Sorting.h"
 #include <algorithm>
 
-std::vector <std::vector <std::string>> information; //Nomainīt uz klasi
+std::vector <std::vector <std::string>> information; //Nomainīt uz klasi visu
 std::vector <int> itemOrder;
 std::vector <int> filterItemOrder;
 std::string currentListFile = "";
@@ -260,7 +260,7 @@ namespace ToDoList {
 			this->exitToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
 			// 
@@ -289,7 +289,7 @@ namespace ToDoList {
 			// addNewListToolStripMenuItem
 			// 
 			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
-			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(147, 22);
 			this->addNewListToolStripMenuItem->Text = L"Add new list";
 			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
 			// 
@@ -571,7 +571,7 @@ namespace ToDoList {
 		if (reader.ParseError() < 0) {
 			MessageBox::Show("Reader parse error");
 		}
-		std::string fileLocation = defLocation
+		std::string fileLocation = defLocation //Saņem faila vietu no config faila
 		ifstream file(fileLocation);
 		int i = 0;
 
@@ -584,7 +584,7 @@ namespace ToDoList {
 			i++;
 		}
 
-		if (clickedColumn == -1) {
+		if (clickedColumn == -1) { //Ja ir sortots
 			resetItemOrder(information, itemOrder);
 		}
 		else {
@@ -599,7 +599,7 @@ namespace ToDoList {
 		updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 		for (int i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-			listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
+			listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference())); //Pievieno sarakstā
 		}
 	}
 
@@ -686,6 +686,7 @@ namespace ToDoList {
 	}
 
 	private: System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		//Programmai vajag iziet, savādāk saglabāšanās vieta netiek atjaunināta neskapēc
 		if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
 			createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath), currentListFile, "false");
 			MessageBox::Show("The program will now close for the changes to take effect");
@@ -694,10 +695,10 @@ namespace ToDoList {
 	}
 
 	private: System::Void toolStripComboBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
-		//Show list of fonts
+		//Lieka metode
 	}
 
-	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) { //Taimera metode tiek izsaukta ik pēc vienas sekundes
 		for (int i = 0; i < listView1->Items->Count; i++) {
 			TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
 			listView1->Items[i]->SubItems[4]->Text = convertToSystemString(date.getTimeDifference());
@@ -764,11 +765,12 @@ private: System::Void textBox1_TextChanged_1(System::Object^  sender, System::Ev
 	updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 }
 private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-
-	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
+	//Add new list
+	//Izveido un parāda jaunu logu informācijas ievadei
+	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list"); 
 	this->Enabled = false;
 	form->ShowDialog();
-
+	//Saņem no tā vērtības, kad ok tika uzspiests
 	String ^ textFromForm = form->TextBoxValue;
 	this->Enabled = true;
 	std::string listName = convertToStdString(textFromForm);
@@ -803,7 +805,7 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
 		this->Enabled = false;
 		form->ShowDialog();
-
+		//Ievadīt nosaukumu savam sarakstam un saņemt to
 		String ^ textFromForm = form->TextBoxValue;
 
 		currentListFile = convertToStdString(textFromForm);
@@ -818,7 +820,7 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 			}
 
 		}
-
+		//Saņem kurā vietā saglabāt failus no lietotāja
 		std::string selectedSaveLocation = convertToStdString(folderBrowserDialog1->SelectedPath);
 
 		createIniFile(selectedSaveLocation, currentListFile, "false");
@@ -884,9 +886,11 @@ private: System::Void Form1_FormClosed(System::Object^  sender, System::Windows:
 
 }
 private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-
+	//Tiek nomainīts uz citu sarakstu
 	currentListFile = convertToStdString(comboBox2->Text);
 
+
+	//Copy paste no load metodes :(
 	information.clear();
 	std::vector<std::string> list;
 	std::string buffer;
