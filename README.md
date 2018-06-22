@@ -1,4 +1,7 @@
 # ToDoList
+Galvenais fails ir Form1.h, kur tiek viss darīts.
+Source fails ir Form1.cpp
+=================Kā palaist un kompilēt==============================================================
 Šī programma tika veidota ar Visual Studio 2017 un Desktop development with C++ Workload.
 Lai palaistu exe failu vajag būt ielādētam:
 
