@@ -27,9 +27,9 @@ namespace ToDoList {
 
 
 	/// <summary>
-	/// Summary for Form1
+	/// Summary for MainForm
 	/// </summary>
-	public ref class Form1 : public System::Windows::Forms::Form
+	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public: int clickedColumn = -1;
 	private: System::Windows::Forms::Button^  button5;
@@ -44,7 +44,7 @@ namespace ToDoList {
 	private: System::Windows::Forms::TextBox^  textBox1;
 	public:
 	public:
-		Form1(void)
+		MainForm(void)
 		{
 			InitializeComponent();
 			//
@@ -56,7 +56,7 @@ namespace ToDoList {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~Form1()
+		~MainForm()
 		{
 			if (components)
 			{
@@ -110,7 +110,7 @@ namespace ToDoList {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
@@ -160,9 +160,9 @@ namespace ToDoList {
 			this->listView1->TabIndex = 9;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
-			this->listView1->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &Form1::listView1_ColumnClick);
-			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::listView1_SelectedIndexChanged);
-			this->listView1->Enter += gcnew System::EventHandler(this, &Form1::listView1_Enter);
+			this->listView1->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::listView1_ColumnClick);
+			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listView1_SelectedIndexChanged);
+			this->listView1->Enter += gcnew System::EventHandler(this, &MainForm::listView1_Enter);
 			// 
 			// columnHeader1
 			// 
@@ -204,7 +204,7 @@ namespace ToDoList {
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Add new item";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
 			// 
 			// button2
 			// 
@@ -217,7 +217,7 @@ namespace ToDoList {
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"More info";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
 			// 
 			// button3
 			// 
@@ -230,7 +230,7 @@ namespace ToDoList {
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Delete item";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
 			// menuStrip1
 			// 
@@ -262,7 +262,7 @@ namespace ToDoList {
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
 			this->exitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
-			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::exitToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -276,7 +276,7 @@ namespace ToDoList {
 			this->changeSaveLocationToolStripMenuItem->Name = L"changeSaveLocationToolStripMenuItem";
 			this->changeSaveLocationToolStripMenuItem->Size = System::Drawing::Size(199, 22);
 			this->changeSaveLocationToolStripMenuItem->Text = L"Change save location";
-			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeSaveLocationToolStripMenuItem_Click);
+			this->changeSaveLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::changeSaveLocationToolStripMenuItem_Click);
 			// 
 			// listsToolStripMenuItem
 			// 
@@ -291,7 +291,7 @@ namespace ToDoList {
 			this->addNewListToolStripMenuItem->Name = L"addNewListToolStripMenuItem";
 			this->addNewListToolStripMenuItem->Size = System::Drawing::Size(147, 22);
 			this->addNewListToolStripMenuItem->Text = L"Add new list";
-			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::addNewListToolStripMenuItem_Click);
+			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::addNewListToolStripMenuItem_Click);
 			// 
 			// folderBrowserDialog1
 			// 
@@ -300,7 +300,7 @@ namespace ToDoList {
 			// timer1
 			// 
 			this->timer1->Interval = 1000;
-			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
+			this->timer1->Tick += gcnew System::EventHandler(this, &MainForm::timer1_Tick);
 			// 
 			// button4
 			// 
@@ -313,7 +313,7 @@ namespace ToDoList {
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"Edit";
 			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
 			// 
 			// label1
 			// 
@@ -355,7 +355,7 @@ namespace ToDoList {
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(121, 24);
 			this->comboBox1->TabIndex = 5;
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox1_SelectedIndexChanged);
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox1_SelectedIndexChanged);
 			// 
 			// textBox1
 			// 
@@ -366,7 +366,7 @@ namespace ToDoList {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(160, 22);
 			this->textBox1->TabIndex = 6;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged_1);
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged_1);
 			// 
 			// button5
 			// 
@@ -377,7 +377,7 @@ namespace ToDoList {
 			this->button5->TabIndex = 7;
 			this->button5->Text = L"Reset";
 			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
+			this->button5->Click += gcnew System::EventHandler(this, &MainForm::button5_Click);
 			// 
 			// comboBox2
 			// 
@@ -388,7 +388,7 @@ namespace ToDoList {
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(121, 24);
 			this->comboBox2->TabIndex = 8;
-			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox2_SelectedIndexChanged);
+			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox2_SelectedIndexChanged);
 			// 
 			// label4
 			// 
@@ -432,7 +432,7 @@ namespace ToDoList {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Main controls";
 			// 
-			// Form1
+			// MainForm
 			// 
 			this->AcceptButton = this->button1;
 			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
@@ -448,10 +448,10 @@ namespace ToDoList {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"Form1";
+			this->Name = L"MainForm";
 			this->Text = L"To Do List";
-			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form1::Form1_FormClosed);
-			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainForm::MainForm_FormClosed);
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
@@ -791,7 +791,7 @@ private: System::Void addNewListToolStripMenuItem_Click(System::Object^  sender,
 
 
 }
-private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	INIReader reader("settings.ini");
 	if (reader.ParseError() < 0) {
 		//Wont show error because it might be first time launch
@@ -876,7 +876,7 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 
 
 }
-private: System::Void Form1_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+private: System::Void MainForm_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
 	INIReader reader("settings.ini");
 	if (reader.ParseError() < 0) {
 		MessageBox::Show("Reader parse error");

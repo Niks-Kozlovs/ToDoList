@@ -7,5 +7,5 @@
 
 // TODO: reference additional headers your program requires here
 
-#include "Form1.h"
+#include "MainForm.h"
 #include "INIReader.h"
