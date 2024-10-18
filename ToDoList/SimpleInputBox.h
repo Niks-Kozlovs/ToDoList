@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ToDoList {
+namespace ToDoApp {
 
 	using namespace System;
 	using namespace System::ComponentModel;

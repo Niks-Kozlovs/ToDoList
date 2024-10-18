@@ -19,21 +19,21 @@ TimeManager::TimeManager(std::string dateString, int hour, int minute,int second
 }
 TimeManager::TimeManager(std::string timeDateString)
 {
-	std::vector<std::string> times; //Date and time
-	times = seperateItems(timeDateString, " ");
-	int day, month, year, hour, minute, second;
-	if (std::sscanf(times.at(0).c_str(), "%d/%d/%d", &day, &month, &year) != 3) {
-		//Error
-	}
-	if (std::sscanf(times.at(1).c_str(), "%d:%d:%d", &hour, &minute, &second) != 3) {
-		//Error
-	}
-	this->day = day;
-	this->month = month;
-	this->year = year;
-	this->hour = hour;
-	this->minute = minute;
-	this->second = second;
+	//std::vector<std::string> times; //Date and time
+	//times = seperateItems(timeDateString, " ");
+	//int day, month, year, hour, minute, second;
+	//if (std::sscanf(times.at(0).c_str(), "%d/%d/%d", &day, &month, &year) != 3) {
+	//	//Error
+	//}
+	//if (std::sscanf(times.at(1).c_str(), "%d:%d:%d", &hour, &minute, &second) != 3) {
+	//	//Error
+	//}
+	//this->day = day;
+	//this->month = month;
+	//this->year = year;
+	//this->hour = hour;
+	//this->minute = minute;
+	//this->second = second;
 
 }
 std::string TimeManager::getTimeFull()

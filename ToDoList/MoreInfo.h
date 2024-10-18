@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "Functions.h"
 #include <vector>
+#include <string>
 
-namespace ToDoList {
+namespace ToDoApp {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -33,10 +34,10 @@ namespace ToDoList {
 		MoreInfo(std::vector<std::string> listItem)
 		{
 			InitializeComponent();
-			date = convertToSystemString(listItem.at(0));
-			name = convertToSystemString(listItem.at(1));
-			priority = convertToSystemString(listItem.at(2));
-			description = convertToSystemString(listItem.at(3));
+			//date = convertToSystemString(listItem.at(0));
+			//name = convertToSystemString(listItem.at(1));
+			//priority = convertToSystemString(listItem.at(2));
+			//description = convertToSystemString(listItem.at(3));
 		}
 
 	protected:

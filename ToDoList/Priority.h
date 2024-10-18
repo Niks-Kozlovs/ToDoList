@@ -1,12 +1,11 @@
 #pragma once
-#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + "Other\\priority.txt";
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <string>
 #include <fstream>
 #include "Functions.h"
 #include "INIReader.h"
 
-namespace ToDoList {
+namespace ToDoApp {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -160,28 +159,27 @@ namespace ToDoList {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) { //Ok clicked
-		std::string name = convertToStdString(textBox1->Text);
-		int value = (int)numericUpDown1->Value;
-		std::string strValue = std::to_string(value);
+		//std::string name = convertToStdString(textBox1->Text);
+		//int value = (int)numericUpDown1->Value;
+		//std::string strValue = std::to_string(value);
 
-		INIReader reader("settings.ini");
-		if (reader.ParseError() < 0) {
-			MessageBox::Show("Reader parse error");
-		}
-		std::string priorityLocation = defPriorityLocation
+		//INIReader reader("settings.ini");
+		//if (reader.ParseError() < 0) {
+		//	MessageBox::Show("Reader parse error");
+		//}
+		//std::string priorityLocation = reader.Get("USER", "saveLocation", "priority.txt") + "Other\\priority.txt";
 
-		if (checkIfDuplicate(priorityLocation, 0, name)) {
-			MessageBox::Show("This name is taken");
-		}
-		else {
-			std::ofstream priority(priorityLocation, std::ios::app);
+		//if (checkIfDuplicate(priorityLocation, 0, name)) {
+		//	MessageBox::Show("This name is taken");
+		//}
+		//else {
+		//	std::ofstream priority(priorityLocation, std::ios::app);
 
-			priority << name << "|" << value << std::endl;
+		//	priority << name << "|" << value << std::endl;
 
-			priority.close();
-			this->Close();
-		}
-
+		//	priority.close();
+		//	this->Close();
+		//}
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	this->Close();

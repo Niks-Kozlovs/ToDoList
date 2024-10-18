@@ -10,8 +10,9 @@
 //#include <fstream>
 #include "INIReader.h"
 #include "Priority.h"
+#include <vector>
 
-namespace ToDoList {
+namespace ToDoApp {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -26,11 +27,11 @@ namespace ToDoList {
 	public ref class AddItem : public System::Windows::Forms::Form
 	{
 	private: bool edit;
-	private: String ^ prioritySystem;
+	private: String^ prioritySystem;
 	private: int index;
-	private: String ^ currentListFile = "";
+	private: String^ currentListFile = "";
 	public:
-		AddItem(String ^ currentListFile) //Make new
+		AddItem(String^ currentListFile) //Make new
 		{
 			InitializeComponent();
 			edit = false;
@@ -39,40 +40,40 @@ namespace ToDoList {
 			//TODO: Add the constructor code here
 			//
 		}
-		AddItem(std::vector<std::string> listItem, int index, String ^ currentListName) //Edit
+		AddItem(std::vector<std::string> listItem, int index, String^ currentListName) //Edit
 		{
 			InitializeComponent();
-			this->currentListFile = currentListName;
-			edit = true;
-			this->index = index;
-			std::vector<std::string> dateTime;
-			std::vector<std::string> values;
-			dateTime = seperateItems(listItem.at(0), " ");
+			//this->currentListFile = currentListName;
+			//edit = true;
+			//this->index = index;
+			//std::vector<std::string> dateTime;
+			//std::vector<std::string> values;
+			//dateTime = seperateItems(listItem.at(0), " ");
 
 
-			//Pārvēŗš datumu un laiku no string uz int
-			values = seperateItems(dateTime.at(0), "/");
-			int day = atoi(values.at(0).c_str());
-			int month = atoi(values.at(1).c_str());
-			int year = atoi(values.at(2).c_str());
-			
-			values = seperateItems(dateTime.at(1), ":");
-			int hour = std::atoi(values.at(0).c_str());
-			int minute = std::atoi(values.at(1).c_str());
-			int second = atoi(values.at(2).c_str());
+			////Pārvēŗš datumu un laiku no string uz int
+			//values = seperateItems(dateTime.at(0), "/");
+			//int day = atoi(values.at(0).c_str());
+			//int month = atoi(values.at(1).c_str());
+			//int year = atoi(values.at(2).c_str());
 
-			dateTimePicker1->Value = DateTime(year, month, day);
-			numericUpDown1->Value = hour;
-			numericUpDown2->Value = minute;
-			numericUpDown3->Value = second;
+			//values = seperateItems(dateTime.at(1), ":");
+			//int hour = std::atoi(values.at(0).c_str());
+			//int minute = std::atoi(values.at(1).c_str());
+			//int second = atoi(values.at(2).c_str());
 
-			std::string name = listItem.at(1);
-			std::string priority = listItem.at(2);
-			std::string description = listItem.at(3);
+			//dateTimePicker1->Value = DateTime(year, month, day);
+			//numericUpDown1->Value = hour;
+			//numericUpDown2->Value = minute;
+			//numericUpDown3->Value = second;
 
-			textBox4->Text = convertToSystemString(name);
-			prioritySystem = convertToSystemString(priority); //Neskapēc combobox nepievieno sarakstam lietas ar inicializēšanu, tapēc tas tiek pārvietots uz load metodi
-			richTextBox1->Text = convertToSystemString(description);
+			//std::string name = listItem.at(1);
+			//std::string priority = listItem.at(2);
+			//std::string description = listItem.at(3);
+
+			//textBox4->Text = convertToSystemString(name);
+			//prioritySystem = convertToSystemString(priority); //Neskapēc combobox nepievieno sarakstam lietas ar inicializēšanu, tapēc tas tiek pārvietots uz load metodi
+			//richTextBox1->Text = convertToSystemString(description);
 
 		}
 
@@ -87,29 +88,29 @@ namespace ToDoList {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  label3;
-	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 
-	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::Label^ label5;
 
-	private: System::Windows::Forms::Label^  label6;
-	private: System::Windows::Forms::Label^  label7;
-	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Label^ label8;
 
-	private: System::Windows::Forms::TextBox^  textBox4;
-	private: System::Windows::Forms::RichTextBox^  richTextBox1;
-	private: System::Windows::Forms::ComboBox^  comboBox1;
-	private: System::Windows::Forms::NumericUpDown^  numericUpDown1;
-	private: System::Windows::Forms::NumericUpDown^  numericUpDown2;
-	private: System::Windows::Forms::NumericUpDown^  numericUpDown3;
-	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
+	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
+	private: System::Windows::Forms::NumericUpDown^ numericUpDown3;
+	private: System::Windows::Forms::Button^ button3;
 
-	private: System::ComponentModel::IContainer^  components;
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -389,157 +390,157 @@ namespace ToDoList {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		//TODO: Pievienot iespēju lietotājam pievienot savas prioritātes, kas balstītos uz ciparu svarīguma
 		//1 ir svarīgāks par 2 , kas ir svarīgāks par 3 utt.
-		this->Enabled = false;
+		//this->Enabled = false;
 
-		ToDoList::Priority priority;
-		priority.ShowDialog();
+		//ToDoApp::Priority priority;
+		//priority.ShowDialog();
 
 
 
-		//Update comboBox
-		comboBox1->Items->Clear();
+		////Update comboBox
+		//comboBox1->Items->Clear();
 
-		INIReader reader("settings.ini");
-		if (reader.ParseError() < 0) {
-			MessageBox::Show("Reader parse error");
+		//INIReader reader("settings.ini");
+		//if (reader.ParseError() < 0) {
+		//	MessageBox::Show("Reader parse error");
+		//}
+		//
+		//std::string location = defPriorityLocation;
+		//std::ifstream priorityFile(location);
+
+
+		//while (!priorityFile.eof()) {
+		//	std::string buffer;
+		//	std::vector<std::string> items;
+		//	getline(priorityFile, buffer);
+		//	if (buffer == "") { break; }
+		//	items = seperateItems(buffer, "|");
+		//	comboBox1->Items->Add(convertToSystemString(items.at(0)));
+		//}
+
+		//this->Enabled = true;
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		//string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
+		//int hour = (int)this->numericUpDown1->Value;
+		//int minute = (int)this->numericUpDown2->Value;
+		//int second = (int)this->numericUpDown3->Value;
+
+		//TimeManager time(date, hour, minute, second);
+
+		//string name = convertToStdString(this->textBox4->Text);
+		//string priority = convertToStdString(this->comboBox1->Text);
+		//string description = convertToStdString(this->richTextBox1->Text);
+
+		////Pābaudes vai viss ir labi
+		//if (!time.isDateInPast()) {
+		//	MessageBox::Show("The current date is in the past");
+		//} else if (name == "" || priority == "") {
+		//	MessageBox::Show("Name and/or priority not entered");
+		//}
+		//else if (name.find('|') != string::npos) {
+		//	MessageBox::Show("Name contains an illegal character \"|\"");
+		//}
+		//else if (!edit) {
+		//	/*
+
+		//	Pievienot jaunu itemu
+
+		//	*/
+
+		//		INIReader reader("settings.ini");
+		//		if (reader.ParseError() < 0) {
+		//			//Error
+		//		}
+		//		std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
+		//			ofstream file(fileLocation, ios::app | ios::out);
+		//		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+		//		file.close();
+		//		this->Close();
+		//}
+		//else {
+		//	/*
+
+		//		Rediģēt esošo itemu
+
+		//	*/
+
+		//		INIReader reader("settings.ini");
+		//		if (reader.ParseError() < 0) {
+		//			MessageBox::Show("Reader parse error");
+		//		}
+		//		std::string tempFileLocation = defTempFileLocation;
+		//		std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
+
+		//		ifstream file(fileLocation);
+		//		ofstream tempFile(tempFileLocation);
+
+		//		int countIndex = 0;
+
+		//		while (!file.eof()) {
+
+		//			std::string buffer;
+
+		//			getline(file, buffer);
+		//			if (countIndex == index) {
+		//				tempFile << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
+		//			}
+		//			else {
+		//				tempFile << buffer << endl;
+		//			}
+		//				countIndex++;
+		//		}
+		//		
+		//		tempFile.close();
+		//		file.close();
+		//		remove(fileLocation.c_str());
+		//		rename(tempFileLocation.c_str(), fileLocation.c_str());
+		//		this->Close();
+		//	}
+	}
+		private: System::Void AddItem_Load(System::Object^ sender, System::EventArgs^ e) {
+			//bool duplicatePriority = false;
+
+			////Update comboBox
+			//comboBox1->Items->Clear();
+
+			//INIReader reader("settings.ini");
+			//if (reader.ParseError() < 0) {
+			//	MessageBox::Show("Reader parse error");
+			//}
+
+			//std::string location = defPriorityLocation;
+			//std::ifstream priorityFile(location);
+
+			//priorityFile.clear();
+			//priorityFile.seekg(0, ios::beg);
+			//while (!priorityFile.eof()) {
+			//	std::string buffer;
+			//	std::vector<std::string> items;
+			//	getline(priorityFile, buffer);
+			//	if (buffer == "") { break; }
+			//	items = seperateItems(buffer, "|");
+			//	comboBox1->Items->Add(convertToSystemString(items.at(0)));
+
+			//	//Pārbauda lai nebūtu divas vienādas prioritātes
+			//	if (edit && !duplicatePriority) {
+			//		if (convertToSystemString(items.at(0)) == prioritySystem) { duplicatePriority = true; }
+			//	}
+			//}
+			////Pievieno izvēlētas lietas priority ja nav un izvēlas to
+			//if (edit && !duplicatePriority) {
+			//	comboBox1->Items->Add(prioritySystem);
+			//	comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
+			//}
+			//else {
+			//	comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
+			//}
 		}
-		
-		std::string location = defPriorityLocation;
-		std::ifstream priorityFile(location);
-
-
-		while (!priorityFile.eof()) {
-			std::string buffer;
-			std::vector<std::string> items;
-			getline(priorityFile, buffer);
-			if (buffer == "") { break; }
-			items = seperateItems(buffer, "|");
-			comboBox1->Items->Add(convertToSystemString(items.at(0)));
-		}
-
-		this->Enabled = true;
-	}
-private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
-	int hour = (int)this->numericUpDown1->Value;
-	int minute = (int)this->numericUpDown2->Value;
-	int second = (int)this->numericUpDown3->Value;
-
-	TimeManager time(date, hour, minute, second);
-
-	string name = convertToStdString(this->textBox4->Text);
-	string priority = convertToStdString(this->comboBox1->Text);
-	string description = convertToStdString(this->richTextBox1->Text);
-
-	//Pābaudes vai viss ir labi
-	if (!time.isDateInPast()) {
-		MessageBox::Show("The current date is in the past");
-	} else if (name == "" || priority == "") {
-		MessageBox::Show("Name and/or priority not entered");
-	}
-	else if (name.find('|') != string::npos) {
-		MessageBox::Show("Name contains an illegal character \"|\"");
-	}
-	else if (!edit) {
-		/*
-
-		Pievienot jaunu itemu
-
-		*/
-
-			INIReader reader("settings.ini");
-			if (reader.ParseError() < 0) {
-				//Error
-			}
-			std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
-				ofstream file(fileLocation, ios::app | ios::out);
-			file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-			file.close();
-			this->Close();
-	}
-	else {
-		/*
-
-			Rediģēt esošo itemu
-
-		*/
-
-			INIReader reader("settings.ini");
-			if (reader.ParseError() < 0) {
-				MessageBox::Show("Reader parse error");
-			}
-			std::string tempFileLocation = defTempFileLocation;
-			std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
-
-			ifstream file(fileLocation);
-			ofstream tempFile(tempFileLocation);
-
-			int countIndex = 0;
-
-			while (!file.eof()) {
-
-				std::string buffer;
-
-				getline(file, buffer);
-				if (countIndex == index) {
-					tempFile << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-				}
-				else {
-					tempFile << buffer << endl;
-				}
-					countIndex++;
-			}
-			
-			tempFile.close();
-			file.close();
-			remove(fileLocation.c_str());
-			rename(tempFileLocation.c_str(), fileLocation.c_str());
-			this->Close();
-		}
-	}
-private: System::Void AddItem_Load(System::Object^  sender, System::EventArgs^  e) {
-	bool duplicatePriority = false;
-
-	//Update comboBox
-	comboBox1->Items->Clear();
-
-	INIReader reader("settings.ini");
-	if (reader.ParseError() < 0) {
-		MessageBox::Show("Reader parse error");
-	}
-
-	std::string location = defPriorityLocation;
-	std::ifstream priorityFile(location);
-
-	priorityFile.clear();
-	priorityFile.seekg(0, ios::beg);
-	while (!priorityFile.eof()) {
-		std::string buffer;
-		std::vector<std::string> items;
-		getline(priorityFile, buffer);
-		if (buffer == "") { break; }
-		items = seperateItems(buffer, "|");
-		comboBox1->Items->Add(convertToSystemString(items.at(0)));
-
-		//Pārbauda lai nebūtu divas vienādas prioritātes
-		if (edit && !duplicatePriority) {
-			if (convertToSystemString(items.at(0)) == prioritySystem) { duplicatePriority = true; }
-		}
-	}
-	//Pievieno izvēlētas lietas priority ja nav un izvēlas to
-	if (edit && !duplicatePriority) {
-		comboBox1->Items->Add(prioritySystem);
-		comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
-	}
-	else {
-		comboBox1->SelectedIndex = comboBox1->FindStringExact(prioritySystem);
-	}
-}
-};
+	};
 }

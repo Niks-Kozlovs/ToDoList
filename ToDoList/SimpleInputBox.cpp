@@ -1,3 +1,1 @@
-
 #include "SimpleInputBox.h"
-
