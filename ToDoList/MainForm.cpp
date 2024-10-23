@@ -294,6 +294,19 @@ System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::Ev
 	}
 	listSelector->Items->AddRange(fileNames);
 	listSelector->SelectedItem = listName;
+
+	populateListView();
+}
+
+void ToDoApp::MainForm::populateListView()
+{
+	for each (ToDoListItem ^ item in this->toDoList->items) {
+		ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(item->name);
+		listViewItem->SubItems->Add(item->description);
+		listViewItem->SubItems->Add(item->priority.ToString());
+		listViewItem->SubItems->Add(item->time);
+		this->toDoListView->Items->Add(listViewItem);
+	}
 }
 
 void ToDoApp::MainForm::handleFirstTimeLaunch(System::String^& location, System::String^& listName)
@@ -326,6 +339,7 @@ System::Void ToDoApp::MainForm::buttonAddItem_Click(System::Object^ sender, Syst
 
 	ToDoListItem^ item = addItemForm->item;
 	toDoList->AddItem(item);
+
 	ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(item->name);
 	listViewItem->SubItems->Add(item->description);
 	listViewItem->SubItems->Add(item->priority.ToString());

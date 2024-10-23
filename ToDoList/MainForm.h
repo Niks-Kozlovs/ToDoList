@@ -464,6 +464,7 @@ private:
 	System::Void textBox1_TextChanged_1(System::Object^ sender, System::EventArgs^ e);
 	System::Void addNewListToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e);
+	void populateListView();
 	void handleFirstTimeLaunch(System::String^& location, System::String^& listName);
 	System::Void MainForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 	System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
