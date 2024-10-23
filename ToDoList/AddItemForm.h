@@ -1,16 +1,5 @@
 ﻿#pragma once
-#define defTempFileLocation reader.Get("USER", "saveLocation", "list.txt") + R"(TempFile.txt)";
-#define defPriorityLocation reader.Get("USER", "saveLocation", "priority.txt") + R"(Other\priority.txt)";
-
-//#include <iostream>
-#include <stdio.h>
-#include "TimeManager.h"
-#include <string>
-#include "Functions.h"
-//#include <fstream>
-#include "INIReader.h"
-#include "Priority.h"
-#include <vector>
+#include "ToDoListItem.h"
 
 namespace ToDoApp {
 
@@ -24,64 +13,28 @@ namespace ToDoApp {
 	/// <summary>
 	/// Summary for AddItem
 	/// </summary>
-	public ref class AddItem : public System::Windows::Forms::Form
+	public ref class AddItemForm : public System::Windows::Forms::Form
 	{
-	private: bool edit;
-	private: String^ prioritySystem;
-	private: int index;
-	private: String^ currentListFile = "";
+	public: ToDoListItem^ item;
 	public:
-		AddItem(String^ currentListFile) //Make new
+		AddItemForm()
 		{
 			InitializeComponent();
-			edit = false;
-			this->currentListFile = currentListFile;
 			//
 			//TODO: Add the constructor code here
 			//
 		}
-		AddItem(std::vector<std::string> listItem, int index, String^ currentListName) //Edit
+		AddItemForm(ToDoListItem^ item)
 		{
 			InitializeComponent();
-			//this->currentListFile = currentListName;
-			//edit = true;
-			//this->index = index;
-			//std::vector<std::string> dateTime;
-			//std::vector<std::string> values;
-			//dateTime = seperateItems(listItem.at(0), " ");
-
-
-			////Pārvēŗš datumu un laiku no string uz int
-			//values = seperateItems(dateTime.at(0), "/");
-			//int day = atoi(values.at(0).c_str());
-			//int month = atoi(values.at(1).c_str());
-			//int year = atoi(values.at(2).c_str());
-
-			//values = seperateItems(dateTime.at(1), ":");
-			//int hour = std::atoi(values.at(0).c_str());
-			//int minute = std::atoi(values.at(1).c_str());
-			//int second = atoi(values.at(2).c_str());
-
-			//dateTimePicker1->Value = DateTime(year, month, day);
-			//numericUpDown1->Value = hour;
-			//numericUpDown2->Value = minute;
-			//numericUpDown3->Value = second;
-
-			//std::string name = listItem.at(1);
-			//std::string priority = listItem.at(2);
-			//std::string description = listItem.at(3);
-
-			//textBox4->Text = convertToSystemString(name);
-			//prioritySystem = convertToSystemString(priority); //Neskapēc combobox nepievieno sarakstam lietas ar inicializēšanu, tapēc tas tiek pārvietots uz load metodi
-			//richTextBox1->Text = convertToSystemString(description);
-
+			this->item = item;
 		}
 
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~AddItem()
+		~AddItemForm()
 		{
 			if (components)
 			{
@@ -89,7 +42,8 @@ namespace ToDoApp {
 			}
 		}
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ okButton;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
@@ -130,7 +84,7 @@ namespace ToDoApp {
 		void InitializeComponent(void)
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->okButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -163,19 +117,19 @@ namespace ToDoApp {
 			this->button1->TabIndex = 10;
 			this->button1->Text = L"Cancel";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &AddItem::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &AddItemForm::button1_Click);
 			// 
-			// button2
+			// okButton
 			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button2->Location = System::Drawing::Point(212, 301);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(70, 35);
-			this->button2->TabIndex = 9;
-			this->button2->Text = L"Ok";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &AddItem::button2_Click);
+			this->okButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->okButton->Location = System::Drawing::Point(212, 301);
+			this->okButton->Margin = System::Windows::Forms::Padding(2);
+			this->okButton->Name = L"okButton";
+			this->okButton->Size = System::Drawing::Size(70, 35);
+			this->okButton->TabIndex = 9;
+			this->okButton->Text = L"Ok";
+			this->okButton->UseVisualStyleBackColor = true;
+			this->okButton->Click += gcnew System::EventHandler(this, &AddItemForm::okButton_Click);
 			// 
 			// label1
 			// 
@@ -184,7 +138,7 @@ namespace ToDoApp {
 			this->label1->Location = System::Drawing::Point(9, 7);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(35, 16);
+			this->label1->Size = System::Drawing::Size(34, 16);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Date";
 			// 
@@ -195,7 +149,7 @@ namespace ToDoApp {
 			this->label2->Location = System::Drawing::Point(9, 61);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(42, 16);
+			this->label2->Size = System::Drawing::Size(41, 16);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Name";
 			// 
@@ -206,7 +160,7 @@ namespace ToDoApp {
 			this->label3->Location = System::Drawing::Point(9, 89);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(49, 16);
+			this->label3->Size = System::Drawing::Size(48, 16);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Priority";
 			// 
@@ -217,7 +171,7 @@ namespace ToDoApp {
 			this->label4->Location = System::Drawing::Point(9, 118);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(73, 16);
+			this->label4->Size = System::Drawing::Size(72, 16);
 			this->label4->TabIndex = 5;
 			this->label4->Text = L"Description";
 			// 
@@ -240,7 +194,7 @@ namespace ToDoApp {
 			this->label5->Location = System::Drawing::Point(9, 32);
 			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(36, 16);
+			this->label5->Size = System::Drawing::Size(35, 16);
 			this->label5->TabIndex = 8;
 			this->label5->Text = L"Time";
 			// 
@@ -251,7 +205,7 @@ namespace ToDoApp {
 			this->label6->Location = System::Drawing::Point(84, 32);
 			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(42, 16);
+			this->label6->Size = System::Drawing::Size(41, 16);
 			this->label6->TabIndex = 10;
 			this->label6->Text = L"Hours";
 			// 
@@ -262,7 +216,7 @@ namespace ToDoApp {
 			this->label7->Location = System::Drawing::Point(162, 32);
 			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(54, 16);
+			this->label7->Size = System::Drawing::Size(53, 16);
 			this->label7->TabIndex = 11;
 			this->label7->Text = L"Minutes";
 			// 
@@ -273,7 +227,7 @@ namespace ToDoApp {
 			this->label8->Location = System::Drawing::Point(258, 32);
 			this->label8->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(59, 16);
+			this->label8->Size = System::Drawing::Size(58, 16);
 			this->label8->TabIndex = 13;
 			this->label8->Text = L"Seconds";
 			// 
@@ -350,11 +304,11 @@ namespace ToDoApp {
 			this->button3->TabIndex = 7;
 			this->button3->Text = L"Add new";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &AddItem::button3_Click);
+			this->button3->Click += gcnew System::EventHandler(this, &AddItemForm::button3_Click);
 			// 
 			// AddItem
 			// 
-			this->AcceptButton = this->button2;
+			this->AcceptButton = this->okButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->button1;
@@ -376,12 +330,12 @@ namespace ToDoApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->button2);
+			this->Controls->Add(this->okButton);
 			this->Controls->Add(this->button1);
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"AddItem";
-			this->Text = L"AddItem";
-			this->Load += gcnew System::EventHandler(this, &AddItem::AddItem_Load);
+			this->Name = L"AddItemForm";
+			this->Text = L"AddItemForm";
+			this->Load += gcnew System::EventHandler(this, &AddItemForm::AddItem_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
@@ -426,84 +380,7 @@ namespace ToDoApp {
 
 		//this->Enabled = true;
 	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		//string date = convertToStdString(this->dateTimePicker1->Text); //Pārveido no (System::String uz std::string
-		//int hour = (int)this->numericUpDown1->Value;
-		//int minute = (int)this->numericUpDown2->Value;
-		//int second = (int)this->numericUpDown3->Value;
-
-		//TimeManager time(date, hour, minute, second);
-
-		//string name = convertToStdString(this->textBox4->Text);
-		//string priority = convertToStdString(this->comboBox1->Text);
-		//string description = convertToStdString(this->richTextBox1->Text);
-
-		////Pābaudes vai viss ir labi
-		//if (!time.isDateInPast()) {
-		//	MessageBox::Show("The current date is in the past");
-		//} else if (name == "" || priority == "") {
-		//	MessageBox::Show("Name and/or priority not entered");
-		//}
-		//else if (name.find('|') != string::npos) {
-		//	MessageBox::Show("Name contains an illegal character \"|\"");
-		//}
-		//else if (!edit) {
-		//	/*
-
-		//	Pievienot jaunu itemu
-
-		//	*/
-
-		//		INIReader reader("settings.ini");
-		//		if (reader.ParseError() < 0) {
-		//			//Error
-		//		}
-		//		std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
-		//			ofstream file(fileLocation, ios::app | ios::out);
-		//		file << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-		//		file.close();
-		//		this->Close();
-		//}
-		//else {
-		//	/*
-
-		//		Rediģēt esošo itemu
-
-		//	*/
-
-		//		INIReader reader("settings.ini");
-		//		if (reader.ParseError() < 0) {
-		//			MessageBox::Show("Reader parse error");
-		//		}
-		//		std::string tempFileLocation = defTempFileLocation;
-		//		std::string fileLocation = reader.Get("USER", "saveLocation", "") + R"(Lists\)" + convertToStdString(currentListFile) + ".txt";
-
-		//		ifstream file(fileLocation);
-		//		ofstream tempFile(tempFileLocation);
-
-		//		int countIndex = 0;
-
-		//		while (!file.eof()) {
-
-		//			std::string buffer;
-
-		//			getline(file, buffer);
-		//			if (countIndex == index) {
-		//				tempFile << time.getTimeFull() << "|" << name << "|" << priority << "|" << description << endl;
-		//			}
-		//			else {
-		//				tempFile << buffer << endl;
-		//			}
-		//				countIndex++;
-		//		}
-		//		
-		//		tempFile.close();
-		//		file.close();
-		//		remove(fileLocation.c_str());
-		//		rename(tempFileLocation.c_str(), fileLocation.c_str());
-		//		this->Close();
-		//	}
-	}
+	private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
 		private: System::Void AddItem_Load(System::Object^ sender, System::EventArgs^ e) {
 			//bool duplicatePriority = false;
 

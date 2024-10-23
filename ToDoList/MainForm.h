@@ -47,13 +47,16 @@ namespace ToDoApp {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ListView^  listView1;
+	private: System::Windows::Forms::ListView^ toDoListView;
+	protected:
+
 	protected:
 	private: System::Windows::Forms::ColumnHeader^  columnHeader1;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader2;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader3;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader4;
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^ buttonAddItem;
+
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
@@ -95,13 +98,13 @@ namespace ToDoApp {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			System::Windows::Forms::Label^ label4;
-			this->listView1 = (gcnew System::Windows::Forms::ListView());
+			this->toDoListView = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->buttonAddItem = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -128,25 +131,35 @@ namespace ToDoApp {
 			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// listView1
+			// label4
 			// 
-			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
-				this->columnHeader1, this->columnHeader2,
-					this->columnHeader3, this->columnHeader4, this->columnHeader5
+			label4->AutoSize = true;
+			label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			label4->Location = System::Drawing::Point(584, 348);
+			label4->Name = L"label4";
+			label4->Size = System::Drawing::Size(32, 16);
+			label4->TabIndex = 13;
+			label4->Text = L"List:";
+			// 
+			// toDoListView
+			// 
+			this->toDoListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
+				this->columnHeader1,
+					this->columnHeader2, this->columnHeader3, this->columnHeader4, this->columnHeader5
 			});
-			this->listView1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->listView1->FullRowSelect = true;
-			this->listView1->HideSelection = false;
-			this->listView1->Location = System::Drawing::Point(10, 25);
-			this->listView1->Margin = System::Windows::Forms::Padding(2);
-			this->listView1->Name = L"listView1";
-			this->listView1->Size = System::Drawing::Size(562, 490);
-			this->listView1->TabIndex = 9;
-			this->listView1->UseCompatibleStateImageBehavior = false;
-			this->listView1->View = System::Windows::Forms::View::Details;
-			this->listView1->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::listView1_ColumnClick);
-			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listView1_SelectedIndexChanged);
-			this->listView1->Enter += gcnew System::EventHandler(this, &MainForm::listView1_Enter);
+			this->toDoListView->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->toDoListView->FullRowSelect = true;
+			this->toDoListView->HideSelection = false;
+			this->toDoListView->Location = System::Drawing::Point(10, 25);
+			this->toDoListView->Margin = System::Windows::Forms::Padding(2);
+			this->toDoListView->Name = L"toDoListView";
+			this->toDoListView->Size = System::Drawing::Size(562, 490);
+			this->toDoListView->TabIndex = 9;
+			this->toDoListView->UseCompatibleStateImageBehavior = false;
+			this->toDoListView->View = System::Windows::Forms::View::Details;
+			this->toDoListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::listView1_ColumnClick);
+			this->toDoListView->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listView1_SelectedIndexChanged);
+			this->toDoListView->Enter += gcnew System::EventHandler(this, &MainForm::listView1_Enter);
 			// 
 			// columnHeader1
 			// 
@@ -177,18 +190,18 @@ namespace ToDoApp {
 			this->columnHeader5->Text = L"Time left";
 			this->columnHeader5->Width = 75;
 			// 
-			// button1
+			// buttonAddItem
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->buttonAddItem->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(9, 18);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(120, 60);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Add new item";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
+			this->buttonAddItem->Location = System::Drawing::Point(9, 18);
+			this->buttonAddItem->Margin = System::Windows::Forms::Padding(2);
+			this->buttonAddItem->Name = L"buttonAddItem";
+			this->buttonAddItem->Size = System::Drawing::Size(120, 60);
+			this->buttonAddItem->TabIndex = 1;
+			this->buttonAddItem->Text = L"Add new item";
+			this->buttonAddItem->UseVisualStyleBackColor = true;
+			this->buttonAddItem->Click += gcnew System::EventHandler(this, &MainForm::buttonAddItem_Click);
 			// 
 			// button2
 			// 
@@ -372,16 +385,6 @@ namespace ToDoApp {
 			this->listSelector->TabIndex = 8;
 			this->listSelector->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox2_SelectedIndexChanged);
 			// 
-			// label4
-			// 
-			label4->AutoSize = true;
-			label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			label4->Location = System::Drawing::Point(584, 348);
-			label4->Name = L"label4";
-			label4->Size = System::Drawing::Size(32, 16);
-			label4->TabIndex = 13;
-			label4->Text = L"List:";
-			// 
 			// groupBox1
 			// 
 			this->groupBox1->AutoSize = true;
@@ -405,7 +408,7 @@ namespace ToDoApp {
 			this->groupBox2->Controls->Add(this->button4);
 			this->groupBox2->Controls->Add(this->button3);
 			this->groupBox2->Controls->Add(this->button2);
-			this->groupBox2->Controls->Add(this->button1);
+			this->groupBox2->Controls->Add(this->buttonAddItem);
 			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->groupBox2->Location = System::Drawing::Point(581, 34);
 			this->groupBox2->Name = L"groupBox2";
@@ -416,7 +419,7 @@ namespace ToDoApp {
 			// 
 			// MainForm
 			// 
-			this->AcceptButton = this->button1;
+			this->AcceptButton = this->buttonAddItem;
 			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
@@ -425,7 +428,7 @@ namespace ToDoApp {
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(label4);
 			this->Controls->Add(this->listSelector);
-			this->Controls->Add(this->listView1);
+			this->Controls->Add(this->toDoListView);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
@@ -444,7 +447,7 @@ namespace ToDoApp {
 		}
 #pragma endregion
 private:
-	System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void buttonAddItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 	System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_Enter(System::Object^ sender, System::EventArgs^ e);

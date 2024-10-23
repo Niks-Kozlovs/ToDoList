@@ -149,7 +149,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddItem.cpp" />
+    <ClCompile Include="AddItemForm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -162,7 +162,7 @@
     <ClCompile Include="ToDoListItem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AddItem.h">
+    <ClInclude Include="AddItemForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MainForm.h">
@@ -186,8 +186,8 @@
     <ClInclude Include="ToDoListItem.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddItem.resx">
-      <DependentUpon>AddItem.h</DependentUpon>
+    <EmbeddedResource Include="AddItemForm.resx">
+      <DependentUpon>AddItemForm.h</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

@@ -1,7 +1,7 @@
 #pragma once
 ref class ToDoListItem
 {
-private:
+public:
 	System::String^ name;
 	System::String^ description;
 	int priority;

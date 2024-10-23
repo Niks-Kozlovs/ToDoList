@@ -5,84 +5,16 @@
 #include "Functions.h"
 #include "INIReader.h"
 #include "SimpleInputBox.h"
-
-System::Void ToDoApp::MainForm::button1_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	////Atslēdz, lai lietotājs nevar neko darīt kamēr pievieno jaunu informāciju
-//this->Enabled = false;
-////Izveido un parāda jaunu form priekš informācijas ievades
-////Tā izskatīsies labāk nekā piepildīt galveno form ar dažādiem text boxiem
-//AddItem^ addItem = gcnew AddItem(convertToSystemString(currentListFile));
-//addItem->ShowDialog();
-////Pēc form aizstaisīšanas galvenais form atkal tiek ieslēgts
-//this->Enabled = true;
-
-////Pārnes saņemto informāciju (ja tāda ir) uz listview.
-////Iztīra visu no listview, lai tas neatkārtotos divas reizes
-//std::vector<std::string> list;
-//std::string buffer;
-//INIReader reader("settings.ini");
-//if (reader.ParseError() < 0) {
-//	MessageBox::Show("Reader parse error");
-//}
-//std::string fileLocation = defLocation
-//	//MessageBox::Show(convertToSystemString(fileLocation));
-//ifstream file(fileLocation);
-//int i = 0;
-
-//information.clear();
-//while (!file.eof()) {
-//	getline(file, buffer);
-//	if (buffer == "") { break; }
-//	std::vector<std::string> text;
-//	text = seperateItems(buffer, "|");
-//	information.push_back(text);
-//	i++;
-//}
-//file.close();
-
-//resetItemOrder(information, itemOrder);
-
-//if (clickedColumn != -1) { //Ja ir sortots
-//	Sorting sortItem;
-//	std::string sortType = convertToStdString(comboBox1->Text);
-
-//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-//}
-
-//if (isFiltered) {
-//	std::string textToFilter = convertToStdString(textBox1->Text);
-//	filterItemOrder.clear();
-//	for (size_t i = 0; i < itemOrder.size(); i++) {
-//		std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
-//		std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
-//		std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
-//		//name.find('|') != string::npos
-//		if (textToCheck.find(textToFilter) != string::npos) {
-//			filterItemOrder.push_back(itemOrder.at(i));
-//		}
-//	}
-
-//	isFiltered = true;
-//} 
-
-//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
-
-//for (i = 0; i < listView1->Items->Count; i++) {
-//	TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-//	listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
-//}
-
-}
+#include "AddItemForm.h"
 
 System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
-	if (this->listView1->SelectedItems->Count == 1) {
+	if (this->toDoListView->SelectedItems->Count == 1) {
 		button2->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
 		button3->Enabled = true;
 		button4->Enabled = true;
 	}
-	else if (this->listView1->SelectedItems->Count > 1) {
+	else if (this->toDoListView->SelectedItems->Count > 1) {
 		//button3->Enabled = true;
 		//button2->Enabled = false;
 
@@ -154,9 +86,9 @@ System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, Sy
 {
 	//MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
 		//MessageBox::Show(this->listView1->FocusedItem->Index.ToString());
-	if (listView1->Items->Count > 1) {
+	if (toDoListView->Items->Count > 1) {
 		clickedColumn = e->Column;
-		label1->Text = "Selected: " + listView1->Columns[clickedColumn]->Text;
+		label1->Text = "Selected: " + toDoListView->Columns[clickedColumn]->Text;
 		//Set combobox parameters
 		comboBox1->Items->Clear();
 
@@ -368,19 +300,103 @@ void ToDoApp::MainForm::handleFirstTimeLaunch(System::String^& location, System:
 {
 	System::Windows::Forms::FolderBrowserDialog^ folderBrowserDialog = gcnew System::Windows::Forms::FolderBrowserDialog();
 	MessageBox::Show("Program has noticed this is the first time you are launching this program. Please choose save location!");
-	if (folderBrowserDialog->ShowDialog() != System::Windows::Forms::DialogResult::OK) {
+	if (folderBrowserDialog->ShowDialog(this) != System::Windows::Forms::DialogResult::OK) {
 		MessageBox::Show("No location selected. Exiting.");
 		exit(0);
 	}
 
 	MessageBox::Show("Please choose a name for the list!");
 	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "Default");
-	form->ShowDialog();
+	form->ShowDialog(this);
 
 	location = folderBrowserDialog->SelectedPath;
 	listName = form->TextBoxValue;
 	createIniFile(location, listName);
 	createRootFolder(location);
+}
+
+System::Void ToDoApp::MainForm::buttonAddItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	AddItemForm^ addItemForm = gcnew AddItemForm();
+	addItemForm->ShowDialog(this);
+
+	if (addItemForm->DialogResult != System::Windows::Forms::DialogResult::OK) {
+		return;
+	}
+
+	ToDoListItem^ item = addItemForm->item;
+	toDoList->AddItem(item);
+	ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(item->name);
+	listViewItem->SubItems->Add(item->description);
+	listViewItem->SubItems->Add(item->priority.ToString());
+	listViewItem->SubItems->Add(item->time);
+	this->toDoListView->Items->Add(listViewItem);
+	
+	////Atslēdz, lai lietotājs nevar neko darīt kamēr pievieno jaunu informāciju
+//this->Enabled = false;
+////Izveido un parāda jaunu form priekš informācijas ievades
+////Tā izskatīsies labāk nekā piepildīt galveno form ar dažādiem text boxiem
+//AddItem^ addItem = gcnew AddItem(convertToSystemString(currentListFile));
+//addItem->ShowDialog();
+////Pēc form aizstaisīšanas galvenais form atkal tiek ieslēgts
+//this->Enabled = true;
+
+////Pārnes saņemto informāciju (ja tāda ir) uz listview.
+////Iztīra visu no listview, lai tas neatkārtotos divas reizes
+//std::vector<std::string> list;
+//std::string buffer;
+//INIReader reader("settings.ini");
+//if (reader.ParseError() < 0) {
+//	MessageBox::Show("Reader parse error");
+//}
+//std::string fileLocation = defLocation
+//	//MessageBox::Show(convertToSystemString(fileLocation));
+//ifstream file(fileLocation);
+//int i = 0;
+
+//information.clear();
+//while (!file.eof()) {
+//	getline(file, buffer);
+//	if (buffer == "") { break; }
+//	std::vector<std::string> text;
+//	text = seperateItems(buffer, "|");
+//	information.push_back(text);
+//	i++;
+//}
+//file.close();
+
+//resetItemOrder(information, itemOrder);
+
+//if (clickedColumn != -1) { //Ja ir sortots
+//	Sorting sortItem;
+//	std::string sortType = convertToStdString(comboBox1->Text);
+
+//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
+//}
+
+//if (isFiltered) {
+//	std::string textToFilter = convertToStdString(textBox1->Text);
+//	filterItemOrder.clear();
+//	for (size_t i = 0; i < itemOrder.size(); i++) {
+//		std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
+//		std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
+//		std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
+//		//name.find('|') != string::npos
+//		if (textToCheck.find(textToFilter) != string::npos) {
+//			filterItemOrder.push_back(itemOrder.at(i));
+//		}
+//	}
+
+//	isFiltered = true;
+//} 
+
+//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
+
+//for (i = 0; i < listView1->Items->Count; i++) {
+//	TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
+//	listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
+//}
+
 }
 
 System::Void ToDoApp::MainForm::MainForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)

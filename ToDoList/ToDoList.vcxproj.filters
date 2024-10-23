@@ -36,7 +36,7 @@
     <ClCompile Include="Sorting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddItem.cpp">
+    <ClCompile Include="AddItemForm.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="MainForm.cpp">
@@ -65,7 +65,7 @@
     <ClInclude Include="MainForm.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="AddItem.h">
+    <ClInclude Include="AddItemForm.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
