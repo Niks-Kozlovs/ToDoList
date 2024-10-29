@@ -30,12 +30,6 @@
     <ClCompile Include="Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sorting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AddItemForm.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
@@ -43,9 +37,6 @@
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="MoreInfo.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Priority.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="SimpleInputBox.cpp">
@@ -60,6 +51,15 @@
     <ClCompile Include="ToDoListItem.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="ToDoListSorter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Priorities.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPriorityForm.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -71,23 +71,17 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="INIReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Priority.h">
+    <ClInclude Include="AddPriorityForm.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="MoreInfo.h">
       <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="Sorting.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleInputBox.h">
       <Filter>Header Files\View</Filter>
@@ -98,14 +92,14 @@
     <ClInclude Include="ToDoListItem.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="ToDoListSorter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Priorities.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddItem.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Priority.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
     <EmbeddedResource Include="MoreInfo.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>

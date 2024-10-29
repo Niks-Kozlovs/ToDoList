@@ -150,15 +150,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddItemForm.cpp" />
+    <ClCompile Include="AddPriorityForm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="MoreInfo.cpp" />
-    <ClCompile Include="Priority.cpp" />
+    <ClCompile Include="Priorities.cpp" />
     <ClCompile Include="SimpleInputBox.cpp" />
-    <ClCompile Include="Sorting.cpp" />
-    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="ToDoList.cpp" />
+    <ClCompile Include="ToDoListSorter.cpp" />
     <ClCompile Include="ToDoListItem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,16 +173,16 @@
     <ClInclude Include="MoreInfo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Priority.h">
+    <ClInclude Include="AddPriorityForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Priorities.h" />
     <ClInclude Include="SimpleInputBox.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Sorting.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="ToDoList.h" />
+    <ClInclude Include="ToDoListSorter.h" />
     <ClInclude Include="ToDoListItem.h" />
   </ItemGroup>
   <ItemGroup>
@@ -196,8 +196,8 @@
     <EmbeddedResource Include="MoreInfo.resx">
       <DependentUpon>MoreInfo.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Priority.resx">
-      <DependentUpon>Priority.h</DependentUpon>
+    <EmbeddedResource Include="AddPriorityForm.resx">
+      <DependentUpon>AddPriorityForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleInputBox.resx">
       <DependentUpon>SimpleInputBox.h</DependentUpon>
