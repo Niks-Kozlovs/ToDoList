@@ -37,44 +37,6 @@ System::Void ToDoApp::MainForm::moreInfoButton_Click(System::Object^ sender, Sys
 
 System::Void ToDoApp::MainForm::listView1_Enter(System::Object^ sender, System::EventArgs^ e)
 {
-	//timer1->Start();
-	//information.clear();
-	//std::vector<std::string> list;
-	//std::string buffer;
-	//INIReader reader("settings.ini");
-	//if (reader.ParseError() < 0) {
-	//	MessageBox::Show("Reader parse error");
-	//}
-	//std::string fileLocation = "defLocation"; //Saņem faila vietu no config faila
-	//ifstream file(fileLocation);
-	//int i = 0;
-
-	//while (!file.eof()) {
-	//	getline(file, buffer);
-	//	if (buffer == "") { break; }
-	//	std::vector<std::string> text;
-	//	text = seperateItems(buffer, "|");
-	//	information.push_back(text);
-	//	i++;
-	//}
-
-	//if (clickedColumn == -1) { //Ja ir sortots
-	//	resetItemOrder(information, itemOrder);
-	//}
-	//else {
-	//	Sorting sortItem;
-	//	std::string sortType = convertToStdString(comboBox1->Text);
-
-	//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-	//}
-
-	//file.close();
-
-	//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
-	//for (int i = 0; i < listView1->Items->Count; i++) {
-	//	TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-	//	listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference())); //Pievieno sarakstā
-	//}
 }
 
 System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
@@ -115,23 +77,10 @@ System::Void ToDoApp::MainForm::deleteButton_Click(System::Object^ sender, Syste
 
 System::Void ToDoApp::MainForm::changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	//Programmai vajag iziet, savādāk saglabāšanās vieta netiek atjaunināta neskapēc
-//if (folderBrowserDialog1->ShowDialog().ToString() == "OK") {
-//	createIniFile(convertToStdString(folderBrowserDialog1->SelectedPath), currentListFile);
-//	MessageBox::Show("The program will now close for the changes to take effect");
-//	exit(0);
-//}
 }
 
 System::Void ToDoApp::MainForm::timer1_Tick(System::Object^ sender, System::EventArgs^ e)
 {
-	//for (int i = 0; i < listView1->Items->Count; i++) {
-	//	TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-	//	listView1->Items[i]->SubItems[4]->Text = convertToSystemString(date.getTimeDifference());
-	//	if (listView1->Items[i]->SubItems[4]->Text == "Time has passed") { //Ja laiks ir pagajis, tad true
-	//		//Make item red
-	//	}
-	//}
 }
 
 System::Void ToDoApp::MainForm::editButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -149,80 +98,30 @@ System::Void ToDoApp::MainForm::editButton_Click(System::Object^ sender, System:
 
 System::Void ToDoApp::MainForm::comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
-	//Sorting sortItem;
-	//std::string sortType = convertToStdString(comboBox1->Text);
-	//if (!isFiltered) {
-	//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-	//}
-	//else {
-	//	sortItem.sortItems(information, sortType, clickedColumn, filterItemOrder);
-	//}
-
-	//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
-
 }
 
 System::Void ToDoApp::MainForm::button5_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	//comboBox1->Enabled = false;
-	//comboBox1->Items->Clear();
-	//comboBox1->Text = "";
-
-	//textBox1->Text = "";
-	//textBox1->Enabled = false;
-
-	//label1->Text = "Selected: None";
-	//clickedColumn = -1;
-	//isFiltered = false;
-
-	//filterItemOrder.clear();
-	//resetItemOrder(information, itemOrder);
-
-	//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
 }
 
-System::Void ToDoApp::MainForm::textBox1_TextChanged_1(System::Object^ sender, System::EventArgs^ e)
+System::Void ToDoApp::MainForm::filterInput_TextChanged(System::Object^ sender, System::EventArgs^ e)
 {
-	//std::string textToFilter = convertToStdString(textBox1->Text);
-	//filterItemOrder.clear();
-	//for (size_t i = 0; i < itemOrder.size(); i++) {
-	//	std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
-	//	std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
-	//	std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
+	System::String^ filterText = filterInput->Text;
+	if (filterText == "") {
+		populateListView();
+		return;
+	}
 
-	//	if (textToCheck.find(textToFilter) != string::npos) {
-	//		filterItemOrder.push_back(itemOrder.at(i));
-	//	}
-	//}
-
-	//isFiltered = true;
-	//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
+	toDoListView->Items->Clear();
+	for each (ToDoListItem ^ item in toDoList->items) {
+		if (item->ToString()->Contains(filterText)) {
+			toDoListView->Items->Add(item->toListViewItem());
+		}
+	}
 }
 
 System::Void ToDoApp::MainForm::addNewListToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	////Add new list
-	////Izveido un parāda jaunu logu informācijas ievadei
-	//SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "New list");
-	//this->Enabled = false;
-	//form->ShowDialog();
-	////Saņem no tā vērtības, kad ok tika uzspiests
-	//String^ textFromForm = form->TextBoxValue;
-	//this->Enabled = true;
-	//std::string listName = convertToStdString(textFromForm);
-
-
-	//INIReader reader("settings.ini");
-	//if (reader.ParseError() < 0) {
-	//	MessageBox::Show("Reader parse error");
-	//}
-
-	//std::string selectedSaveLocation = "defLocationNoEnding";
-	//std::string saveLocation = selectedSaveLocation + listName + ".txt";
-	//fstream fileCreate(saveLocation, ios::in | ios::out | ios::app);
-	//fileCreate.close();
-
-	//comboBox2->Items->Add(convertToSystemString(listName));
 }
 
 System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::EventArgs^ e)
@@ -305,46 +204,4 @@ System::Void ToDoApp::MainForm::MainForm_FormClosed(System::Object^ sender, Syst
 
 System::Void ToDoApp::MainForm::comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
-	////Tiek nomainīts uz citu sarakstu
-	//currentListFile = convertToStdString(comboBox2->Text);
-
-
-	////Copy paste no load metodes :(
-	//information.clear();
-	//std::vector<std::string> list;
-	//std::string buffer;
-	//INIReader reader("settings.ini");
-	//if (reader.ParseError() < 0) {
-	//	MessageBox::Show("Reader parse error");
-	//}
-	//std::string fileLocation = "defLocation";
-	//ifstream file(fileLocation);
-	//int i = 0;
-
-	//while (!file.eof()) {
-	//	getline(file, buffer);
-	//	if (buffer == "") { break; }
-	//	std::vector<std::string> text;
-	//	text = seperateItems(buffer, "|");
-	//	information.push_back(text);
-	//	i++;
-	//}
-
-	//if (clickedColumn == -1) {
-	//	resetItemOrder(information, itemOrder);
-	//}
-	//else {
-	//	Sorting sortItem;
-	//	std::string sortType = convertToStdString(comboBox1->Text);
-
-	//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-	//}
-
-	//file.close();
-
-	//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
-	//for (int i = 0; i < listView1->Items->Count; i++) {
-	//	TimeManager date1(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-	//	listView1->Items[i]->SubItems->Add(convertToSystemString(date1.getTimeDifference()));
-	//}
 }

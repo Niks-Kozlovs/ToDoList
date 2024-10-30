@@ -24,8 +24,9 @@ namespace ToDoApp {
 
 
 	private: System::Windows::Forms::GroupBox^  groupBox2;
+	private: System::Windows::Forms::TextBox^ filterInput;
 	public:
-	private: System::Windows::Forms::TextBox^  textBox1;
+
 	public:
 	public:
 		MainForm(void)
@@ -120,7 +121,7 @@ namespace ToDoApp {
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->editButton = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->filterInput = (gcnew System::Windows::Forms::TextBox());
 			this->listSelector = (gcnew System::Windows::Forms::ComboBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			label4 = (gcnew System::Windows::Forms::Label());
@@ -315,16 +316,15 @@ namespace ToDoApp {
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Filter";
 			// 
-			// textBox1
+			// filterInput
 			// 
-			this->textBox1->AcceptsReturn = true;
-			this->textBox1->Enabled = false;
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->textBox1->Location = System::Drawing::Point(590, 216);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(160, 22);
-			this->textBox1->TabIndex = 6;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged_1);
+			this->filterInput->AcceptsReturn = true;
+			this->filterInput->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->filterInput->Location = System::Drawing::Point(590, 216);
+			this->filterInput->Name = L"filterInput";
+			this->filterInput->Size = System::Drawing::Size(160, 22);
+			this->filterInput->TabIndex = 6;
+			this->filterInput->TextChanged += gcnew System::EventHandler(this, &MainForm::filterInput_TextChanged);
 			// 
 			// listSelector
 			// 
@@ -360,7 +360,7 @@ namespace ToDoApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(981, 542);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->filterInput);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(label4);
@@ -396,7 +396,7 @@ private:
 	System::Void editButton_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 	System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
-	System::Void textBox1_TextChanged_1(System::Object^ sender, System::EventArgs^ e);
+	System::Void filterInput_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	System::Void addNewListToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e);
 	void populateListView();
