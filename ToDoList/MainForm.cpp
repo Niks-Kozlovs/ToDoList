@@ -17,9 +17,9 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 		editButton->Enabled = true;
 	}
 	else if (this->toDoListView->SelectedItems->Count > 1) {
-		//button3->Enabled = true;
-		//button2->Enabled = false;
-
+		deleteButton->Enabled = true;
+		editButton->Enabled = false;
+		moreInfoButton->Enabled = false;
 	}
 	else {
 		moreInfoButton->Enabled = false;
@@ -30,7 +30,7 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 
 System::Void ToDoApp::MainForm::moreInfoButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	ToDoListItem^ item = this->toDoList->items[this->toDoListView->SelectedItems[0]->Index];
+	ToDoListItem^ item = dynamic_cast<ToDoListItem^>(this->toDoListView->SelectedItems[0]->Tag);
 	MoreInfo^ moreInfo = gcnew MoreInfo(item);
 	moreInfo->ShowDialog(this);
 }
@@ -104,8 +104,9 @@ System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, Sy
 System::Void ToDoApp::MainForm::deleteButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	toDoListView->BeginUpdate();
-	for each (System::Windows::Forms::ListViewItem ^ item in toDoListView->SelectedItems) {
-		toDoList->RemoveItem(item->Index);
+	for each (ListViewItem^ item in toDoListView->SelectedItems) {
+        ToDoListItem^ itemToRemove = dynamic_cast<ToDoListItem^>(item->Tag);
+		toDoList->RemoveItem(itemToRemove);
 		toDoListView->Items->Remove(item);
 	}
 	toDoListView->EndUpdate();
@@ -135,12 +136,12 @@ System::Void ToDoApp::MainForm::timer1_Tick(System::Object^ sender, System::Even
 
 System::Void ToDoApp::MainForm::editButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	ToDoListItem^ item = this->toDoList->items[this->toDoListView->SelectedItems[0]->Index];
-	AddItemForm^ edit = gcnew AddItemForm(item);
+	ToDoListItem^ oldItem = dynamic_cast<ToDoListItem^>(this->toDoListView->SelectedItems[0]->Tag);
+	AddItemForm^ edit = gcnew AddItemForm(oldItem);
 	edit->ShowDialog(this);
 	if (edit->DialogResult == System::Windows::Forms::DialogResult::OK) {
 		ToDoListItem^ updatedItem = edit->Item;
-		this->toDoList->items[this->toDoListView->SelectedItems[0]->Index] = updatedItem;
+		this->toDoList->UpdateItem(oldItem, updatedItem);
 		this->toDoList->Save();
 		this->populateListView();
 	}

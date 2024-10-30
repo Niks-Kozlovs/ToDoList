@@ -5,7 +5,8 @@ ref class ToDoList
 public:
 	ToDoList(System::String^ filename);
 	void AddItem(ToDoListItem^ item);
-	void RemoveItem(int index);
+	void UpdateItem(ToDoListItem^ oldItem, ToDoListItem^ item);
+	void RemoveItem(ToDoListItem^ item);
 	void Save(System::String^ filename);
 	void Save();
 	System::Collections::Generic::List<ToDoListItem^>^ items;

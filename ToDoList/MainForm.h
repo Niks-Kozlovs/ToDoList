@@ -15,14 +15,14 @@ namespace ToDoApp {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public: int clickedColumn = -1;
-	private: System::Windows::Forms::Button^  button5;
+
 	private: System::Windows::Forms::ToolStripMenuItem^  listsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  addNewListToolStripMenuItem;
 	private: System::Windows::Forms::ComboBox^ listSelector;
 
 
 
-	private: System::Windows::Forms::GroupBox^  groupBox1;
+
 	private: System::Windows::Forms::GroupBox^  groupBox2;
 	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
@@ -76,10 +76,10 @@ namespace ToDoApp {
 
 
 
-	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::Label^  label2;
+
+
 	private: System::Windows::Forms::Label^  label3;
-	private: System::Windows::Forms::ComboBox^  comboBox1;
+
 
 	private: System::ComponentModel::IContainer^  components;
 	private: ToDoList^ toDoList;
@@ -119,18 +119,12 @@ namespace ToDoApp {
 			this->addNewListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->editButton = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->listSelector = (gcnew System::Windows::Forms::ComboBox());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			label4 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
-			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -138,7 +132,7 @@ namespace ToDoApp {
 			// 
 			label4->AutoSize = true;
 			label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			label4->Location = System::Drawing::Point(584, 348);
+			label4->Location = System::Drawing::Point(587, 253);
 			label4->Name = L"label4";
 			label4->Size = System::Drawing::Size(32, 16);
 			label4->TabIndex = 13;
@@ -311,69 +305,26 @@ namespace ToDoApp {
 			this->editButton->UseVisualStyleBackColor = true;
 			this->editButton->Click += gcnew System::EventHandler(this, &MainForm::editButton_Click);
 			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label1->Location = System::Drawing::Point(6, 29);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(96, 16);
-			this->label1->TabIndex = 6;
-			this->label1->Text = L"Selected: None";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label2->Location = System::Drawing::Point(6, 50);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(31, 16);
-			this->label2->TabIndex = 7;
-			this->label2->Text = L"Sort";
-			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label3->Location = System::Drawing::Point(147, 50);
+			this->label3->Location = System::Drawing::Point(587, 199);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(36, 16);
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Filter";
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox1->Enabled = false;
-			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(6, 67);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(121, 24);
-			this->comboBox1->TabIndex = 5;
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox1_SelectedIndexChanged);
 			// 
 			// textBox1
 			// 
 			this->textBox1->AcceptsReturn = true;
 			this->textBox1->Enabled = false;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->textBox1->Location = System::Drawing::Point(150, 67);
+			this->textBox1->Location = System::Drawing::Point(590, 216);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(160, 22);
 			this->textBox1->TabIndex = 6;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged_1);
-			// 
-			// button5
-			// 
-			this->button5->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button5->Location = System::Drawing::Point(6, 107);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(79, 27);
-			this->button5->TabIndex = 7;
-			this->button5->Text = L"Reset";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &MainForm::button5_Click);
 			// 
 			// listSelector
 			// 
@@ -381,30 +332,12 @@ namespace ToDoApp {
 			this->listSelector->FlatStyle = System::Windows::Forms::FlatStyle::System;
 			this->listSelector->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->listSelector->FormattingEnabled = true;
-			this->listSelector->Location = System::Drawing::Point(587, 364);
+			this->listSelector->Location = System::Drawing::Point(590, 269);
 			this->listSelector->Name = L"listSelector";
 			this->listSelector->Size = System::Drawing::Size(121, 24);
 			this->listSelector->Sorted = true;
 			this->listSelector->TabIndex = 8;
 			this->listSelector->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox2_SelectedIndexChanged);
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->AutoSize = true;
-			this->groupBox1->Controls->Add(this->button5);
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->comboBox1);
-			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->groupBox1->Location = System::Drawing::Point(581, 190);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(333, 155);
-			this->groupBox1->TabIndex = 14;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Sorting and filtering";
 			// 
 			// groupBox2
 			// 
@@ -427,8 +360,9 @@ namespace ToDoApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(981, 542);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->groupBox2);
-			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(label4);
 			this->Controls->Add(this->listSelector);
 			this->Controls->Add(this->toDoListView);
@@ -441,8 +375,6 @@ namespace ToDoApp {
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			this->groupBox1->ResumeLayout(false);
-			this->groupBox1->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();

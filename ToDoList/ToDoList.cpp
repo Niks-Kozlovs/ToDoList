@@ -28,8 +28,15 @@ void ToDoList::AddItem(ToDoListItem^ item)
 	this->Save();
 }
 
-void ToDoList::RemoveItem(int index)
+void ToDoList::UpdateItem(ToDoListItem^ oldItem, ToDoListItem^ item)
 {
+	int index = this->items->IndexOf(oldItem);
+	this->items[index] = item;
+}
+
+void ToDoList::RemoveItem(ToDoListItem^ item)
+{
+	int index = this->items->IndexOf(item);
 	this->items->RemoveAt(index);
 	this->Save();
 }

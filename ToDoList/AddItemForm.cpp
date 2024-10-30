@@ -37,7 +37,6 @@ System::Void ToDoApp::AddItemForm::okButton_Click(System::Object^ sender, System
 
 System::Void ToDoApp::AddItemForm::AddItem_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	this->datePicker->MinDate = DateTime::Now;
 	this->priorities = gcnew Priorities();
     this->prioritiesList->DisplayMember = "NameVal";
     this->prioritiesList->ValueMember = "Value";
@@ -51,5 +50,8 @@ System::Void ToDoApp::AddItemForm::AddItem_Load(System::Object^ sender, System::
         this->datePicker->Value = DateTime(this->item->time->Year, this->item->time->Month, this->item->time->Day);
 		this->hourInput->Value = this->item->time->Hour;
 		this->minuteInput->Value = this->item->time->Minute;
+	}
+	else {
+		this->datePicker->MinDate = DateTime::Now;
 	}
 }

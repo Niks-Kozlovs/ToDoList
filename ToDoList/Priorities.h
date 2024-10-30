@@ -29,6 +29,11 @@ public:
 			return _name;
 		}
 	}
+
+	int CompareTo(Priority^ other)
+	{
+		return this->Value - other->Value;
+	}
 };
 
 ref class Priorities
