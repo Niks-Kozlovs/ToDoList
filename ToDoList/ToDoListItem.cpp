@@ -28,7 +28,7 @@ System::String^ ToDoListItem::ToString()
 System::Windows::Forms::ListViewItem^ ToDoListItem::toListViewItem()
 {
 	System::Windows::Forms::ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(this->time->ToShortDateString());
-    System::TimeSpan^ timeLeft = this->time->Subtract(System::DateTime::Now);
+	System::TimeSpan^ timeLeft = this->time->Subtract(System::DateTime::Now);
 
 	listViewItem->SubItems->Add(this->name);
 	listViewItem->SubItems->Add(this->priority->NameVal);

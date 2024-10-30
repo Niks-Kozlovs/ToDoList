@@ -2,7 +2,6 @@
 #include "ToDoListItem.h"
 
 namespace ToDoApp {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -15,10 +14,6 @@ namespace ToDoApp {
 	/// </summary>
 	public ref class MoreInfo : public System::Windows::Forms::Form
 	{
-	private: System::Windows::Forms::Button^ okButton;
-
-	public:
-		ToDoListItem^ item;
 	public:
 		MoreInfo(void)
 		{
@@ -43,21 +38,18 @@ namespace ToDoApp {
 			}
 		}
 
-	protected:
-
-
-
-	private: System::Windows::Forms::RichTextBox^  itemDescription;
-	private: System::Windows::Forms::Label^  itemName;
-	private: System::Windows::Forms::Label^  itemDate;
-	private: System::Windows::Forms::Label^  itemPriority;
-
+	private: System::Windows::Forms::RichTextBox^ itemDescription;
+	private: System::Windows::Forms::Label^ itemName;
+	private: System::Windows::Forms::Label^ itemDate;
+	private: System::Windows::Forms::Label^ itemPriority;
+	private: System::Windows::Forms::Button^ okButton;
+	private: System::ComponentModel::Container^ components;
+	public:	ToDoListItem^ item;
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -208,6 +200,6 @@ namespace ToDoApp {
 		}
 #pragma endregion
 	private: System::Void MoreInfo_Load(System::Object^ sender, System::EventArgs^ e);
-private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
+	};
 }

@@ -66,8 +66,8 @@ System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, Sy
 System::Void ToDoApp::MainForm::deleteButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	toDoListView->BeginUpdate();
-	for each (ListViewItem^ item in toDoListView->SelectedItems) {
-        ToDoListItem^ itemToRemove = dynamic_cast<ToDoListItem^>(item->Tag);
+	for each (ListViewItem ^ item in toDoListView->SelectedItems) {
+		ToDoListItem^ itemToRemove = dynamic_cast<ToDoListItem^>(item->Tag);
 		toDoList->RemoveItem(itemToRemove);
 		toDoListView->Items->Remove(item);
 	}
@@ -108,7 +108,7 @@ System::Void ToDoApp::MainForm::editButton_Click(System::Object^ sender, System:
 	AddItemForm^ edit = gcnew AddItemForm(oldItem);
 	edit->ShowDialog(this);
 	if (edit->DialogResult == System::Windows::Forms::DialogResult::OK) {
-		ToDoListItem^ updatedItem = edit->Item;
+		ToDoListItem^ updatedItem = edit->item;
 		this->toDoList->UpdateItem(oldItem, updatedItem);
 		this->toDoList->Save();
 		this->populateListView();
@@ -228,7 +228,7 @@ System::Void ToDoApp::MainForm::buttonAddItem_Click(System::Object^ sender, Syst
 		return;
 	}
 
-	ToDoListItem^ item = addItemForm->Item;
+	ToDoListItem^ item = addItemForm->item;
 	toDoList->AddItem(item);
 	this->toDoListView->Items->Add(item->toListViewItem());
 }

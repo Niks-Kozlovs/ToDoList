@@ -3,16 +3,16 @@
 
 ToDoListSorter::ToDoListSorter()
 {
-    ColumnToSort = 0;
+	ColumnToSort = 0;
 
-    OrderOfSort = System::Windows::Forms::SortOrder::None;
+	OrderOfSort = System::Windows::Forms::SortOrder::None;
 
-    ObjectCompare = gcnew System::Collections::CaseInsensitiveComparer();
+	ObjectCompare = gcnew System::Collections::CaseInsensitiveComparer();
 }
 
 int ToDoListSorter::Compare(System::Object^ x, System::Object^ y)
 {
-    //Cast to listViewItem
+	//Cast to listViewItem
 	System::Windows::Forms::ListViewItem^ listviewX = (System::Windows::Forms::ListViewItem^)x;
 	System::Windows::Forms::ListViewItem^ listviewY = (System::Windows::Forms::ListViewItem^)y;
 

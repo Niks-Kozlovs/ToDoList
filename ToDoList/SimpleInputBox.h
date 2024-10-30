@@ -1,7 +1,6 @@
 #pragma once
 
 namespace ToDoApp {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -14,9 +13,6 @@ namespace ToDoApp {
 	/// </summary>
 	public ref class SimpleInputBox : public System::Windows::Forms::Form
 	{
-	public: String ^ message;
-	public: String ^ name;
-	public: String^ answer;
 	public:
 		SimpleInputBox(void)
 		{
@@ -25,12 +21,10 @@ namespace ToDoApp {
 			//TODO: Add the constructor code here
 			//
 		}
-		SimpleInputBox(String ^ message, String ^ name) {
+		SimpleInputBox(String^ message, String^ name) {
 			InitializeComponent();
 			this->name = name;
 			this->message = message;
-			
-
 		}
 	protected:
 		/// <summary>
@@ -43,20 +37,15 @@ namespace ToDoApp {
 				delete components;
 			}
 		}
+
+	public: String^ message;
+	public: String^ name;
+	public: String^ answer;
 	private: System::Windows::Forms::Button^ cancelButton;
-	protected:
-
 	private: System::Windows::Forms::Button^ okButton;
-	protected:
-
-	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::TextBox^  textBox1;
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -132,7 +121,7 @@ namespace ToDoApp {
 		}
 #pragma endregion
 	private: System::Void SimpleInputBox_Load(System::Object^ sender, System::EventArgs^ e);
-private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e);
+	};
 }

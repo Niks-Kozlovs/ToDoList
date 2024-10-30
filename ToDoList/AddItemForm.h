@@ -42,44 +42,17 @@ namespace ToDoApp {
 			}
 		}
 	private: System::Windows::Forms::Button^ cancel;
-	protected:
-
 	private: System::Windows::Forms::Button^ okButton;
-
-
-
-
 	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::RichTextBox^ descriptionInput;
 	private: System::Windows::Forms::ComboBox^ prioritiesList;
 	private: System::Windows::Forms::NumericUpDown^ hourInput;
 	private: System::Windows::Forms::NumericUpDown^ minuteInput;
 	private: System::Windows::Forms::Button^ addPriority;
-	private: System::ComponentModel::IContainer^ components;
 	private: System::Windows::Forms::DateTimePicker^ datePicker;
-
-
-
-	protected:
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		ToDoListItem^ item;
-		Priorities^ priorities;
-
-	public:
-		property ToDoListItem^ Item {
-			ToDoListItem^ get() {
-				return item;
-			}
-			void set(ToDoListItem^ value) {
-				item = value;
-			}
-		}
-
-
+	private: System::ComponentModel::IContainer^ components;
+	private: Priorities^ priorities;
+	public: ToDoListItem^ item;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -98,7 +71,7 @@ namespace ToDoApp {
 			this->cancel = (gcnew System::Windows::Forms::Button());
 			this->okButton = (gcnew System::Windows::Forms::Button());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->descriptionInput = (gcnew System::Windows::Forms::RichTextBox());
 			this->prioritiesList = (gcnew System::Windows::Forms::ComboBox());
 			this->hourInput = (gcnew System::Windows::Forms::NumericUpDown());
 			this->minuteInput = (gcnew System::Windows::Forms::NumericUpDown());
@@ -226,16 +199,16 @@ namespace ToDoApp {
 			this->textBox4->Size = System::Drawing::Size(270, 22);
 			this->textBox4->TabIndex = 5;
 			// 
-			// richTextBox1
+			// descriptionInput
 			// 
-			this->richTextBox1->EnableAutoDragDrop = true;
-			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->richTextBox1->Location = System::Drawing::Point(86, 118);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(2);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(270, 182);
-			this->richTextBox1->TabIndex = 8;
-			this->richTextBox1->Text = L"";
+			this->descriptionInput->EnableAutoDragDrop = true;
+			this->descriptionInput->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->descriptionInput->Location = System::Drawing::Point(86, 118);
+			this->descriptionInput->Margin = System::Windows::Forms::Padding(2);
+			this->descriptionInput->Name = L"descriptionInput";
+			this->descriptionInput->Size = System::Drawing::Size(270, 182);
+			this->descriptionInput->TabIndex = 8;
+			this->descriptionInput->Text = L"";
 			// 
 			// prioritiesList
 			// 
@@ -306,7 +279,7 @@ namespace ToDoApp {
 			this->Controls->Add(this->minuteInput);
 			this->Controls->Add(this->hourInput);
 			this->Controls->Add(this->prioritiesList);
-			this->Controls->Add(this->richTextBox1);
+			this->Controls->Add(this->descriptionInput);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(label7);
 			this->Controls->Add(label6);

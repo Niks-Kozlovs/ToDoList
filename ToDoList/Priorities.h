@@ -1,10 +1,10 @@
 #pragma once
 
- ref class Priority
+ref class Priority
 {
 private:
-    int _value;
-    System::String^ _name;
+	int _value;
+	System::String^ _name;
 
 public:
 	Priority(int value, System::String^ name)
@@ -39,16 +39,16 @@ public:
 ref class Priorities
 {
 private:
-    System::Collections::Generic::List<Priority^>^ priorities = gcnew System::Collections::Generic::List<Priority^>();
-    System::String^ priorityLocation;
-    void AddFromString(System::String^ line);
+	System::Collections::Generic::List<Priority^>^ priorities = gcnew System::Collections::Generic::List<Priority^>();
+	System::String^ priorityLocation;
+	void AddFromString(System::String^ line);
 public:
-    Priorities();
-    void AddPriority(int value, System::String^ name);
+	Priorities();
+	void AddPriority(int value, System::String^ name);
 	void Priorities::AddPriority(Priority^ priority);
-    System::String^ GetNameByValue(int value);
+	System::String^ GetNameByValue(int value);
 	Priority^ Priorities::GetPriorityByValue(int value);
-    int GetValueByName(System::String^ name);
-    void SavePriorities();
-    System::Collections::Generic::List<Priority^>^ GetPriorities();
+	int GetValueByName(System::String^ name);
+	void SavePriorities();
+	System::Collections::Generic::List<Priority^>^ GetPriorities();
 };

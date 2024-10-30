@@ -107,40 +107,4 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Release\Redistributables\vc_redist.x86.exe">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\Release\Redistributables\dotNetFx40_Full_setup.exe">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\Release\ToDoList.exe">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\Release\Redistributables\vc_redist.x64.exe">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\Release\ReadMe.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Release\AddItem.h mainīgie.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Release\Form1.h mainīgie.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Release\MoreInfo.h mainīgie.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Release\Priority.h mainīgie.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Release\SimpleInputBox.h mainīgie.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

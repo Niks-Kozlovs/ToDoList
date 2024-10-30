@@ -203,22 +203,6 @@
       <DependentUpon>SimpleInputBox.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\Release\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Release\Redistributables\dotNetFx40_Full_setup.exe" />
-    <None Include="..\Release\Redistributables\vc_redist.x64.exe" />
-    <None Include="..\Release\Redistributables\vc_redist.x86.exe" />
-    <None Include="..\Release\ToDoList.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Release\AddItem.h mainīgie.png" />
-    <Image Include="..\Release\Form1.h mainīgie.png" />
-    <Image Include="..\Release\MoreInfo.h mainīgie.png" />
-    <Image Include="..\Release\Priority.h mainīgie.png" />
-    <Image Include="..\Release\SimpleInputBox.h mainīgie.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
