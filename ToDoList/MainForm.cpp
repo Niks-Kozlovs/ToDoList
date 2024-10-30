@@ -13,7 +13,7 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 {
 	if (this->toDoListView->SelectedItems->Count == 1) {
 		moreInfoButton->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
-		button3->Enabled = true;
+		deleteButton->Enabled = true;
 		button4->Enabled = true;
 	}
 	else if (this->toDoListView->SelectedItems->Count > 1) {
@@ -23,7 +23,7 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 	}
 	else {
 		moreInfoButton->Enabled = false;
-		button3->Enabled = false;
+		deleteButton->Enabled = false;
 		button4->Enabled = false;
 	}
 }
@@ -101,32 +101,15 @@ System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, Sy
 	toDoListView->Sort();
 }
 
-System::Void ToDoApp::MainForm::button3_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void ToDoApp::MainForm::deleteButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	////Dzes ara no saraksta
-	//int index = this->listView1->FocusedItem->Index;
-	//listView1->SelectedItems[0]->Remove();
+	toDoListView->BeginUpdate();
+	for each (System::Windows::Forms::ListViewItem ^ item in toDoListView->SelectedItems) {
+		toDoList->RemoveItem(item->Index);
+		toDoListView->Items->Remove(item);
+	}
+	toDoListView->EndUpdate();
 
-	////Vector update
-	//information.erase(information.begin() + itemOrder.at(index)); //Paņem vajadzīgo indeksu no itemOrder un izdēš to
-	//itemOrder.erase(itemOrder.begin() + index); //Pēc tam izdzēš to indeksu no itemOrder, tas nozīmē, ka var izdēst pat ja ir sortots un filtrēts
-
-
-	////File update
-	//INIReader reader("settings.ini");
-	//if (reader.ParseError() < 0) {
-	//	//Error
-	//}
-	//std::string fileLocation = "defLocation";
-	//ofstream file(fileLocation);
-
-	//for (size_t i = 0; i < information.size(); i++) {
-	//	for (size_t j = 0; j < information.at(i).size() - 1; j++) {
-	//		file << information.at(i).at(j) << "|";
-	//	}
-	//	file << information.at(i).at(information.at(i).size() - 1) << endl;
-	//}
-	//information.clear();
 }
 
 System::Void ToDoApp::MainForm::changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)

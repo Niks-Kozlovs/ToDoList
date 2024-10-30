@@ -57,9 +57,10 @@ namespace ToDoApp {
 	private: System::Windows::Forms::ColumnHeader^  columnHeader4;
 	private: System::Windows::Forms::Button^ buttonAddItem;
 	private: System::Windows::Forms::Button^ moreInfoButton;
+	private: System::Windows::Forms::Button^ deleteButton;
 
 
-	private: System::Windows::Forms::Button^  button3;
+
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
 
@@ -107,7 +108,7 @@ namespace ToDoApp {
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->buttonAddItem = (gcnew System::Windows::Forms::Button());
 			this->moreInfoButton = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->deleteButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -217,18 +218,18 @@ namespace ToDoApp {
 			this->moreInfoButton->UseVisualStyleBackColor = true;
 			this->moreInfoButton->Click += gcnew System::EventHandler(this, &MainForm::moreInfoButton_Click);
 			// 
-			// button3
+			// deleteButton
 			// 
-			this->button3->Enabled = false;
-			this->button3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button3->Location = System::Drawing::Point(133, 83);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(120, 60);
-			this->button3->TabIndex = 4;
-			this->button3->Text = L"Delete item";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
+			this->deleteButton->Enabled = false;
+			this->deleteButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->deleteButton->Location = System::Drawing::Point(133, 83);
+			this->deleteButton->Margin = System::Windows::Forms::Padding(2);
+			this->deleteButton->Name = L"deleteButton";
+			this->deleteButton->Size = System::Drawing::Size(120, 60);
+			this->deleteButton->TabIndex = 4;
+			this->deleteButton->Text = L"Delete item";
+			this->deleteButton->UseVisualStyleBackColor = true;
+			this->deleteButton->Click += gcnew System::EventHandler(this, &MainForm::deleteButton_Click);
 			// 
 			// menuStrip1
 			// 
@@ -407,7 +408,7 @@ namespace ToDoApp {
 			// groupBox2
 			// 
 			this->groupBox2->Controls->Add(this->button4);
-			this->groupBox2->Controls->Add(this->button3);
+			this->groupBox2->Controls->Add(this->deleteButton);
 			this->groupBox2->Controls->Add(this->moreInfoButton);
 			this->groupBox2->Controls->Add(this->buttonAddItem);
 			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
@@ -453,7 +454,7 @@ private:
 	System::Void moreInfoButton_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_Enter(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
-	System::Void button3_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void deleteButton_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			//exit(0);
 		}
