@@ -16,23 +16,7 @@ namespace ToDoApp {
 	{
 	public: String ^ message;
 	public: String ^ name;
-	public: bool answered = false;
-	public: property System::String^ TextBoxValue
-	{
-		System::String^ get()
-		{
-			if (answered) {
-				return textBox1->Text;
-			}
-			else {
-				return "";
-			}
-		}
-		void set(System::String^ text)
-		{
-			label1->Text = text;
-		}
-	}
+	public: String^ answer;
 	public:
 		SimpleInputBox(void)
 		{
@@ -59,9 +43,12 @@ namespace ToDoApp {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^ cancelButton;
 	protected:
-	private: System::Windows::Forms::Button^  button2;
+
+	private: System::Windows::Forms::Button^ okButton;
+	protected:
+
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::TextBox^  textBox1;
 
@@ -78,34 +65,34 @@ namespace ToDoApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->cancelButton = (gcnew System::Windows::Forms::Button());
+			this->okButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
-			// button1
+			// cancelButton
 			// 
-			this->button1->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button1->Location = System::Drawing::Point(128, 59);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(70, 35);
-			this->button1->TabIndex = 3;
-			this->button1->Text = L"Cancel";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &SimpleInputBox::button1_Click);
+			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->cancelButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->cancelButton->Location = System::Drawing::Point(128, 59);
+			this->cancelButton->Name = L"cancelButton";
+			this->cancelButton->Size = System::Drawing::Size(70, 35);
+			this->cancelButton->TabIndex = 3;
+			this->cancelButton->Text = L"Cancel";
+			this->cancelButton->UseVisualStyleBackColor = true;
+			this->cancelButton->Click += gcnew System::EventHandler(this, &SimpleInputBox::cancelButton_Click);
 			// 
-			// button2
+			// okButton
 			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button2->Location = System::Drawing::Point(52, 59);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(70, 35);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"Ok";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &SimpleInputBox::button2_Click);
+			this->okButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->okButton->Location = System::Drawing::Point(52, 59);
+			this->okButton->Name = L"okButton";
+			this->okButton->Size = System::Drawing::Size(70, 35);
+			this->okButton->TabIndex = 2;
+			this->okButton->Text = L"Ok";
+			this->okButton->UseVisualStyleBackColor = true;
+			this->okButton->Click += gcnew System::EventHandler(this, &SimpleInputBox::okButton_Click);
 			// 
 			// label1
 			// 
@@ -113,7 +100,7 @@ namespace ToDoApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->label1->Location = System::Drawing::Point(9, 12);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(42, 16);
+			this->label1->Size = System::Drawing::Size(41, 16);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"label1";
 			// 
@@ -127,15 +114,15 @@ namespace ToDoApp {
 			// 
 			// SimpleInputBox
 			// 
-			this->AcceptButton = this->button2;
+			this->AcceptButton = this->okButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->CancelButton = this->button1;
+			this->CancelButton = this->cancelButton;
 			this->ClientSize = System::Drawing::Size(209, 105);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->okButton);
+			this->Controls->Add(this->cancelButton);
 			this->Name = L"SimpleInputBox";
 			this->Text = L"Please answer!";
 			this->Load += gcnew System::EventHandler(this, &SimpleInputBox::SimpleInputBox_Load);
@@ -144,16 +131,8 @@ namespace ToDoApp {
 
 		}
 #pragma endregion
-	private: System::Void SimpleInputBox_Load(System::Object^  sender, System::EventArgs^  e) {
-		this->Text = name;
-		label1->Text = message;
-	}
-private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	answered = true;
-	this->Close();
-}
-private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	this->Close();
-}
+	private: System::Void SimpleInputBox_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

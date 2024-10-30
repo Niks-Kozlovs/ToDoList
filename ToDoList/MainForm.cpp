@@ -75,6 +75,11 @@ System::Void ToDoApp::MainForm::deleteButton_Click(System::Object^ sender, Syste
 
 }
 
+System::Void ToDoApp::MainForm::exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	exit(0);
+}
+
 System::Void ToDoApp::MainForm::changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
 }
@@ -122,6 +127,18 @@ System::Void ToDoApp::MainForm::filterInput_TextChanged(System::Object^ sender, 
 
 System::Void ToDoApp::MainForm::addNewListToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
+	SimpleInputBox^ form = gcnew SimpleInputBox("Please enter the name of the list:", "Default");
+	form->ShowDialog(this);
+
+	if (form->DialogResult != System::Windows::Forms::DialogResult::OK) {
+		return;
+	}
+
+	System::String^ listName = form->answer;
+	toDoList->Save();
+	INIReader reader("settings.ini");
+	String^ location = msclr::interop::marshal_as<System::String^>(reader.Get("USER", "saveLocation", ""));
+	LoadList(listName, location);
 }
 
 System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::EventArgs^ e)
@@ -138,14 +155,23 @@ System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::Ev
 		listName = msclr::interop::marshal_as<System::String^>(reader.Get("USER", "selectedForm", "Default"));
 	}
 
+	LoadList(listName, location);
+}
+
+void ToDoApp::MainForm::LoadList(System::String^ listName, System::String^ location)
+{
 	this->Text = "ToDoList - " + listName;
 	this->toDoList = gcnew ToDoList(location + "\\Lists\\" + listName + ".txt");
-    cli::array<System::String^>^ fileNames = System::IO::Directory::GetFiles(location + "\\Lists\\");
+	createIniFile(location, listName);
+	cli::array<System::String^>^ fileNames = System::IO::Directory::GetFiles(location + "\\Lists\\");
 	for (int i = 0; i < fileNames->Length; i++) {
 		fileNames[i] = System::IO::Path::GetFileNameWithoutExtension(fileNames[i]);
 	}
+	listSelector->Enabled = false;
+	listSelector->Items->Clear();
 	listSelector->Items->AddRange(fileNames);
 	listSelector->SelectedItem = listName;
+	listSelector->Enabled = true;
 
 	toDoListView->ListViewItemSorter = gcnew ToDoListSorter();
 
@@ -174,7 +200,7 @@ void ToDoApp::MainForm::handleFirstTimeLaunch(System::String^& location, System:
 	form->ShowDialog(this);
 
 	location = folderBrowserDialog->SelectedPath;
-	listName = form->TextBoxValue;
+	listName = form->answer;
 	createIniFile(location, listName);
 	createRootFolder(location);
 }
@@ -202,6 +228,16 @@ System::Void ToDoApp::MainForm::MainForm_FormClosed(System::Object^ sender, Syst
 	std::string fileLocation = "defLocationNoEnding";
 }
 
-System::Void ToDoApp::MainForm::comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+System::Void ToDoApp::MainForm::listSelector_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
+	//Since this event is called when the form is loaded, we need to check if the listSelector is enabled
+	//So that id does not cause an infinite loop using loadList function
+	if (listSelector->Enabled == false) {
+		return;
+	}
+
+	System::String^ listName = listSelector->SelectedItem->ToString();
+	INIReader reader("settings.ini");
+	String^ location = msclr::interop::marshal_as<System::String^>(reader.Get("USER", "saveLocation", ""));
+	LoadList(listName, location);
 }

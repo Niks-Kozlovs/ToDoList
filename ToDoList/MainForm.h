@@ -337,7 +337,7 @@ namespace ToDoApp {
 			this->listSelector->Size = System::Drawing::Size(121, 24);
 			this->listSelector->Sorted = true;
 			this->listSelector->TabIndex = 8;
-			this->listSelector->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox2_SelectedIndexChanged);
+			this->listSelector->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listSelector_SelectedIndexChanged);
 			// 
 			// groupBox2
 			// 
@@ -388,9 +388,7 @@ private:
 	System::Void listView1_Enter(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
 	System::Void deleteButton_Click(System::Object^ sender, System::EventArgs^ e);
-	System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			//exit(0);
-		}
+	System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e);
 	System::Void editButton_Click(System::Object^ sender, System::EventArgs^ e);
@@ -399,9 +397,10 @@ private:
 	System::Void filterInput_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	System::Void addNewListToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e);
+	void LoadList(System::String^ listName, System::String^ location);
 	void populateListView();
 	void handleFirstTimeLaunch(System::String^& location, System::String^& listName);
 	System::Void MainForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
-	System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+	System::Void listSelector_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 };
 };
