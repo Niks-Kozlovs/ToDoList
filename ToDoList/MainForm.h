@@ -56,8 +56,9 @@ namespace ToDoApp {
 	private: System::Windows::Forms::ColumnHeader^  columnHeader3;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader4;
 	private: System::Windows::Forms::Button^ buttonAddItem;
+	private: System::Windows::Forms::Button^ moreInfoButton;
 
-	private: System::Windows::Forms::Button^  button2;
+
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
@@ -105,7 +106,7 @@ namespace ToDoApp {
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->buttonAddItem = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->moreInfoButton = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -203,18 +204,18 @@ namespace ToDoApp {
 			this->buttonAddItem->UseVisualStyleBackColor = true;
 			this->buttonAddItem->Click += gcnew System::EventHandler(this, &MainForm::buttonAddItem_Click);
 			// 
-			// button2
+			// moreInfoButton
 			// 
-			this->button2->Enabled = false;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button2->Location = System::Drawing::Point(133, 19);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(120, 60);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"More info";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
+			this->moreInfoButton->Enabled = false;
+			this->moreInfoButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->moreInfoButton->Location = System::Drawing::Point(133, 19);
+			this->moreInfoButton->Margin = System::Windows::Forms::Padding(2);
+			this->moreInfoButton->Name = L"moreInfoButton";
+			this->moreInfoButton->Size = System::Drawing::Size(120, 60);
+			this->moreInfoButton->TabIndex = 2;
+			this->moreInfoButton->Text = L"More info";
+			this->moreInfoButton->UseVisualStyleBackColor = true;
+			this->moreInfoButton->Click += gcnew System::EventHandler(this, &MainForm::moreInfoButton_Click);
 			// 
 			// button3
 			// 
@@ -407,7 +408,7 @@ namespace ToDoApp {
 			// 
 			this->groupBox2->Controls->Add(this->button4);
 			this->groupBox2->Controls->Add(this->button3);
-			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Controls->Add(this->moreInfoButton);
 			this->groupBox2->Controls->Add(this->buttonAddItem);
 			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
 			this->groupBox2->Location = System::Drawing::Point(581, 34);
@@ -449,7 +450,7 @@ namespace ToDoApp {
 private:
 	System::Void buttonAddItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
-	System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void moreInfoButton_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_Enter(System::Object^ sender, System::EventArgs^ e);
 	System::Void listView1_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
 	System::Void button3_Click(System::Object^ sender, System::EventArgs^ e);

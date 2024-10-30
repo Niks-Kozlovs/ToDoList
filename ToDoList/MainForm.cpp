@@ -6,11 +6,13 @@
 #include "INIReader.h"
 #include "SimpleInputBox.h"
 #include "AddItemForm.h"
+#include "ToDoListSorter.h"
+#include "MoreInfo.h"
 
 System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
 	if (this->toDoListView->SelectedItems->Count == 1) {
-		button2->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
+		moreInfoButton->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
 		button3->Enabled = true;
 		button4->Enabled = true;
 	}
@@ -20,24 +22,17 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 
 	}
 	else {
-		button2->Enabled = false;
+		moreInfoButton->Enabled = false;
 		button3->Enabled = false;
 		button4->Enabled = false;
 	}
 }
 
-System::Void ToDoApp::MainForm::button2_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void ToDoApp::MainForm::moreInfoButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	//this->Enabled = false;
-
-	//MoreInfo^ moreInfo = gcnew MoreInfo(information.at(listView1->FocusedItem->Index));
-	//moreInfo->ShowDialog();
-	////Pogas vajag atslēgt, jo kad aiztaisas logs, tad nekas no saraksta nav izvēlēts, bet uz pogām vēl var uzpiest
-	//button2->Enabled = false;
-	//button3->Enabled = false;
-	//button4->Enabled = false;
-	//this->Enabled = true;
-
+	ToDoListItem^ item = this->toDoList->items[this->toDoListView->SelectedItems[0]->Index];
+	MoreInfo^ moreInfo = gcnew MoreInfo(item);
+	moreInfo->ShowDialog(this);
 }
 
 System::Void ToDoApp::MainForm::listView1_Enter(System::Object^ sender, System::EventArgs^ e)
@@ -84,54 +79,26 @@ System::Void ToDoApp::MainForm::listView1_Enter(System::Object^ sender, System::
 
 System::Void ToDoApp::MainForm::listView1_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
 {
-	//MessageBox::Show(e->Column.ToString()); //Tells which column was clicked
-		//MessageBox::Show(this->listView1->FocusedItem->Index.ToString());
-	if (toDoListView->Items->Count > 1) {
-		clickedColumn = e->Column;
-		label1->Text = "Selected: " + toDoListView->Columns[clickedColumn]->Text;
-		//Set combobox parameters
-		comboBox1->Items->Clear();
-
-		comboBox1->Text = "";
-
-		comboBox1->Enabled = true;
-		textBox1->Enabled = true;
-
-		switch (clickedColumn)
+	ToDoListSorter^ sorter = dynamic_cast<ToDoListSorter^>(toDoListView->ListViewItemSorter);
+	if (e->Column == sorter->ColumnToSort)
+	{
+		// Reverse the sorting order if the same column is clicked
+		if (sorter->OrderOfSort == System::Windows::Forms::SortOrder::Ascending)
 		{
-		case 0:
-			//Date
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		case 1:
-			//Name
-			comboBox1->Items->Add("A-Z");
-			comboBox1->Items->Add("Z-A");
-			textBox1->Enabled = true;
-			break;
-		case 2:
-			//Priority
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		case 3:
-			//Description (Nav ko kartot tapec disable)
-			comboBox1->Enabled = false;
-			textBox1->Enabled = true;
-			break;
-		case 4:
-			//Time left
-			comboBox1->Items->Add("High to low");
-			comboBox1->Items->Add("Low to high");
-			textBox1->Enabled = true;
-			break;
-		default:
-			break;
+			sorter->OrderOfSort = System::Windows::Forms::SortOrder::Descending;
+		}
+		else
+		{
+			sorter->OrderOfSort = System::Windows::Forms::SortOrder::Ascending;
 		}
 	}
+	else
+	{
+		sorter->ColumnToSort = e->Column;
+		sorter->OrderOfSort = System::Windows::Forms::SortOrder::Ascending;
+	}
+
+	toDoListView->Sort();
 }
 
 System::Void ToDoApp::MainForm::button3_Click(System::Object^ sender, System::EventArgs^ e)
@@ -295,17 +262,16 @@ System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::Ev
 	listSelector->Items->AddRange(fileNames);
 	listSelector->SelectedItem = listName;
 
+	toDoListView->ListViewItemSorter = gcnew ToDoListSorter();
+
 	populateListView();
 }
 
 void ToDoApp::MainForm::populateListView()
 {
+	this->toDoListView->Items->Clear();
 	for each (ToDoListItem ^ item in this->toDoList->items) {
-		ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(item->name);
-		listViewItem->SubItems->Add(item->description);
-		listViewItem->SubItems->Add(item->priority.ToString());
-		listViewItem->SubItems->Add(item->time);
-		this->toDoListView->Items->Add(listViewItem);
+		this->toDoListView->Items->Add(item->toListViewItem());
 	}
 }
 
@@ -337,80 +303,9 @@ System::Void ToDoApp::MainForm::buttonAddItem_Click(System::Object^ sender, Syst
 		return;
 	}
 
-	ToDoListItem^ item = addItemForm->item;
+	ToDoListItem^ item = addItemForm->Item;
 	toDoList->AddItem(item);
-
-	ListViewItem^ listViewItem = gcnew System::Windows::Forms::ListViewItem(item->name);
-	listViewItem->SubItems->Add(item->description);
-	listViewItem->SubItems->Add(item->priority.ToString());
-	listViewItem->SubItems->Add(item->time);
-	this->toDoListView->Items->Add(listViewItem);
-	
-	////Atslēdz, lai lietotājs nevar neko darīt kamēr pievieno jaunu informāciju
-//this->Enabled = false;
-////Izveido un parāda jaunu form priekš informācijas ievades
-////Tā izskatīsies labāk nekā piepildīt galveno form ar dažādiem text boxiem
-//AddItem^ addItem = gcnew AddItem(convertToSystemString(currentListFile));
-//addItem->ShowDialog();
-////Pēc form aizstaisīšanas galvenais form atkal tiek ieslēgts
-//this->Enabled = true;
-
-////Pārnes saņemto informāciju (ja tāda ir) uz listview.
-////Iztīra visu no listview, lai tas neatkārtotos divas reizes
-//std::vector<std::string> list;
-//std::string buffer;
-//INIReader reader("settings.ini");
-//if (reader.ParseError() < 0) {
-//	MessageBox::Show("Reader parse error");
-//}
-//std::string fileLocation = defLocation
-//	//MessageBox::Show(convertToSystemString(fileLocation));
-//ifstream file(fileLocation);
-//int i = 0;
-
-//information.clear();
-//while (!file.eof()) {
-//	getline(file, buffer);
-//	if (buffer == "") { break; }
-//	std::vector<std::string> text;
-//	text = seperateItems(buffer, "|");
-//	information.push_back(text);
-//	i++;
-//}
-//file.close();
-
-//resetItemOrder(information, itemOrder);
-
-//if (clickedColumn != -1) { //Ja ir sortots
-//	Sorting sortItem;
-//	std::string sortType = convertToStdString(comboBox1->Text);
-
-//	sortItem.sortItems(information, sortType, clickedColumn, itemOrder);
-//}
-
-//if (isFiltered) {
-//	std::string textToFilter = convertToStdString(textBox1->Text);
-//	filterItemOrder.clear();
-//	for (size_t i = 0; i < itemOrder.size(); i++) {
-//		std::string textToCheck = information.at(itemOrder.at(i)).at(clickedColumn);
-//		std::transform(textToCheck.begin(), textToCheck.end(), textToCheck.begin(), ::toupper);
-//		std::transform(textToFilter.begin(), textToFilter.end(), textToFilter.begin(), ::toupper);
-//		//name.find('|') != string::npos
-//		if (textToCheck.find(textToFilter) != string::npos) {
-//			filterItemOrder.push_back(itemOrder.at(i));
-//		}
-//	}
-
-//	isFiltered = true;
-//} 
-
-//updateListView(listView1, information, itemOrder, filterItemOrder, isFiltered);
-
-//for (i = 0; i < listView1->Items->Count; i++) {
-//	TimeManager date(convertToStdString(listView1->Items[i]->SubItems[0]->Text));
-//	listView1->Items[i]->SubItems->Add(convertToSystemString(date.getTimeDifference()));
-//}
-
+	this->toDoListView->Items->Add(item->toListViewItem());
 }
 
 System::Void ToDoApp::MainForm::MainForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)

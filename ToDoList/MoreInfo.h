@@ -1,7 +1,5 @@
 ﻿#pragma once
-#include "Functions.h"
-#include <vector>
-#include <string>
+#include "ToDoListItem.h"
 
 namespace ToDoApp {
 
@@ -17,27 +15,20 @@ namespace ToDoApp {
 	/// </summary>
 	public ref class MoreInfo : public System::Windows::Forms::Form
 	{
-	public: String ^ name;
-	public: String ^ date;
-	public: String ^ priority;
-	private: System::Windows::Forms::Button^  button2;
-	public:
+	private: System::Windows::Forms::Button^ okButton;
 
 	public:
-	public: String ^ description;
+		ToDoListItem^ item;
 	public:
 		MoreInfo(void)
 		{
 			InitializeComponent();
 			MessageBox::Show("Error! No variables passed for this form!");
 		}
-		MoreInfo(std::vector<std::string> listItem)
+		MoreInfo(ToDoListItem^ item)
 		{
 			InitializeComponent();
-			//date = convertToSystemString(listItem.at(0));
-			//name = convertToSystemString(listItem.at(1));
-			//priority = convertToSystemString(listItem.at(2));
-			//description = convertToSystemString(listItem.at(3));
+			this->item = item;
 		}
 
 	protected:
@@ -51,15 +42,15 @@ namespace ToDoApp {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^  label1;
+
 	protected:
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  label3;
-	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::RichTextBox^  richTextBox1;
-	private: System::Windows::Forms::Label^  label5;
-	private: System::Windows::Forms::Label^  label6;
-	private: System::Windows::Forms::Label^  label7;
+
+
+
+	private: System::Windows::Forms::RichTextBox^  itemDescription;
+	private: System::Windows::Forms::Label^  itemName;
+	private: System::Windows::Forms::Label^  itemDate;
+	private: System::Windows::Forms::Label^  itemPriority;
 
 
 	private:
@@ -75,134 +66,138 @@ namespace ToDoApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			System::Windows::Forms::Label^ label1;
+			System::Windows::Forms::Label^ label2;
+			System::Windows::Forms::Label^ label3;
+			System::Windows::Forms::Label^ label4;
+			this->itemDescription = (gcnew System::Windows::Forms::RichTextBox());
+			this->itemName = (gcnew System::Windows::Forms::Label());
+			this->itemDate = (gcnew System::Windows::Forms::Label());
+			this->itemPriority = (gcnew System::Windows::Forms::Label());
+			this->okButton = (gcnew System::Windows::Forms::Button());
+			label1 = (gcnew System::Windows::Forms::Label());
+			label2 = (gcnew System::Windows::Forms::Label());
+			label3 = (gcnew System::Windows::Forms::Label());
+			label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label1->Location = System::Drawing::Point(4, 13);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 16);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Name:";
+			label1->AutoSize = true;
+			label1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			label1->Location = System::Drawing::Point(4, 13);
+			label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			label1->Name = L"label1";
+			label1->Size = System::Drawing::Size(45, 16);
+			label1->TabIndex = 0;
+			label1->Text = L"Name:";
 			// 
 			// label2
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label2->Location = System::Drawing::Point(4, 43);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(39, 16);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"Date:";
+			label2->AutoSize = true;
+			label2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			label2->Location = System::Drawing::Point(4, 43);
+			label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			label2->Name = L"label2";
+			label2->Size = System::Drawing::Size(38, 16);
+			label2->TabIndex = 1;
+			label2->Text = L"Date:";
 			// 
 			// label3
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label3->Location = System::Drawing::Point(4, 74);
-			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(53, 16);
-			this->label3->TabIndex = 2;
-			this->label3->Text = L"Priority:";
+			label3->AutoSize = true;
+			label3->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			label3->Location = System::Drawing::Point(4, 74);
+			label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			label3->Name = L"label3";
+			label3->Size = System::Drawing::Size(52, 16);
+			label3->TabIndex = 2;
+			label3->Text = L"Priority:";
 			// 
 			// label4
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label4->Location = System::Drawing::Point(4, 105);
-			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(77, 16);
-			this->label4->TabIndex = 3;
-			this->label4->Text = L"Description:";
+			label4->AutoSize = true;
+			label4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			label4->Location = System::Drawing::Point(4, 105);
+			label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			label4->Name = L"label4";
+			label4->Size = System::Drawing::Size(76, 16);
+			label4->TabIndex = 3;
+			label4->Text = L"Description:";
 			// 
-			// richTextBox1
+			// itemDescription
 			// 
-			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->richTextBox1->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->richTextBox1->EnableAutoDragDrop = true;
-			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->richTextBox1->Location = System::Drawing::Point(85, 105);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(2);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(246, 171);
-			this->richTextBox1->TabIndex = 4;
-			this->richTextBox1->Text = L"";
+			this->itemDescription->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->itemDescription->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->itemDescription->EnableAutoDragDrop = true;
+			this->itemDescription->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->itemDescription->Location = System::Drawing::Point(85, 105);
+			this->itemDescription->Margin = System::Windows::Forms::Padding(2);
+			this->itemDescription->Name = L"itemDescription";
+			this->itemDescription->ReadOnly = true;
+			this->itemDescription->Size = System::Drawing::Size(246, 171);
+			this->itemDescription->TabIndex = 4;
+			this->itemDescription->Text = L"";
 			// 
-			// label5
+			// itemName
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label5->Location = System::Drawing::Point(82, 13);
-			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(0, 16);
-			this->label5->TabIndex = 1;
+			this->itemName->AutoSize = true;
+			this->itemName->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->itemName->Location = System::Drawing::Point(82, 13);
+			this->itemName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->itemName->Name = L"itemName";
+			this->itemName->Size = System::Drawing::Size(0, 16);
+			this->itemName->TabIndex = 1;
 			// 
-			// label6
+			// itemDate
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label6->Location = System::Drawing::Point(82, 43);
-			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(0, 16);
-			this->label6->TabIndex = 2;
+			this->itemDate->AutoSize = true;
+			this->itemDate->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->itemDate->Location = System::Drawing::Point(82, 43);
+			this->itemDate->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->itemDate->Name = L"itemDate";
+			this->itemDate->Size = System::Drawing::Size(0, 16);
+			this->itemDate->TabIndex = 2;
 			// 
-			// label7
+			// itemPriority
 			// 
-			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->label7->Location = System::Drawing::Point(82, 74);
-			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(0, 16);
-			this->label7->TabIndex = 3;
+			this->itemPriority->AutoSize = true;
+			this->itemPriority->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->itemPriority->Location = System::Drawing::Point(82, 74);
+			this->itemPriority->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->itemPriority->Name = L"itemPriority";
+			this->itemPriority->Size = System::Drawing::Size(0, 16);
+			this->itemPriority->TabIndex = 3;
 			// 
-			// button2
+			// okButton
 			// 
-			this->button2->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button2->Location = System::Drawing::Point(281, 287);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(70, 35);
-			this->button2->TabIndex = 5;
-			this->button2->Text = L"Ok";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MoreInfo::button2_Click);
+			this->okButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->okButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->okButton->Location = System::Drawing::Point(281, 287);
+			this->okButton->Margin = System::Windows::Forms::Padding(2);
+			this->okButton->Name = L"okButton";
+			this->okButton->Size = System::Drawing::Size(70, 35);
+			this->okButton->TabIndex = 5;
+			this->okButton->Text = L"Ok";
+			this->okButton->UseVisualStyleBackColor = true;
+			this->okButton->Click += gcnew System::EventHandler(this, &MoreInfo::okButton_Click);
 			// 
 			// MoreInfo
 			// 
-			this->AcceptButton = this->button2;
+			this->AcceptButton = this->okButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->CancelButton = this->button2;
+			this->CancelButton = this->okButton;
 			this->ClientSize = System::Drawing::Size(362, 333);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->label7);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->richTextBox1);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->okButton);
+			this->Controls->Add(this->itemPriority);
+			this->Controls->Add(this->itemDate);
+			this->Controls->Add(this->itemName);
+			this->Controls->Add(this->itemDescription);
+			this->Controls->Add(label4);
+			this->Controls->Add(label3);
+			this->Controls->Add(label2);
+			this->Controls->Add(label1);
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MoreInfo";
 			this->Text = L"MoreInfo";
@@ -212,15 +207,7 @@ namespace ToDoApp {
 
 		}
 #pragma endregion
-	private: System::Void MoreInfo_Load(System::Object^  sender, System::EventArgs^  e) {
-		//Saņemto informāciju parāda vienkārši. Nekas īpašs
-		label5->Text = name;
-		label6->Text = date;
-		label7->Text = priority;
-		richTextBox1->Text = description;
-	}
-private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	this->Close();
-}
+	private: System::Void MoreInfo_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
