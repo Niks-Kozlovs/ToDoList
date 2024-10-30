@@ -82,6 +82,20 @@ System::Void ToDoApp::MainForm::exitToolStripMenuItem_Click(System::Object^ send
 
 System::Void ToDoApp::MainForm::changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
+	System::Windows::Forms::FolderBrowserDialog^ folderBrowserDialog = gcnew System::Windows::Forms::FolderBrowserDialog();
+	if (folderBrowserDialog->ShowDialog(this) != System::Windows::Forms::DialogResult::OK) {
+		return;
+	}
+
+	System::String^ newLocation = folderBrowserDialog->SelectedPath;
+
+	INIReader reader("settings.ini");
+	String^ oldLocation = msclr::interop::marshal_as<System::String^>(reader.Get("USER", "saveLocation", ""));
+
+	System::IO::Directory::Move(oldLocation + "\\Lists", newLocation + "\\Lists");
+	System::IO::File::Move(oldLocation + "\\priority.txt", newLocation + "\\priority.txt");
+
+	LoadList(listSelector->SelectedItem->ToString(), newLocation);
 }
 
 System::Void ToDoApp::MainForm::timer1_Tick(System::Object^ sender, System::EventArgs^ e)
@@ -160,9 +174,9 @@ System::Void ToDoApp::MainForm::MainForm_Load(System::Object^ sender, System::Ev
 
 void ToDoApp::MainForm::LoadList(System::String^ listName, System::String^ location)
 {
+	createIniFile(location, listName);
 	this->Text = "ToDoList - " + listName;
 	this->toDoList = gcnew ToDoList(location + "\\Lists\\" + listName + ".txt");
-	createIniFile(location, listName);
 	cli::array<System::String^>^ fileNames = System::IO::Directory::GetFiles(location + "\\Lists\\");
 	for (int i = 0; i < fileNames->Length; i++) {
 		fileNames[i] = System::IO::Path::GetFileNameWithoutExtension(fileNames[i]);
