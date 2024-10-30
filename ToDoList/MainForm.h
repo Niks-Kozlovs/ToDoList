@@ -72,9 +72,10 @@ namespace ToDoApp {
 
 	private: System::Windows::Forms::ColumnHeader^  columnHeader5;
 	private: System::Windows::Forms::Timer^  timer1;
+	private: System::Windows::Forms::Button^ editButton;
 
 
-	private: System::Windows::Forms::Button^  button4;
+
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
@@ -117,7 +118,7 @@ namespace ToDoApp {
 			this->listsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->addNewListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->editButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -297,18 +298,18 @@ namespace ToDoApp {
 			this->timer1->Interval = 1000;
 			this->timer1->Tick += gcnew System::EventHandler(this, &MainForm::timer1_Tick);
 			// 
-			// button4
+			// editButton
 			// 
-			this->button4->Enabled = false;
-			this->button4->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->button4->Location = System::Drawing::Point(9, 82);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(120, 60);
-			this->button4->TabIndex = 3;
-			this->button4->Text = L"Edit";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
+			this->editButton->Enabled = false;
+			this->editButton->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->editButton->Location = System::Drawing::Point(9, 82);
+			this->editButton->Margin = System::Windows::Forms::Padding(2);
+			this->editButton->Name = L"editButton";
+			this->editButton->Size = System::Drawing::Size(120, 60);
+			this->editButton->TabIndex = 3;
+			this->editButton->Text = L"Edit";
+			this->editButton->UseVisualStyleBackColor = true;
+			this->editButton->Click += gcnew System::EventHandler(this, &MainForm::editButton_Click);
 			// 
 			// label1
 			// 
@@ -407,7 +408,7 @@ namespace ToDoApp {
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->button4);
+			this->groupBox2->Controls->Add(this->editButton);
 			this->groupBox2->Controls->Add(this->deleteButton);
 			this->groupBox2->Controls->Add(this->moreInfoButton);
 			this->groupBox2->Controls->Add(this->buttonAddItem);
@@ -460,7 +461,7 @@ private:
 		}
 	System::Void changeSaveLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e);
-	System::Void button4_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void editButton_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 	System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void textBox1_TextChanged_1(System::Object^ sender, System::EventArgs^ e);

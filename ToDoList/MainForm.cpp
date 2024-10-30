@@ -14,7 +14,7 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 	if (this->toDoListView->SelectedItems->Count == 1) {
 		moreInfoButton->Enabled = true; //More info poga varēs tikai parādīt informāciju par vienu lietu
 		deleteButton->Enabled = true;
-		button4->Enabled = true;
+		editButton->Enabled = true;
 	}
 	else if (this->toDoListView->SelectedItems->Count > 1) {
 		//button3->Enabled = true;
@@ -24,7 +24,7 @@ System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ s
 	else {
 		moreInfoButton->Enabled = false;
 		deleteButton->Enabled = false;
-		button4->Enabled = false;
+		editButton->Enabled = false;
 	}
 }
 
@@ -133,15 +133,17 @@ System::Void ToDoApp::MainForm::timer1_Tick(System::Object^ sender, System::Even
 	//}
 }
 
-System::Void ToDoApp::MainForm::button4_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void ToDoApp::MainForm::editButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	//AddItem^ edit = gcnew AddItem(information.at(listView1->FocusedItem->Index), (int)listView1->FocusedItem->Index, convertToSystemString(currentListFile));
-//edit->ShowDialog();
-
-//button2->Enabled = false;
-//button3->Enabled = false;
-//button4->Enabled = false;
-
+	ToDoListItem^ item = this->toDoList->items[this->toDoListView->SelectedItems[0]->Index];
+	AddItemForm^ edit = gcnew AddItemForm(item);
+	edit->ShowDialog(this);
+	if (edit->DialogResult == System::Windows::Forms::DialogResult::OK) {
+		ToDoListItem^ updatedItem = edit->Item;
+		this->toDoList->items[this->toDoListView->SelectedItems[0]->Index] = updatedItem;
+		this->toDoList->Save();
+		this->populateListView();
+	}
 }
 
 System::Void ToDoApp::MainForm::comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)

@@ -42,4 +42,14 @@ System::Void ToDoApp::AddItemForm::AddItem_Load(System::Object^ sender, System::
     this->prioritiesList->DisplayMember = "NameVal";
     this->prioritiesList->ValueMember = "Value";
     this->prioritiesList->DataSource = this->priorities->GetPriorities();
+
+	if (this->item != nullptr)
+	{
+		this->textBox4->Text = this->item->name;
+		this->richTextBox1->Text = this->item->description;
+		this->prioritiesList->SelectedValue = this->item->priority->Value;
+        this->datePicker->Value = DateTime(this->item->time->Year, this->item->time->Month, this->item->time->Day);
+		this->hourInput->Value = this->item->time->Hour;
+		this->minuteInput->Value = this->item->time->Minute;
+	}
 }
