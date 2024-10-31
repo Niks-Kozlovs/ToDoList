@@ -1,6 +1,7 @@
 #include <msclr/marshal_cppstd.h>
 #include "Priorities.h"
-#include "INIReader.h"
+#include "../INIReader.h"
+
 
 void Priorities::AddPriority(int value, System::String^ name)
 {
@@ -72,7 +73,7 @@ System::Collections::Generic::List<Priority^>^ Priorities::GetPriorities()
 
 Priorities::Priorities()
 {
-	INIReader iniReader = INIReader("settings.ini");
+	INIReader iniReader("settings.ini");
 	this->priorityLocation = msclr::interop::marshal_as<System::String^>(iniReader.Get("USER", "saveLocation", "priority.txt") + "\\priority.txt");
 
 	System::IO::StreamReader^ reader = System::IO::File::OpenText(this->priorityLocation);

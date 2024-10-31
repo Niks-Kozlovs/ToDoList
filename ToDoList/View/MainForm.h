@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "ToDoList.h"
+#include "../Model/ToDoList.h"
 namespace ToDoApp {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -71,6 +71,7 @@ namespace ToDoApp {
 			System::Windows::Forms::ColumnHeader^ columnHeader3;
 			System::Windows::Forms::ColumnHeader^ columnHeader4;
 			System::Windows::Forms::ColumnHeader^ columnHeader5;
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->editButton = (gcnew System::Windows::Forms::Button());
 			this->deleteButton = (gcnew System::Windows::Forms::Button());
 			this->moreInfoButton = (gcnew System::Windows::Forms::Button());
@@ -244,26 +245,6 @@ namespace ToDoApp {
 			this->addNewListToolStripMenuItem->Text = L"Add new list";
 			this->addNewListToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::addNewListToolStripMenuItem_Click);
 			// 
-			// toDoListView
-			// 
-			this->toDoListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
-				columnHeader1, columnHeader2,
-					columnHeader3, columnHeader4, columnHeader5
-			});
-			this->toDoListView->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
-			this->toDoListView->FullRowSelect = true;
-			this->toDoListView->HideSelection = false;
-			this->toDoListView->Location = System::Drawing::Point(10, 25);
-			this->toDoListView->Margin = System::Windows::Forms::Padding(2);
-			this->toDoListView->Name = L"toDoListView";
-			this->toDoListView->Size = System::Drawing::Size(562, 490);
-			this->toDoListView->TabIndex = 9;
-			this->toDoListView->UseCompatibleStateImageBehavior = false;
-			this->toDoListView->View = System::Windows::Forms::View::Details;
-			this->toDoListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::listView1_ColumnClick);
-			this->toDoListView->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listView1_SelectedIndexChanged);
-			this->toDoListView->Enter += gcnew System::EventHandler(this, &MainForm::listView1_Enter);
-			// 
 			// columnHeader1
 			// 
 			columnHeader1->Text = L"Date";
@@ -292,6 +273,26 @@ namespace ToDoApp {
 			columnHeader5->DisplayIndex = 1;
 			columnHeader5->Text = L"Time left";
 			columnHeader5->Width = 75;
+			// 
+			// toDoListView
+			// 
+			this->toDoListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
+				columnHeader1, columnHeader2,
+					columnHeader3, columnHeader4, columnHeader5
+			});
+			this->toDoListView->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F));
+			this->toDoListView->FullRowSelect = true;
+			this->toDoListView->HideSelection = false;
+			this->toDoListView->Location = System::Drawing::Point(10, 25);
+			this->toDoListView->Margin = System::Windows::Forms::Padding(2);
+			this->toDoListView->Name = L"toDoListView";
+			this->toDoListView->Size = System::Drawing::Size(562, 490);
+			this->toDoListView->TabIndex = 9;
+			this->toDoListView->UseCompatibleStateImageBehavior = false;
+			this->toDoListView->View = System::Windows::Forms::View::Details;
+			this->toDoListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::listView1_ColumnClick);
+			this->toDoListView->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listView1_SelectedIndexChanged);
+			this->toDoListView->Enter += gcnew System::EventHandler(this, &MainForm::listView1_Enter);
 			// 
 			// filterInput
 			// 
@@ -330,6 +331,7 @@ namespace ToDoApp {
 			this->Controls->Add(this->listSelector);
 			this->Controls->Add(this->toDoListView);
 			this->Controls->Add(menuStrip1);
+			this->Icon = gcnew System::Drawing::Icon(L"Resources/Logo.ico");
 			this->MainMenuStrip = menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainForm";

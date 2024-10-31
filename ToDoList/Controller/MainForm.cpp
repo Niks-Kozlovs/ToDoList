@@ -1,13 +1,13 @@
 ﻿#include <fstream>
 #include <msclr/marshal_cppstd.h>
-#include "MainForm.h"
-#include "ToDoList.h"
-#include "Functions.h"
-#include "INIReader.h"
-#include "SimpleInputBox.h"
-#include "AddItemForm.h"
-#include "ToDoListSorter.h"
-#include "MoreInfo.h"
+#include "../View/MainForm.h"
+#include "../View/MoreInfo.h"
+#include "../View/SimpleInputBox.h"
+#include "../View/AddItemForm.h"
+#include "../Model/ToDoList.h"
+#include "../Functions.h"
+#include "../INIReader.h"
+#include "../ToDoListSorter.h"
 
 System::Void ToDoApp::MainForm::listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {

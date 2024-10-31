@@ -1,4 +1,4 @@
-#include "SimpleInputBox.h"
+#include "../View/SimpleInputBox.h"
 System::Void ToDoApp::SimpleInputBox::SimpleInputBox_Load(System::Object^ sender, System::EventArgs^ e)
 {
 	this->textBox1->Focus();

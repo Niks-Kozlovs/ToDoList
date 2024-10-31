@@ -1,5 +1,5 @@
-#include "AddPriorityForm.h"
-#include "Priorities.h"
+#include "../View/AddPriorityForm.h"
+#include "../Model/Priorities.h"
 System::Void ToDoApp::AddPriorityForm::okButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	this->priority = gcnew Priority(Convert::ToInt32(this->valueInput->Value), this->nameInput->Text);

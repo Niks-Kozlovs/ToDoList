@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "ToDoListItem.h"
-#include "Priorities.h"
+#include "../Model/ToDoListItem.h"
+#include "../Model/Priorities.h"
 
 namespace ToDoApp {
 

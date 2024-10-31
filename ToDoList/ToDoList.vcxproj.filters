@@ -30,44 +30,38 @@
     <ClCompile Include="Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddItemForm.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="MainForm.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="MoreInfo.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleInputBox.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ToDoList.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ToDoListItem.cpp">
-      <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="ToDoListSorter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Priorities.cpp">
+    <ClCompile Include="Controller\AddItemForm.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\AddPriorityForm.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\MainForm.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\MoreInfo.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\SimpleInputBox.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Priorities.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="AddPriorityForm.cpp">
-      <Filter>Source Files\Controller</Filter>
+    <ClCompile Include="Model\ToDoList.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\ToDoListItem.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainForm.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="AddItemForm.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -77,26 +71,32 @@
     <ClInclude Include="INIReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AddPriorityForm.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="MoreInfo.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleInputBox.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="ToDoList.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ToDoListItem.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="ToDoListSorter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Priorities.h">
+    <ClInclude Include="Model\Priorities.h">
       <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\ToDoList.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\ToDoListItem.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="View\AddItemForm.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\AddPriorityForm.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\MainForm.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\MoreInfo.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimpleInputBox.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

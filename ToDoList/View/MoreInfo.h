@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "ToDoListItem.h"
+#include "../Model/ToDoListItem.h"
 
 namespace ToDoApp {
 	using namespace System;
@@ -62,6 +62,7 @@ namespace ToDoApp {
 			System::Windows::Forms::Label^ label2;
 			System::Windows::Forms::Label^ label3;
 			System::Windows::Forms::Label^ label4;
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MoreInfo::typeid));
 			this->itemDescription = (gcnew System::Windows::Forms::RichTextBox());
 			this->itemName = (gcnew System::Windows::Forms::Label());
 			this->itemDate = (gcnew System::Windows::Forms::Label());
@@ -190,6 +191,7 @@ namespace ToDoApp {
 			this->Controls->Add(label3);
 			this->Controls->Add(label2);
 			this->Controls->Add(label1);
+			this->Icon = gcnew System::Drawing::Icon(L"Resources/Logo.ico");
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MoreInfo";
 			this->Text = L"MoreInfo";

@@ -1,5 +1,5 @@
-﻿#include "AddItemForm.h"
-#include "AddPriorityForm.h"
+﻿#include "../View/AddItemForm.h"
+#include "../View/AddPriorityForm.h"
 
 System::Void ToDoApp::AddItemForm::cancel_Click(System::Object^ sender, System::EventArgs^ e)
 {

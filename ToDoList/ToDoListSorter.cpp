@@ -1,5 +1,5 @@
 #include "ToDoListSorter.h"
-#include "ToDoListItem.h"
+#include "Model/ToDoListItem.h"
 
 ToDoListSorter::ToDoListSorter()
 {

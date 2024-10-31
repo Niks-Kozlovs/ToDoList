@@ -1,5 +1,5 @@
 #pragma once
-#include "Priorities.h"
+#include "../Model/Priorities.h"
 
 namespace ToDoApp {
 

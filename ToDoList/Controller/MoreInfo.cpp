@@ -1,4 +1,4 @@
-#include "MoreInfo.h"
+#include "../View/MoreInfo.h"
 
 System::Void ToDoApp::MoreInfo::MoreInfo_Load(System::Object^ sender, System::EventArgs^ e)
 {

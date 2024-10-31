@@ -54,6 +54,7 @@ namespace ToDoApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SimpleInputBox::typeid));
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->okButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -112,6 +113,7 @@ namespace ToDoApp {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->okButton);
 			this->Controls->Add(this->cancelButton);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"SimpleInputBox";
 			this->Text = L"Please answer!";
 			this->Load += gcnew System::EventHandler(this, &SimpleInputBox::SimpleInputBox_Load);
